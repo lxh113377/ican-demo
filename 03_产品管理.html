@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,6 +7,7 @@
     <title>产品管理 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
+    <meta name="csrf-token" content="IjUxOTY3MzU1NzBiZWI1Njg5MTE0MzhkOTRlNThhYTY0MTViMGQ0MWIi.ao3oyw.mYmS-cYN17dkMw5c0k4nfDPWe74">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -113,42 +115,6 @@ html[data-theme="dark"] {
     --shadow-md: 0 4px 12px rgba(0,0,0,.45);
     --shadow-lg: 0 8px 24px rgba(0,0,0,.55);
     color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) {
-        --primary: #2DD4BF;
-        --primary-light: #5EEAD4;
-        --primary-dark: #0D9488;
-        --success: #34D399;
-        --danger: #F87171;
-        --warning: #FBBF24;
-        /* 语义状态色（暗色覆写） */
-        --success-bg: #064E3B;
-        --success-text: #A7F3D0;
-        --success-border: #065F46;
-        --danger-bg: #7F1D1D;
-        --danger-text: #FECACA;
-        --danger-border: #991B1B;
-        --warning-bg: #78350F;
-        --warning-text: #FDE68A;
-        --warning-border: #92400E;
-        --neutral-bg: #334155;
-        --neutral-text: #CBD5E1;
-        --bg: #0B1B19;
-        --card-bg: #142826;
-        --text: #E2E8F0;
-        --text-light: #94A3B8;
-        --border: #1F3A34;
-        --th-bg: #0F211F;
-        --hover-bg: #17332E;
-        --glow: rgba(45,212,191,.22);
-        --glow-strong: rgba(45,212,191,.38);
-        --shadow-sm: 0 1px 3px rgba(0,0,0,.4);
-        --shadow-md: 0 4px 12px rgba(0,0,0,.45);
-        --shadow-lg: 0 8px 24px rgba(0,0,0,.55);
-        color-scheme: dark;
-    }
 }
 
 /* ═══════════ 2. 基础 ═══════════ */
@@ -267,6 +233,11 @@ body {
     bottom: calc(16px + env(safe-area-inset-bottom));
     z-index: 200;
 }
+/* 主题按钮线性图标（SVG）：默认墨绿黑暗显示太阳（点击切亮），亮色显示月亮（点击切暗） */
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 /* ═══════════ 4. Flash 消息 ═══════════ */
 .flash-messages { padding: 8px 16px; }
@@ -391,12 +362,6 @@ select.form-control {
 /* 暗色模式下箭头提亮，保证在深底上可读（P3） */
 html[data-theme="dark"] select.form-control {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-}
-/* 跟随系统暗色（仅在未显式选亮色时生效，与设计变量逻辑一致） */
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) select.form-control {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    }
 }
 
 .form-hint {
@@ -1201,6 +1166,141 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
 
+/* ═══════════ 23. 产品管理完整化（工具条/toggle/内联编辑/批量底栏 — 超市web 移植） ═══════════ */
+/* 隐藏元素统一兜底：.batch-bar/.btn 等显式 display 会覆盖 hidden 属性默认 none，必须 !important */
+[hidden] { display: none !important; }
+
+/* 复选框品牌色 */
+#productTable input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; }
+
+/* 工具条：搜索 + 分类筛选胶囊 */
+.product-tools { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+@media (min-width: 768px) {
+    body.is-admin .product-tools { flex-direction: row; align-items: center; }
+    body.is-admin .product-tools > .form-control { max-width: 240px; }
+}
+.pill-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+    padding: 5px 14px; font-size: 12px; border-radius: 16px;
+    border: 1px solid var(--border); color: var(--text-light);
+    background: var(--card-bg); cursor: pointer; transition: all .15s;
+}
+.pill:hover { border-color: var(--primary); color: var(--primary); }
+.pill.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); font-weight: 600; }
+
+/* 行内编辑：行下就地展开表单 */
+.inline-edit-row td { background: var(--hover-bg); padding: 10px; }
+.inline-edit-fields { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 640px) {
+    .inline-edit-fields { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+.inline-edit-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+/* 行内错误红条（暗色主题适配） */
+.form-error {
+    margin-top: 8px; padding: 6px 10px; font-size: 12px;
+    border-radius: var(--radius-sm); background: var(--danger-bg);
+    color: var(--danger-text); border: 1px solid var(--danger-border);
+}
+
+/* 上下架开关（滑动圆钮，on 态主题主色） */
+.toggle-switch {
+    position: relative; width: 40px; height: 22px; padding: 0;
+    border: none; border-radius: 11px; cursor: pointer;
+    background: var(--border); transition: background-color .2s; vertical-align: middle;
+}
+.toggle-switch .toggle-knob {
+    position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--card-bg); box-shadow: var(--shadow-sm);
+    transition: transform .2s;
+}
+.toggle-switch.on { background: var(--primary); }
+.toggle-switch.on .toggle-knob { transform: translateX(18px); }
+.toggle-switch:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.toggle-switch:active .toggle-knob { width: 20px; }
+@media (prefers-reduced-motion: reduce) {
+    .toggle-switch, .toggle-switch .toggle-knob { transition: none; }
+}
+
+/* 图标按钮（编辑/删除） */
+.icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; padding: 0; border: 1px solid transparent;
+    border-radius: var(--radius-sm); background: transparent; color: var(--text-light);
+    cursor: pointer; transition: all .15s;
+}
+.icon-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--hover-bg); }
+.icon-btn.inline-delete:hover { color: var(--danger); border-color: var(--danger); }
+.row-actions { display: flex; gap: 6px; white-space: nowrap; }
+#productTable .col-check { width: 40px; }
+#productTable .col-actions { width: 92px; }
+
+/* 批量操作固定底栏（安全区适配） */
+.batch-bar {
+    position: fixed; left: 0; right: 0; bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 60; margin: 0 auto; max-width: 960px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+}
+.batch-count { font-size: 13px; color: var(--text-light); }
+.batch-count b { color: var(--primary); }
+.batch-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.batch-price { display: flex; gap: 6px; align-items: center; }
+.batch-price .form-control { width: 150px; min-width: 0; margin: 0; }
+
+/* ≤640px 产品表卡片化（data-label 显示列名，手机微信可读可点） */
+@media (max-width: 640px) {
+    #productTable thead { display: none; }
+    #productTable, #productTable tbody { display: block; width: 100%; }
+    #productTable tbody { display: flex; flex-direction: column; gap: 10px; }
+    #productTable tr[data-id], #productTable tr.inline-edit-row { display: block; }
+    #productTable tr[data-id]:not(.inline-edit-row) {
+        border: 1px solid var(--border); border-radius: var(--radius-md);
+        padding: 6px 10px; background: var(--card-bg);
+    }
+    #productTable tr[data-id]:not(.inline-edit-row).inactive { opacity: .6; }
+    #productTable td {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 7px 2px; border-bottom: 1px dashed var(--border); text-align: right;
+    }
+    #productTable td:last-child { border-bottom: none; }
+    #productTable td::before {
+        content: attr(data-label); color: var(--text-light); font-size: 12px; margin-right: 12px;
+    }
+    #productTable td.col-check { justify-content: flex-start; }
+    #productTable td.col-check::before { content: none; }
+    #productTable td.row-actions { justify-content: flex-end; }
+    #productTable td.row-actions::before { content: attr(data-label); margin-right: auto; }
+    #productTable .inline-edit-row td { display: block; text-align: left; }
+    #productTable .inline-edit-row td::before { content: none; }
+    #productTable td[colspan="7"] { border: 1px solid var(--border); border-radius: var(--radius-md); }
+}
+
+/* ═══════════ 24. 店员端底部 Tab 导航 + 空状态情感化图标 ═══════════ */
+.bottom-tabs {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 100; display: flex;
+    background: var(--card-bg); border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 12px rgba(0,0,0,.12);
+}
+.tab-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 2px; padding: 8px 0 6px; text-decoration: none;
+    color: var(--text-light); font-size: 11px; transition: color .15s;
+}
+.tab-item .tab-icon { line-height: 1; }
+.tab-item.active { color: var(--primary); font-weight: 600; }
+.tab-item:active { transform: scale(.94); }
+/* 防固定底栏遮挡页面底部内容 */
+body.h5-page .main-content { padding-bottom: 74px; }
+@media (prefers-reduced-motion: reduce) { .tab-item { transition: none; } }
+
+/* 空状态情感化图标（复用 _icons 宏，低透明度品牌色） */
+.empty-state .empty-icon { display: block; margin-bottom: 8px; }
+.empty-state .empty-icon svg { color: var(--text-light); opacity: .55; }
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1238,8 +1338,36 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
     <h2>产品管理</h2>
 </div>
 
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<div class="product-tools">
+    <input type="search" id="prodSearch" class="form-control" placeholder="搜索产品名称 / 分类…"
+           aria-label="搜索产品">
+    <div class="pill-filter" id="prodFilter" role="group" aria-label="分类筛选">
+        <button type="button" class="pill active" data-cat="">全部</button>
+        
+        <button type="button" class="pill" data-cat="奶茶">奶茶</button>
+        
+        <button type="button" class="pill" data-cat="果茶">果茶</button>
+        
+    </div>
+    <button type="button" id="prodClearFilter" class="btn btn-outline btn-sm" hidden>清除筛选</button>
+</div>
+
 <form method="POST" action="/admin/products/add" class="sales-form inline-form">
-    <input type="hidden" name="csrf_token" value="ImNjNTMxMTI4Y2QyOTFmY2E1YmVkZTZjZDg1ZmNlYWE3ZmRmMjY2NjIi.ao3e3w.Ejgc6SqGyAeTyTz_9iUCJ8-BWR4">
+    <input type="hidden" name="csrf_token" value="IjUxOTY3MzU1NzBiZWI1Njg5MTE0MzhkOTRlNThhYTY0MTViMGQ0MWIi.ao3oyw.mYmS-cYN17dkMw5c0k4nfDPWe74">
     <div class="form-row">
         <div class="form-group flex-2">
             <input type="text" name="product_name" class="form-control" placeholder="产品名称" required>
@@ -1258,60 +1386,267 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
 </form>
 
 <div class="table-responsive">
-    <table class="table">
-        <thead><tr><th>产品</th><th>单价</th><th>成本价</th><th>分类</th><th>状态</th></tr></thead>
+    <table class="table" id="productTable">
+        <thead>
+            <tr>
+                <th class="col-check"><input type="checkbox" id="selectAll" aria-label="全选当前筛选的产品"></th>
+                <th>产品</th>
+                <th>单价</th>
+                <th>成本价</th>
+                <th>分类</th>
+                <th>状态</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
         <tbody>
         
-        <tr class="">
-            <td>烧仙草</td>
-            <td>¥15.00</td>
-            <td>¥5.60</td>
-            <td>奶茶</td>
-            <td><span class="status active">在售</span></td>
+        <tr class="" data-id="3"
+            data-name="烧仙草" data-cat="奶茶">
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="3" aria-label="选择 烧仙草"></td>
+            <td data-label="产品">烧仙草</td>
+            <td data-label="单价">¥15.00</td>
+            <td data-label="成本价">¥5.60</td>
+            <td data-label="分类">奶茶</td>
+            <td data-label="状态">
+                <button type="button" class="toggle-switch on"
+                        role="switch"
+                        aria-checked="true"
+                        aria-label="下架 烧仙草"
+                        title="点击下架"
+                        data-id="3" data-active="1">
+                    <span class="toggle-knob"></span>
+                </button>
+            </td>
+            <td class="col-actions row-actions" data-label="操作">
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="3"
+                        title="编辑" aria-label="编辑 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+                <button type="button" class="icon-btn inline-delete" data-id="3"
+                        data-name="烧仙草"
+                        title="删除" aria-label="删除 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+            </td>
+        </tr>
+        <tr class="inline-edit-row" data-id="3" data-for="3" hidden>
+            <td colspan="7">
+                <form class="inline-edit-form" data-id="3">
+                    <div class="inline-edit-fields">
+                        <input type="text" name="product_name" class="form-control" value="烧仙草" required aria-label="产品名称">
+                        <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="15.00" aria-label="单价">
+                        <input type="number" name="cost_price" class="form-control" step="0.01" min="0" value="5.60" placeholder="成本价(可选)" aria-label="成本价">
+                        <input type="text" name="category" class="form-control" value="奶茶" placeholder="分类" aria-label="分类">
+                    </div>
+                    <div class="form-error" hidden></div>
+                    <div class="inline-edit-actions">
+                        <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                        <button type="button" class="btn btn-outline btn-sm inline-edit-cancel">取消</button>
+                    </div>
+                </form>
+            </td>
         </tr>
         
-        <tr class="">
-            <td>珍珠奶茶</td>
-            <td>¥12.00</td>
-            <td>¥4.50</td>
-            <td>奶茶</td>
-            <td><span class="status active">在售</span></td>
+        <tr class="" data-id="1"
+            data-name="珍珠奶茶" data-cat="奶茶">
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="1" aria-label="选择 珍珠奶茶"></td>
+            <td data-label="产品">珍珠奶茶</td>
+            <td data-label="单价">¥12.00</td>
+            <td data-label="成本价">¥4.50</td>
+            <td data-label="分类">奶茶</td>
+            <td data-label="状态">
+                <button type="button" class="toggle-switch on"
+                        role="switch"
+                        aria-checked="true"
+                        aria-label="下架 珍珠奶茶"
+                        title="点击下架"
+                        data-id="1" data-active="1">
+                    <span class="toggle-knob"></span>
+                </button>
+            </td>
+            <td class="col-actions row-actions" data-label="操作">
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="1"
+                        title="编辑" aria-label="编辑 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+                <button type="button" class="icon-btn inline-delete" data-id="1"
+                        data-name="珍珠奶茶"
+                        title="删除" aria-label="删除 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+            </td>
+        </tr>
+        <tr class="inline-edit-row" data-id="1" data-for="1" hidden>
+            <td colspan="7">
+                <form class="inline-edit-form" data-id="1">
+                    <div class="inline-edit-fields">
+                        <input type="text" name="product_name" class="form-control" value="珍珠奶茶" required aria-label="产品名称">
+                        <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="12.00" aria-label="单价">
+                        <input type="number" name="cost_price" class="form-control" step="0.01" min="0" value="4.50" placeholder="成本价(可选)" aria-label="成本价">
+                        <input type="text" name="category" class="form-control" value="奶茶" placeholder="分类" aria-label="分类">
+                    </div>
+                    <div class="form-error" hidden></div>
+                    <div class="inline-edit-actions">
+                        <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                        <button type="button" class="btn btn-outline btn-sm inline-edit-cancel">取消</button>
+                    </div>
+                </form>
+            </td>
         </tr>
         
-        <tr class="">
-            <td>芋泥波波</td>
-            <td>¥16.00</td>
-            <td>¥6.00</td>
-            <td>奶茶</td>
-            <td><span class="status active">在售</span></td>
+        <tr class="" data-id="5"
+            data-name="芋泥波波" data-cat="奶茶">
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="5" aria-label="选择 芋泥波波"></td>
+            <td data-label="产品">芋泥波波</td>
+            <td data-label="单价">¥16.00</td>
+            <td data-label="成本价">¥6.00</td>
+            <td data-label="分类">奶茶</td>
+            <td data-label="状态">
+                <button type="button" class="toggle-switch on"
+                        role="switch"
+                        aria-checked="true"
+                        aria-label="下架 芋泥波波"
+                        title="点击下架"
+                        data-id="5" data-active="1">
+                    <span class="toggle-knob"></span>
+                </button>
+            </td>
+            <td class="col-actions row-actions" data-label="操作">
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="5"
+                        title="编辑" aria-label="编辑 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+                <button type="button" class="icon-btn inline-delete" data-id="5"
+                        data-name="芋泥波波"
+                        title="删除" aria-label="删除 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+            </td>
+        </tr>
+        <tr class="inline-edit-row" data-id="5" data-for="5" hidden>
+            <td colspan="7">
+                <form class="inline-edit-form" data-id="5">
+                    <div class="inline-edit-fields">
+                        <input type="text" name="product_name" class="form-control" value="芋泥波波" required aria-label="产品名称">
+                        <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="16.00" aria-label="单价">
+                        <input type="number" name="cost_price" class="form-control" step="0.01" min="0" value="6.00" placeholder="成本价(可选)" aria-label="成本价">
+                        <input type="text" name="category" class="form-control" value="奶茶" placeholder="分类" aria-label="分类">
+                    </div>
+                    <div class="form-error" hidden></div>
+                    <div class="inline-edit-actions">
+                        <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                        <button type="button" class="btn btn-outline btn-sm inline-edit-cancel">取消</button>
+                    </div>
+                </form>
+            </td>
         </tr>
         
-        <tr class="">
-            <td>杨枝甘露</td>
-            <td>¥18.00</td>
-            <td>¥6.80</td>
-            <td>果茶</td>
-            <td><span class="status active">在售</span></td>
+        <tr class="" data-id="2"
+            data-name="杨枝甘露" data-cat="果茶">
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="2" aria-label="选择 杨枝甘露"></td>
+            <td data-label="产品">杨枝甘露</td>
+            <td data-label="单价">¥18.00</td>
+            <td data-label="成本价">¥6.80</td>
+            <td data-label="分类">果茶</td>
+            <td data-label="状态">
+                <button type="button" class="toggle-switch on"
+                        role="switch"
+                        aria-checked="true"
+                        aria-label="下架 杨枝甘露"
+                        title="点击下架"
+                        data-id="2" data-active="1">
+                    <span class="toggle-knob"></span>
+                </button>
+            </td>
+            <td class="col-actions row-actions" data-label="操作">
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="2"
+                        title="编辑" aria-label="编辑 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+                <button type="button" class="icon-btn inline-delete" data-id="2"
+                        data-name="杨枝甘露"
+                        title="删除" aria-label="删除 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+            </td>
+        </tr>
+        <tr class="inline-edit-row" data-id="2" data-for="2" hidden>
+            <td colspan="7">
+                <form class="inline-edit-form" data-id="2">
+                    <div class="inline-edit-fields">
+                        <input type="text" name="product_name" class="form-control" value="杨枝甘露" required aria-label="产品名称">
+                        <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="18.00" aria-label="单价">
+                        <input type="number" name="cost_price" class="form-control" step="0.01" min="0" value="6.80" placeholder="成本价(可选)" aria-label="成本价">
+                        <input type="text" name="category" class="form-control" value="果茶" placeholder="分类" aria-label="分类">
+                    </div>
+                    <div class="form-error" hidden></div>
+                    <div class="inline-edit-actions">
+                        <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                        <button type="button" class="btn btn-outline btn-sm inline-edit-cancel">取消</button>
+                    </div>
+                </form>
+            </td>
         </tr>
         
-        <tr class="">
-            <td>柠檬水</td>
-            <td>¥8.00</td>
-            <td><span class="text-muted">待录入</span></td>
-            <td>果茶</td>
-            <td><span class="status active">在售</span></td>
+        <tr class="" data-id="4"
+            data-name="柠檬水" data-cat="果茶">
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="4" aria-label="选择 柠檬水"></td>
+            <td data-label="产品">柠檬水</td>
+            <td data-label="单价">¥8.00</td>
+            <td data-label="成本价"><span class="text-muted">待录入</span></td>
+            <td data-label="分类">果茶</td>
+            <td data-label="状态">
+                <button type="button" class="toggle-switch on"
+                        role="switch"
+                        aria-checked="true"
+                        aria-label="下架 柠檬水"
+                        title="点击下架"
+                        data-id="4" data-active="1">
+                    <span class="toggle-knob"></span>
+                </button>
+            </td>
+            <td class="col-actions row-actions" data-label="操作">
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="4"
+                        title="编辑" aria-label="编辑 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+                <button type="button" class="icon-btn inline-delete" data-id="4"
+                        data-name="柠檬水"
+                        title="删除" aria-label="删除 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+            </td>
+        </tr>
+        <tr class="inline-edit-row" data-id="4" data-for="4" hidden>
+            <td colspan="7">
+                <form class="inline-edit-form" data-id="4">
+                    <div class="inline-edit-fields">
+                        <input type="text" name="product_name" class="form-control" value="柠檬水" required aria-label="产品名称">
+                        <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="8.00" aria-label="单价">
+                        <input type="number" name="cost_price" class="form-control" step="0.01" min="0" value="" placeholder="成本价(可选)" aria-label="成本价">
+                        <input type="text" name="category" class="form-control" value="果茶" placeholder="分类" aria-label="分类">
+                    </div>
+                    <div class="form-error" hidden></div>
+                    <div class="inline-edit-actions">
+                        <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                        <button type="button" class="btn btn-outline btn-sm inline-edit-cancel">取消</button>
+                    </div>
+                </form>
+            </td>
         </tr>
         
+        <tr id="noMatchRow" hidden><td colspan="7"><div class="empty-state"><span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>没有匹配的产品，换个关键词或分类试试。</div></td></tr>
         </tbody>
     </table>
+</div>
+
+
+<div class="batch-bar" id="batchBar" hidden>
+    <span class="batch-count">已选 <b id="batchCount">0</b> 项</span>
+    <div class="batch-actions">
+        <button type="button" class="btn btn-sm btn-outline" data-action="enable">上架</button>
+        <button type="button" class="btn btn-sm btn-outline" data-action="disable">下架</button>
+        <button type="button" class="btn btn-sm btn-danger" data-action="delete">删除</button>
+        <div class="batch-price">
+            <input type="text" id="batchPrice" class="form-control" placeholder="统一价 或 折扣%(如 80%)" aria-label="批量改价">
+            <button type="button" class="btn btn-sm btn-primary" data-action="set_price">改价</button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline" id="batchCancel">✕ 取消选择</button>
 </div>
 
         </main>
     </div>
 
+    <!-- 店员端固定底部 Tab 导航（4 页高频切换；仅店员身份渲染，管理员端保持 PC 网格导航） -->
+    
+
     <!-- 主题切换（全局浮动 fab，内联脚本保证快照剥离 main.js 后仍可切换） -->
     <button type="button" class="theme-toggle theme-fab" id="themeToggle"
-            title="切换深色/浅色" aria-label="切换深色/浅色">🌙</button>
+            title="切换深色/浅色" aria-label="切换深色/浅色">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <script>
     (function () {
         var btn = document.getElementById('themeToggle');
@@ -1321,7 +1656,14 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
             var t = document.documentElement.dataset.theme;
             return t ? t === 'dark' : true; // 缺省默认墨绿黑暗主题
         }
-        function syncIcon() { btn.textContent = isDark() ? '☀️' : '🌙'; }
+        function syncIcon() {
+            // 图标语义 = 点击后切换到的目标主题：暗色显示太阳（切亮），亮色显示月亮（切暗）
+            var dark = isDark();
+            var sun = btn.querySelector('.icon-sun');
+            var moon = btn.querySelector('.icon-moon');
+            if (sun) sun.style.display = dark ? 'block' : 'none';
+            if (moon) moon.style.display = dark ? 'none' : 'block';
+        }
         syncIcon();
         btn.addEventListener('click', function () {
             var next = isDark() ? 'light' : 'dark';
@@ -1338,5 +1680,273 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
+<script>
+(function () {
+    'use strict';
+    var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    var csrf = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+    function api(url, payload) {
+        var body = new URLSearchParams(payload || {}).toString();
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrf,
+                'X-Requested-With': 'fetch'
+            },
+            body: body
+        }).then(function (r) {
+            return r.json().catch(function () {
+                throw new Error('响应格式错误');
+            });
+        }).catch(function () {
+            throw new Error('网络错误，请稍后重试');
+        });
+    }
+
+    function forEach(list, fn) {
+        Array.prototype.forEach.call(list, fn);
+    }
+
+    // ── 工具条：搜索 + 分类筛选（客户端过滤，联动全选/已选）──
+    var search = document.getElementById('prodSearch');
+    var filterBar = document.getElementById('prodFilter');
+    var clearBtn = document.getElementById('prodClearFilter');
+    var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-id]'));
+    var noMatchRow = document.getElementById('noMatchRow');
+
+    function visibleRows() {
+        return rows.filter(function (r) { return !r.hidden; });
+    }
+
+    function applyFilter() {
+        var kw = (search ? search.value.trim() : '').toLowerCase();
+        var activePill = filterBar ? filterBar.querySelector('.pill.active') : null;
+        var catVal = activePill ? activePill.getAttribute('data-cat') : '';
+        var anyVisible = false;
+        rows.forEach(function (r) {
+            var name = (r.getAttribute('data-name') || '').toLowerCase();
+            var rc = r.getAttribute('data-cat') || '';
+            var show = (!kw || name.indexOf(kw) !== -1) && (!catVal || rc === catVal);
+            r.hidden = !show;
+            if (show) {
+                anyVisible = true;
+            } else {
+                var cb = r.querySelector('.row-select');
+                if (cb) cb.checked = false;
+                var er = document.querySelector('tr.inline-edit-row[data-for="' + r.getAttribute('data-id') + '"]');
+                if (er) er.hidden = true;
+            }
+        });
+        if (noMatchRow) noMatchRow.hidden = anyVisible;
+        if (clearBtn) clearBtn.hidden = !kw && !catVal;
+        syncSelectAll();
+        syncBatch();
+    }
+
+    if (filterBar) {
+        filterBar.addEventListener('click', function (e) {
+            var pill = e.target.closest('.pill');
+            if (!pill) return;
+            forEach(filterBar.querySelectorAll('.pill'), function (p) {
+                p.classList.toggle('active', p === pill);
+            });
+            applyFilter();
+        });
+    }
+    if (search) search.addEventListener('input', applyFilter);
+    if (clearBtn) clearBtn.addEventListener('click', function () {
+        if (search) search.value = '';
+        forEach(filterBar ? filterBar.querySelectorAll('.pill') : [], function (p) {
+            p.classList.toggle('active', p.getAttribute('data-cat') === '');
+        });
+        applyFilter();
+    });
+
+    // ── 选择集 + 批量底栏 ──
+    var selectAll = document.getElementById('selectAll');
+    var batchBar = document.getElementById('batchBar');
+    var batchCount = document.getElementById('batchCount');
+
+    function selectedIds() {
+        var ids = [];
+        rows.forEach(function (r) {
+            var cb = r.querySelector('.row-select');
+            if (cb && cb.checked) ids.push(r.getAttribute('data-id'));
+        });
+        return ids;
+    }
+
+    function syncSelectAll() {
+        if (!selectAll) return;
+        var vis = visibleRows();
+        var checked = vis.filter(function (r) {
+            var cb = r.querySelector('.row-select');
+            return cb && cb.checked;
+        }).length;
+        selectAll.checked = vis.length > 0 && checked === vis.length;
+        selectAll.indeterminate = checked > 0 && checked < vis.length;
+    }
+
+    function syncBatch() {
+        var n = selectedIds().length;
+        if (batchCount) batchCount.textContent = String(n);
+        if (batchBar) batchBar.hidden = n === 0;
+    }
+
+    if (selectAll) {
+        selectAll.addEventListener('change', function () {
+            var check = selectAll.checked;
+            visibleRows().forEach(function (r) {
+                var cb = r.querySelector('.row-select');
+                if (cb) cb.checked = check;
+            });
+            syncBatch();
+        });
+    }
+    rows.forEach(function (r) {
+        var cb = r.querySelector('.row-select');
+        if (cb) cb.addEventListener('change', function () {
+            syncSelectAll();
+            syncBatch();
+        });
+    });
+
+    // ── 内联编辑：展开/收起（同一时刻仅一行在编）──
+    function collapseAllEdit() {
+        var open = document.querySelector('tr.inline-edit-row:not([hidden])');
+        if (open) open.hidden = true;
+    }
+
+    function expandEdit(id) {
+        collapseAllEdit();
+        var er = document.querySelector('tr.inline-edit-row[data-id="' + id + '"]');
+        if (er) {
+            er.hidden = false;
+            var first = er.querySelector('input');
+            if (first) first.focus();
+        }
+    }
+
+    forEach(document.querySelectorAll('.inline-edit-trigger'), function (btn) {
+        btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-id');
+            var er = document.querySelector('tr.inline-edit-row[data-id="' + id + '"]');
+            if (er && !er.hidden) { er.hidden = true; return; }
+            expandEdit(id);
+        });
+    });
+
+    // ── 内联编辑提交（fetch update，失败行内红条不跳转）──
+    forEach(document.querySelectorAll('.inline-edit-form'), function (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var id = form.getAttribute('data-id');
+            var errBox = form.querySelector('.form-error');
+            var saveBtn = form.querySelector('button[type="submit"]');
+            var payload = {
+                product_name: form.querySelector('[name="product_name"]').value,
+                unit_price: form.querySelector('[name="unit_price"]').value,
+                cost_price: form.querySelector('[name="cost_price"]').value,
+                category: form.querySelector('[name="category"]').value
+            };
+            if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '保存中…'; }
+            api('/admin/products/' + id + '/update', payload).then(function (j) {
+                if (j && j.ok) { window.location.reload(); return; }
+                if (errBox) { errBox.textContent = (j && j.message) || '保存失败'; errBox.hidden = false; }
+                if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '保存'; }
+            }).catch(function (err) {
+                if (errBox) { errBox.textContent = err.message || '网络错误'; errBox.hidden = false; }
+                if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '保存'; }
+            });
+        });
+        var cancel = form.querySelector('.inline-edit-cancel');
+        if (cancel) cancel.addEventListener('click', function () {
+            var er = form.closest('tr.inline-edit-row');
+            if (er) er.hidden = true;
+        });
+    });
+
+    // ── 上下架 toggle（下架先 confirm 防误触）──
+    forEach(document.querySelectorAll('.toggle-switch'), function (sw) {
+        sw.addEventListener('click', function () {
+            var id = sw.getAttribute('data-id');
+            var active = sw.getAttribute('data-active') === '1';
+            if (active && !window.confirm('确定下架该产品？下架后店员 H5 填报将无法选择。')) return;
+            api('/admin/products/' + id + '/toggle', {}).then(function (j) {
+                if (j && j.ok) { window.location.reload(); return; }
+                window.alert((j && j.message) || '操作失败');
+            }).catch(function (err) {
+                window.alert(err.message || '网络错误');
+            });
+        });
+    });
+
+    // ── 删除 ──
+    forEach(document.querySelectorAll('.inline-delete'), function (btn) {
+        btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-id');
+            var name = btn.getAttribute('data-name') || '该产品';
+            if (!window.confirm('确定删除「' + name + '」？删除后不可恢复。')) return;
+            api('/admin/products/' + id + '/delete', {}).then(function (j) {
+                if (j && j.ok) { window.location.reload(); return; }
+                window.alert((j && j.message) || '删除失败');
+            }).catch(function (err) {
+                window.alert(err.message || '网络错误');
+            });
+        });
+    });
+
+    // ── 批量操作 ──
+    function doBatch(action, extra) {
+        var ids = selectedIds();
+        if (ids.length === 0) return;
+        var q = { action: action, ids: ids.join(',') };
+        for (var k in (extra || {})) { q[k] = extra[k]; }
+        api('/admin/products/batch', q).then(function (j) {
+            if (j && j.ok) { window.location.reload(); return; }
+            window.alert((j && j.message) || '批量操作失败');
+        }).catch(function (err) {
+            window.alert(err.message || '网络错误');
+        });
+    }
+
+    if (batchBar) {
+        forEach(batchBar.querySelectorAll('[data-action]'), function (btn) {
+            btn.addEventListener('click', function () {
+                var action = btn.getAttribute('data-action');
+                var n = selectedIds().length;
+                if (action === 'delete') {
+                    if (!window.confirm('确定删除选中的 ' + n + ' 项产品？删除后不可恢复。')) return;
+                    doBatch(action);
+                    return;
+                }
+                if (action === 'set_price') {
+                    var priceInput = document.getElementById('batchPrice');
+                    var val = priceInput ? priceInput.value.trim() : '';
+                    if (!val) { window.alert('请填写统一价或折扣（如 15 或 80%）'); return; }
+                    if (!window.confirm('批量改价：' + val + '（' + n + ' 项）？')) return;
+                    doBatch(action, { price: val });
+                    return;
+                }
+                var label = action === 'enable' ? '上架' : '下架';
+                if (!window.confirm('确定批量' + label + '选中的 ' + n + ' 项产品？')) return;
+                doBatch(action);
+            });
+        });
+        var cancel = document.getElementById('batchCancel');
+        if (cancel) cancel.addEventListener('click', function () {
+            rows.forEach(function (r) {
+                var cb = r.querySelector('.row-select');
+                if (cb) cb.checked = false;
+            });
+            syncSelectAll();
+            syncBatch();
+        });
+    }
+})();
+</script>
+
 <nav class="snap-nav" aria-label="页面导航"><a href="13_新增店员.html">← 上一页</a><a href="index.html">返回总览</a><a href="04_考核查看.html">下一页 →</a></nav></body>
 </html>

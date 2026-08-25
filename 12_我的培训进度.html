@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,6 +7,7 @@
     <title>我的培训进度 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
+    <meta name="csrf-token" content="IjUxOTY3MzU1NzBiZWI1Njg5MTE0MzhkOTRlNThhYTY0MTViMGQ0MWIi.ao3ozA.-E5LVbC168XnkLW1lhV2nFggbc8">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -113,42 +115,6 @@ html[data-theme="dark"] {
     --shadow-md: 0 4px 12px rgba(0,0,0,.45);
     --shadow-lg: 0 8px 24px rgba(0,0,0,.55);
     color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) {
-        --primary: #2DD4BF;
-        --primary-light: #5EEAD4;
-        --primary-dark: #0D9488;
-        --success: #34D399;
-        --danger: #F87171;
-        --warning: #FBBF24;
-        /* 语义状态色（暗色覆写） */
-        --success-bg: #064E3B;
-        --success-text: #A7F3D0;
-        --success-border: #065F46;
-        --danger-bg: #7F1D1D;
-        --danger-text: #FECACA;
-        --danger-border: #991B1B;
-        --warning-bg: #78350F;
-        --warning-text: #FDE68A;
-        --warning-border: #92400E;
-        --neutral-bg: #334155;
-        --neutral-text: #CBD5E1;
-        --bg: #0B1B19;
-        --card-bg: #142826;
-        --text: #E2E8F0;
-        --text-light: #94A3B8;
-        --border: #1F3A34;
-        --th-bg: #0F211F;
-        --hover-bg: #17332E;
-        --glow: rgba(45,212,191,.22);
-        --glow-strong: rgba(45,212,191,.38);
-        --shadow-sm: 0 1px 3px rgba(0,0,0,.4);
-        --shadow-md: 0 4px 12px rgba(0,0,0,.45);
-        --shadow-lg: 0 8px 24px rgba(0,0,0,.55);
-        color-scheme: dark;
-    }
 }
 
 /* ═══════════ 2. 基础 ═══════════ */
@@ -267,6 +233,11 @@ body {
     bottom: calc(16px + env(safe-area-inset-bottom));
     z-index: 200;
 }
+/* 主题按钮线性图标（SVG）：默认墨绿黑暗显示太阳（点击切亮），亮色显示月亮（点击切暗） */
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 /* ═══════════ 4. Flash 消息 ═══════════ */
 .flash-messages { padding: 8px 16px; }
@@ -391,12 +362,6 @@ select.form-control {
 /* 暗色模式下箭头提亮，保证在深底上可读（P3） */
 html[data-theme="dark"] select.form-control {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-}
-/* 跟随系统暗色（仅在未显式选亮色时生效，与设计变量逻辑一致） */
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) select.form-control {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    }
 }
 
 .form-hint {
@@ -1201,6 +1166,141 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
 
+/* ═══════════ 23. 产品管理完整化（工具条/toggle/内联编辑/批量底栏 — 超市web 移植） ═══════════ */
+/* 隐藏元素统一兜底：.batch-bar/.btn 等显式 display 会覆盖 hidden 属性默认 none，必须 !important */
+[hidden] { display: none !important; }
+
+/* 复选框品牌色 */
+#productTable input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; }
+
+/* 工具条：搜索 + 分类筛选胶囊 */
+.product-tools { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+@media (min-width: 768px) {
+    body.is-admin .product-tools { flex-direction: row; align-items: center; }
+    body.is-admin .product-tools > .form-control { max-width: 240px; }
+}
+.pill-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+    padding: 5px 14px; font-size: 12px; border-radius: 16px;
+    border: 1px solid var(--border); color: var(--text-light);
+    background: var(--card-bg); cursor: pointer; transition: all .15s;
+}
+.pill:hover { border-color: var(--primary); color: var(--primary); }
+.pill.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); font-weight: 600; }
+
+/* 行内编辑：行下就地展开表单 */
+.inline-edit-row td { background: var(--hover-bg); padding: 10px; }
+.inline-edit-fields { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 640px) {
+    .inline-edit-fields { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+.inline-edit-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+/* 行内错误红条（暗色主题适配） */
+.form-error {
+    margin-top: 8px; padding: 6px 10px; font-size: 12px;
+    border-radius: var(--radius-sm); background: var(--danger-bg);
+    color: var(--danger-text); border: 1px solid var(--danger-border);
+}
+
+/* 上下架开关（滑动圆钮，on 态主题主色） */
+.toggle-switch {
+    position: relative; width: 40px; height: 22px; padding: 0;
+    border: none; border-radius: 11px; cursor: pointer;
+    background: var(--border); transition: background-color .2s; vertical-align: middle;
+}
+.toggle-switch .toggle-knob {
+    position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--card-bg); box-shadow: var(--shadow-sm);
+    transition: transform .2s;
+}
+.toggle-switch.on { background: var(--primary); }
+.toggle-switch.on .toggle-knob { transform: translateX(18px); }
+.toggle-switch:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.toggle-switch:active .toggle-knob { width: 20px; }
+@media (prefers-reduced-motion: reduce) {
+    .toggle-switch, .toggle-switch .toggle-knob { transition: none; }
+}
+
+/* 图标按钮（编辑/删除） */
+.icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; padding: 0; border: 1px solid transparent;
+    border-radius: var(--radius-sm); background: transparent; color: var(--text-light);
+    cursor: pointer; transition: all .15s;
+}
+.icon-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--hover-bg); }
+.icon-btn.inline-delete:hover { color: var(--danger); border-color: var(--danger); }
+.row-actions { display: flex; gap: 6px; white-space: nowrap; }
+#productTable .col-check { width: 40px; }
+#productTable .col-actions { width: 92px; }
+
+/* 批量操作固定底栏（安全区适配） */
+.batch-bar {
+    position: fixed; left: 0; right: 0; bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 60; margin: 0 auto; max-width: 960px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+}
+.batch-count { font-size: 13px; color: var(--text-light); }
+.batch-count b { color: var(--primary); }
+.batch-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.batch-price { display: flex; gap: 6px; align-items: center; }
+.batch-price .form-control { width: 150px; min-width: 0; margin: 0; }
+
+/* ≤640px 产品表卡片化（data-label 显示列名，手机微信可读可点） */
+@media (max-width: 640px) {
+    #productTable thead { display: none; }
+    #productTable, #productTable tbody { display: block; width: 100%; }
+    #productTable tbody { display: flex; flex-direction: column; gap: 10px; }
+    #productTable tr[data-id], #productTable tr.inline-edit-row { display: block; }
+    #productTable tr[data-id]:not(.inline-edit-row) {
+        border: 1px solid var(--border); border-radius: var(--radius-md);
+        padding: 6px 10px; background: var(--card-bg);
+    }
+    #productTable tr[data-id]:not(.inline-edit-row).inactive { opacity: .6; }
+    #productTable td {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 7px 2px; border-bottom: 1px dashed var(--border); text-align: right;
+    }
+    #productTable td:last-child { border-bottom: none; }
+    #productTable td::before {
+        content: attr(data-label); color: var(--text-light); font-size: 12px; margin-right: 12px;
+    }
+    #productTable td.col-check { justify-content: flex-start; }
+    #productTable td.col-check::before { content: none; }
+    #productTable td.row-actions { justify-content: flex-end; }
+    #productTable td.row-actions::before { content: attr(data-label); margin-right: auto; }
+    #productTable .inline-edit-row td { display: block; text-align: left; }
+    #productTable .inline-edit-row td::before { content: none; }
+    #productTable td[colspan="7"] { border: 1px solid var(--border); border-radius: var(--radius-md); }
+}
+
+/* ═══════════ 24. 店员端底部 Tab 导航 + 空状态情感化图标 ═══════════ */
+.bottom-tabs {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 100; display: flex;
+    background: var(--card-bg); border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 12px rgba(0,0,0,.12);
+}
+.tab-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 2px; padding: 8px 0 6px; text-decoration: none;
+    color: var(--text-light); font-size: 11px; transition: color .15s;
+}
+.tab-item .tab-icon { line-height: 1; }
+.tab-item.active { color: var(--primary); font-weight: 600; }
+.tab-item:active { transform: scale(.94); }
+/* 防固定底栏遮挡页面底部内容 */
+body.h5-page .main-content { padding-bottom: 74px; }
+@media (prefers-reduced-motion: reduce) { .tab-item { transition: none; } }
+
+/* 空状态情感化图标（复用 _icons 宏，低透明度品牌色） */
+.empty-state .empty-icon { display: block; margin-bottom: 8px; }
+.empty-state .empty-icon svg { color: var(--text-light); opacity: .55; }
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1310,9 +1410,30 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
         </main>
     </div>
 
+    <!-- 店员端固定底部 Tab 导航（4 页高频切换；仅店员身份渲染，管理员端保持 PC 网格导航） -->
+    
+    <nav class="bottom-tabs" aria-label="店员端主导航">
+        <a href="07_店员看板.html" class="tab-item ">
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></span><span class="tab-text">填报</span>
+        </a>
+        <a href="08_填报历史.html" class="tab-item ">
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="tab-text">历史</span>
+        </a>
+        <a href="12_我的培训进度.html" class="tab-item active">
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="tab-text">培训</span>
+        </a>
+        <a href="09_AI培训主页.html" class="tab-item ">
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg></span><span class="tab-text">AI</span>
+        </a>
+    </nav>
+    
+
     <!-- 主题切换（全局浮动 fab，内联脚本保证快照剥离 main.js 后仍可切换） -->
     <button type="button" class="theme-toggle theme-fab" id="themeToggle"
-            title="切换深色/浅色" aria-label="切换深色/浅色">🌙</button>
+            title="切换深色/浅色" aria-label="切换深色/浅色">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <script>
     (function () {
         var btn = document.getElementById('themeToggle');
@@ -1322,7 +1443,14 @@ html, input, button, a, .card, .home-card, .mode-card, .record-item { touch-acti
             var t = document.documentElement.dataset.theme;
             return t ? t === 'dark' : true; // 缺省默认墨绿黑暗主题
         }
-        function syncIcon() { btn.textContent = isDark() ? '☀️' : '🌙'; }
+        function syncIcon() {
+            // 图标语义 = 点击后切换到的目标主题：暗色显示太阳（切亮），亮色显示月亮（切暗）
+            var dark = isDark();
+            var sun = btn.querySelector('.icon-sun');
+            var moon = btn.querySelector('.icon-moon');
+            if (sun) sun.style.display = dark ? 'block' : 'none';
+            if (moon) moon.style.display = dark ? 'none' : 'block';
+        }
         syncIcon();
         btn.addEventListener('click', function () {
             var next = isDark() ? 'light' : 'dark';
