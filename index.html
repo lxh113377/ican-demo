@@ -52,11 +52,16 @@
     box-shadow:var(--shadow-lg); transition:all .2s;
   }
   .fab:hover { transform:rotate(15deg) scale(1.08); }
+  /* 主题按钮线性图标：默认墨绿黑暗显示太阳（点击切亮），亮色显示月亮（点击切暗） */
+  .fab .icon-sun { display:block; }
+  .fab .icon-moon { display:none; }
+  html[data-theme="light"] .fab .icon-sun { display:none; }
+  html[data-theme="light"] .fab .icon-moon { display:block; }
 </style></head>
 <body>
   <div class="wrap">
     <h1>📊 iCAN 演示快照集</h1>
-    <div class="sub">面向单人自营门店的轻量化AI管理智能体 · 共 13 页 · 页内按钮可互跳 · 右下角 🌙 可切暗色（离线双击即用）</div>
+    <div class="sub">面向单人自营门店的轻量化AI管理智能体 · 共 13 页 · 页内按钮可互跳 · 右下角按钮可切暗色（离线双击即用）</div>
     <div class="grid">
       <a class="card" href="01_管理员看板.html">
         <div class="role role-admin">管理员</div>
@@ -125,7 +130,10 @@
       </a>
     </div>
   </div>
-  <button type="button" class="fab" id="themeToggle" title="切换深色/浅色">🌙</button>
+  <button type="button" class="fab" id="themeToggle" title="切换深色/浅色" aria-label="切换深色/浅色">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
   <script>
   (function () {
       var btn = document.getElementById('themeToggle');
@@ -134,7 +142,14 @@
           var t = document.documentElement.dataset.theme;
           return t ? t === 'dark' : true; // 缺省默认墨绿黑暗主题
       }
-      function syncIcon() { btn.textContent = isDark() ? '☀️' : '🌙'; }
+      function syncIcon() {
+          // 图标语义 = 点击后切换到的目标主题：暗色显示太阳（切亮），亮色显示月亮（切暗）
+          var dark = isDark();
+          var sun = btn.querySelector('.icon-sun');
+          var moon = btn.querySelector('.icon-moon');
+          if (sun) sun.style.display = dark ? 'block' : 'none';
+          if (moon) moon.style.display = dark ? 'none' : 'block';
+      }
       syncIcon();
       btn.addEventListener('click', function () {
           var next = isDark() ? 'light' : 'dark';
