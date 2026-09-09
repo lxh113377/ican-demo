@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>店员账号管理 · 门店管理助手</title>
+    <title>AI 经营分析 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
+    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rw.Eb6Ti0pp4Ida0BO7pt1rb8u-W2Y">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -1498,53 +1498,282 @@ body.h5-page .main-content { padding-bottom: 74px; }
 
         <main class="main-content">
             
-<div class="page-header">
-    <h2>店员账号管理</h2>
-    <a href="13_新增店员.html" class="btn btn-primary btn-sm">+ 新增店员</a>
+<div class="page-header has-actions">
+    <a href="01_管理员看板.html" class="btn-back">← 返回看板</a>
+    <h2>AI 经营分析</h2>
+    <a href="15_AI助手.html" class="btn btn-outline btn-sm">AI 智能助手</a>
 </div>
 
-<div class="staff-grid">
+<p class="login-subtitle">
+    基于真实经营数据自动生成综合分析报告，
+    <span class="badge badge-warning">规则版演示</span>
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>小李</strong>
-            <span class="status active">启用</span>
+    <small class="text-muted">仅供参考，最终经营决策请由店主判断</small>
+</p>
+
+
+
+
+<div class="stat-cards">
+    <div class="stat-card"><div class="stat-num">¥21410.0</div><div class="stat-label">总营收</div></div>
+    <div class="stat-card"><div class="stat-num">1517</div><div class="stat-label">总销量(份)</div></div>
+    <div class="stat-card"><div class="stat-num">¥3058.57</div><div class="stat-label">日均营收</div></div>
+    <div class="stat-card"><div class="stat-num">¥14.11</div><div class="stat-label">单均营收</div></div>
+</div>
+
+
+
+
+<div class="ai-insights">
+    
+    
+    <div class="insight-card">
+        <h4>销量预测</h4>
+        <div class="prediction">明日约 <strong>256.9</strong> 杯
+             · 营收 ≈ ¥3626
         </div>
-        <small>账号：staff02</small>
-        <small>电话：13800138002</small>
-        <small>门店：南昌·红谷滩店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
     </div>
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>小王</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：staff01</small>
-        <small>电话：13800138001</small>
-        <small>门店：南昌·红谷滩店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
+    
+    <div class="insight-card">
+        <h4>工作日 / 周末规律</h4>
+        <div class="prediction">工作日日均 200.8 杯 · 周末日均 256.5 杯</div>
     </div>
     
+    
+    
+    <div class="insight-card">
+        <h4>AI 备货建议（安全库存）</h4>
+        
+        <div class="prediction">芋泥波波：补 <strong>43.9</strong> 份</div>
+        
+        <div class="prediction">烧仙草：补 <strong>34.9</strong> 份</div>
+        
+        <div class="prediction">珍珠奶茶：补 <strong>22.5</strong> 份</div>
+        
+    </div>
+    
+    
+</div>
+
+
+
+
+<div class="section">
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg> AI 结论置信度与依据</h3>
+    <p class="text-muted trainer-hint">
+        共 4 条结论，平均置信度
+        <strong>88%（高）</strong>
+        <small> · 置信度由样本量与数据充分度推导，样本越少越保守</small>
+    </p>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">销量预测</span>
+            <span class="badge badge-success">
+                置信度 95%（高）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
+        <p>预计明日销量约 256.9 杯，营收约 ¥3626。</p>
+        <ul class="evidence-list">
+            <li>方法：近 7 日均销量 × 趋势系数（近 3 日均 ÷ 前 4 日均，限定 0.7~1.3）</li>
+        </ul>
+        <div class="record-note neutral">局限：趋势外推不适用于突变场景（天气骤变、临时活动、停业）</div>
+    </div>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">分产品预测</span>
+            <span class="badge badge-warning">
+                置信度 68%（中）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 68%"></span></div>
+        <p>「芋泥波波」明日需求约 65.3 份，为当前需求最高的单品。</p>
+        <ul class="evidence-list">
+            <li>近 7 日均 65.3 份 × 趋势系数 1.0</li><li>模型自评稳定度 0.71（含波动率惩罚）</li>
+        </ul>
+        <div class="record-note neutral">局限：单品样本天数少于 3 天时不输出预测</div>
+    </div>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">备货建议</span>
+            <span class="badge badge-success">
+                置信度 95%（高）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
+        <p>建议为「芋泥波波」补 43.9 份原料/成品。</p>
+        <ul class="evidence-list">
+            <li>计算口径：日均需求 65.3 + 安全库存 36.6 − 现存 58.0</li><li>服务水平 95%（安全库存 = 1.65 × 波动 σ=22.19）</li>
+        </ul>
+        <div class="record-note neutral">局限：未考虑在途订货与临期原料，实际下单请结合盘点结果</div>
+    </div>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">损耗预警</span>
+            <span class="badge badge-success">
+                置信度 95%（高）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
+        <p>存在 15 条原料损耗/异常记录，建议优先排查。</p>
+        <ul class="evidence-list">
+            <li>最新：2026-08-19 · 柠檬水 · 下午人流量较少</li><li>判定规则：损耗率 &gt; 15% 或存在异常备注</li>
+        </ul>
+        <div class="record-note neutral">局限：损耗率为按行填报口径估算，未区分原料品类</div>
+    </div>
+    
+</div>
+
+
+
+<div class="section">
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg> 分析结论</h3>
+    
+        
+        
+            
+                
+                    <h4 class="analysis-sec">【① 经营概况】</h4>
+                
+            
+                
+                    <p>统计期总营收 ¥21,410，总销量 1517 杯，日均营收 ¥3,059，客单价 ¥14。</p>
+                
+            
+                
+                    <h4 class="analysis-sec">【② 趋势与结构】</h4>
+                
+            
+                
+                    <p>销量近 7 日日均 217 杯，与前 7 日基本持平。热销 TOP：芋泥波波、杨枝甘露、烧仙草；销售结构：芋泥波波(392杯)、烧仙草(322杯)、杨枝甘露(286杯)、柠檬水(261杯)。</p>
+                
+            
+                
+                    <p>周末日均销量 256.5 杯高于工作日 200.8 杯，周末可适当加量备货。</p>
+                
+            
+                
+                    <p>综合毛利率 62.5%（按已录成本口径，38/47 条填报核入）。</p>
+                
+            
+                
+                    <h4 class="analysis-sec">【③ 风险提示】</h4>
+                
+            
+                
+                    <p>近期 15 条原料损耗预警，集中在 柠檬水、芋泥波波、珍珠奶茶，建议按《损耗控制》逐项排查。</p>
+                
+            
+                
+                    <h4 class="analysis-sec">【④ 优化建议】</h4>
+                
+            
+                
+                    <p>预计明日销量约 256.9 杯、营收约 ¥3,626（基于近 7 日趋势外推，仅供参考），建议按此量级预备原料与人力。</p>
+                
+            
+                
+                    <p>安全库存模型测算需补货：芋泥波波 约 43.9 份、烧仙草 约 34.9 份（按 95% 服务水平）。</p>
+                
+            
+                
+                    <p>建议保持热销品按 1.1-1.2 倍预备、易损鲜果少备勤补，并持续录入成本价以支撑毛利分析。（规则版分析基于真实数据模板生成，配置 Dify 后由大模型输出深度洞察）</p>
+                
+            
+        
+    
+    <p class="note">生成时间：2026-09-09 10:51（规则版·演示）</p>
+</div>
+
+
+<div class="section">
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗预警</h3>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-19 · 柠檬水</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-19 · 珍珠奶茶</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-19 · 芋泥波波</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-20 · 杨枝甘露</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-20 · 柠檬水</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-21 · 杨枝甘露</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-22 · 烧仙草</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-22 · 珍珠奶茶</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-22 · 芋泥波波</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-23 · 柠檬水</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-24 · 柠檬水</span>
+        <span class="record-note">原料损耗率 21.1% 超过预警阈值 15%</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-24 · 芋泥波波</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-25 · 烧仙草</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-25 · 珍珠奶茶</span>
+        <span class="record-note">原料损耗率 23.1% 超过预警阈值 15%</span>
+    </div>
+    
+    <div class="record-item">
+        <span class="product-name">2026-08-25 · 芋泥波波</span>
+        <span class="record-note">下午人流量较少</span>
+    </div>
+    
+</div>
+
+
+<div class="section">
+    <a href="15_AI助手.html" class="btn btn-primary btn-block">向 AI 助手提问经营问题 →</a>
 </div>
 
         </main>
@@ -1592,5 +1821,5 @@ body.h5-page .main-content { padding-bottom: 74px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<nav class="snap-nav" aria-label="页面导航"><a href="01_管理员看板.html">← 上一页</a><a href="index.html">返回总览</a><a href="13_新增店员.html">下一页 →</a></nav></body>
+<nav class="snap-nav" aria-label="页面导航"><a href="06_考核明细.html">← 上一页</a><a href="index.html">返回总览</a><a href="15_AI助手.html">下一页 →</a></nav></body>
 </html>

@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>店员账号管理 · 门店管理助手</title>
+    <title>AI 智能助手 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
+    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rw.Eb6Ti0pp4Ida0BO7pt1rb8u-W2Y">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -1499,52 +1499,36 @@ body.h5-page .main-content { padding-bottom: 74px; }
         <main class="main-content">
             
 <div class="page-header">
-    <h2>店员账号管理</h2>
-    <a href="13_新增店员.html" class="btn btn-primary btn-sm">+ 新增店员</a>
+    <a href="01_管理员看板.html" class="btn-back">← 返回看板</a>
+    <h2>AI 智能助手</h2>
 </div>
 
-<div class="staff-grid">
+<p class="login-subtitle">
+    管理员经营问答：营收 / 销量 / 毛利 / 损耗 / 备货 / 服务知识库
+    <small class="text-muted"> · 仅供参考，最终决策请由店主判断</small>
+</p>
+
+<div class="chat-log" id="assistantLog">
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>小李</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：staff02</small>
-        <small>电话：13800138002</small>
-        <small>门店：南昌·红谷滩店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>小王</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：staff01</small>
-        <small>电话：13800138001</small>
-        <small>门店：南昌·红谷滩店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
+</div>
+
+<form method="GET" action="15_AI助手.html" class="chat-input-row" id="assistantForm" data-ajax>
+    <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rw.Eb6Ti0pp4Ida0BO7pt1rb8u-W2Y">
+    <input type="text" name="ask" class="form-control auto-grow" placeholder="例如：这个月营收多少？明天备货建议？" required>
+    <button type="submit" class="btn btn-primary">提问</button>
+</form>
+
+<div class="quick-questions">
+    <button type="button" class="btn btn-outline btn-xs" data-quick="本周营收多少？">营收</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="门店毛利率是多少？">毛利</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="近期有什么损耗异常吗？">损耗</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="明天备货建议？">备货</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="这周和上周比销量怎么样？">对比</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="明天预计能卖多少杯？">预测</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="哪些产品卖得最差？">滞销</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="杨枝甘露卖得怎么样？">产品</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="谁的考核成绩最好？">考核</button>
+    <button type="button" class="btn btn-outline btn-xs" data-quick="顾客嫌贵砍价怎么应对？">话术</button>
 </div>
 
         </main>
@@ -1592,5 +1576,73 @@ body.h5-page .main-content { padding-bottom: 74px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<nav class="snap-nav" aria-label="页面导航"><a href="01_管理员看板.html">← 上一页</a><a href="index.html">返回总览</a><a href="13_新增店员.html">下一页 →</a></nav></body>
+<script>
+// AI 智能助手 AJAX 化：无刷新提问 +「思考中」反馈 + 失败内联重试
+// 原生 form 兜底：fetch 失败时整页提交，行为不劣化
+(function () {
+    var form = document.getElementById('assistantForm');
+    var log = document.getElementById('assistantLog');
+    var input = form ? form.querySelector('input[name="ask"]') : null;
+    var btn = form ? form.querySelector('button[type="submit"]') : null;
+    if (!form || !input || !log) return;
+
+    function appendBubble(cls, text) {
+        var b = document.createElement('div');
+        b.className = 'bubble ' + cls;
+        b.textContent = text;
+        log.appendChild(b);
+        log.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        return b;
+    }
+    function showInlineError(bubble, text) {
+        bubble.innerHTML = '';
+        var err = document.createElement('div');
+        err.className = 'record-note'; err.textContent = text;
+        bubble.appendChild(err);
+    }
+    function send(text) {
+        input.disabled = true; btn.disabled = true; btn.textContent = '思考中…';
+        appendBubble('staff', text);
+        var typing = appendBubble('customer', '▪▪▪ 正在生成回答…');
+
+        var fd = new FormData(form);
+        fd.set('ask', text);
+        fetch(form.action, {
+            method: 'POST',
+            body: fd,
+            headers: { 'X-Requested-With': 'fetch' }
+        }).then(function (r) { return r.json(); })
+          .then(function (j) {
+              if (j && j.ok) {
+                  typing.textContent = j.reply;
+              } else {
+                  showInlineError(typing, (j && j.reply) || 'AI 服务暂不可用，请稍后重试。');
+              }
+          })
+          .catch(function () {
+              showInlineError(typing, '网络开了个小差，请稍后重试。');
+          })
+          .finally(function () {
+              input.value = '';
+              input.disabled = false; btn.disabled = false; btn.textContent = '提问';
+          });
+    }
+
+    form.addEventListener('submit', function (e) {
+        var text = input.value.trim();
+        if (!text) { e.preventDefault(); return; }
+        e.preventDefault();
+        send(text);
+    });
+
+    // 快捷提问按钮
+    document.querySelectorAll('.quick-questions button[data-quick]').forEach(function (b) {
+        b.addEventListener('click', function () {
+            send(b.getAttribute('data-quick'));
+        });
+    });
+})();
+</script>
+
+<nav class="snap-nav" aria-label="页面导航"><a href="14_经营分析.html">← 上一页</a><a href="index.html">返回总览</a><a href="07_店员看板.html">下一页 →</a></nav></body>
 </html>

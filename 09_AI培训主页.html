@@ -7,7 +7,7 @@
     <title>AI 培训考核 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImRkOWJjNDk5YzUxYjY2M2UzZGYzMjY2ZGJjNTk5MGNhMmI4ZDg1ZmQi.ao31Kw.PopN5T0Ag49hCeHkgdj8YKDnf2I">
+    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6SA.7rm9MDdpos02Wu9Fy23sRg2ikjg">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -414,6 +414,18 @@ select.form-control option:disabled { color: var(--text-disabled); }
 
 .btn-sm { padding: 4px 10px; font-size: 12px; border-radius: 6px; min-height: 0; }
 
+/* 更小尺寸按钮（AI 助手快捷提问等辅助入口） */
+.btn-xs { padding: 3px 8px; font-size: 12px; border-radius: 5px; min-height: 0; gap: 6px; }
+
+/* AI 助手快捷提问容器：横向排列，可换行 */
+.quick-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+.quick-questions .btn { pointer-events: auto; }
+
 .btn.loading, .btn:disabled {
     opacity: .65;
     pointer-events: none;
@@ -431,6 +443,15 @@ select.form-control option:disabled { color: var(--text-disabled); }
 /* ═══════════ 9. Section / 卡片基础 ═══════════ */
 .section { margin-top: 20px; }
 .section h3 { font-size: 16px; margin-bottom: 12px; color: var(--text); }
+
+/* 经营分析报告分节标题（AI 经营分析页用，与页面层级一致） */
+.analysis-sec {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary, #0F766E);
+}
+.analysis-sec + p { margin-top: 2px; }
 
 /* 培训进度概览卡片：auto-fit 自适应，奇数张卡也能整齐排布（如看板 6 卡 = 2×3） */
 .stat-cards {
@@ -964,6 +985,20 @@ select.form-control option:disabled { color: var(--text-disabled); }
 .chat-input-row { display: flex; gap: 8px; margin-top: 8px; }
 .chat-input-row .form-control { flex: 1; }
 
+/* 情景对话「即时点评」提示条（第三轮 M3）：主色左描边 + 卡片底色 */
+.tip-inline {
+    align-self: flex-start;
+    max-width: 80%;
+    padding: 5px 10px;
+    margin-top: -2px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-light);
+    background: var(--card-bg);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
 .scenario-tabs { display: flex; gap: 8px; margin: 12px 0; }
 .scenario-tabs a {
     flex: 1; text-align: center; padding: 8px; font-size: 13px;
@@ -983,11 +1018,57 @@ select.form-control option:disabled { color: var(--text-disabled); }
 }
 .alert-pulse { animation: alertPulse 2.2s ease-in-out infinite; }
 
+/* ═══════════ 17b. AI 学习者模型 / 可解释性 / RAG 反馈（第四轮） ═══════════ */
+/* 掌握度进度条：宽度由模板动态计算，属允许的内联动态值 */
+.mastery-bar {
+    height: 6px; margin: 6px 0; border-radius: 999px;
+    background: var(--neutral-bg); overflow: hidden;
+}
+.mastery-fill {
+    display: block; height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width .3s ease;
+}
+/* 能力雷达容器：固定高度避免图表初始化前页面跳动 */
+.chart-box { width: 100%; height: 260px; }
+
+/* 置信度条（可解释性） */
+.confidence-bar {
+    height: 6px; margin: 6px 0 10px; border-radius: 999px;
+    background: var(--neutral-bg); overflow: hidden;
+}
+.confidence-fill {
+    display: block; height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--warning), var(--success));
+}
+.evidence-card {
+    padding: 12px 14px; margin-bottom: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+.evidence-list { margin: 6px 0 0; padding-left: 18px; }
+.evidence-list li { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+
+/* RAG 知识出处与反馈按钮 */
+.ref-chip { display: inline-flex; align-items: center; gap: 6px; padding-right: 4px; }
+.ref-btn {
+    padding: 1px 6px; font-size: 11px; cursor: pointer;
+    color: var(--primary); background: transparent;
+    border: 1px solid var(--border); border-radius: 999px;
+}
+.ref-btn:hover:enabled { background: var(--hover-bg); }
+.ref-btn:disabled { color: var(--text-disabled); cursor: default; }
+.ref-chip-done { opacity: .65; }
+
 /* ═══════════ 17. 工具类 ═══════════ */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 4px; } .mt-6 { margin-top: 6px; }
 .mt-8 { margin-top: 8px; } .mt-16 { margin-top: 16px; }
 .text-muted { color: var(--text-light); }
+/* 培训助手页提示小字（第三轮 M1） */
+.trainer-hint { font-size: 12px; margin-top: 6px; }
 /* 弹性占比（配合 .form-row 容器使用） */
 .flex-1 { flex: 1; } .flex-2 { flex: 2; }
 
@@ -1003,6 +1084,72 @@ select.form-control option:disabled { color: var(--text-disabled); }
 
 /* ECharts 图表容器统一尺寸（各页不再手写 width/height） */
 .chart-box { width: 100%; height: 300px; }
+
+/* ═══════════ 19. AI 深度优化（第二轮）：判分标签 / 洞察卡 / 补训卡 ═══════════ */
+/* 判分要素标签（规则版判分详情可视化） */
+.kw-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.kw-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 999px;
+    font-size: 12px; line-height: 1.6;
+    border: 1px solid var(--border);
+}
+.kw-chip-hit {
+    color: var(--success-text);
+    background: var(--success-bg);
+    border-color: var(--success-border);
+}
+.kw-chip-miss {
+    color: var(--text-light);
+    background: var(--neutral-bg);
+    border-color: var(--border);
+    opacity: .75;
+}
+.kw-chip-num {
+    color: var(--warning-text);
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+}
+/* AI 洞察卡（经营分析页：周期对比 / 预测 / 周末规律） */
+.ai-insights {
+    display: grid; gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin: 12px 0;
+}
+.insight-card {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 12px);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+}
+.insight-card h4 {
+    margin: 0 0 8px; font-size: 13px;
+    color: var(--primary-dark);
+}
+.trend-badge {
+    display: inline-block; margin: 2px 6px 2px 0;
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600;
+}
+.trend-badge.up { color: var(--success-text); background: var(--success-bg); }
+.trend-badge.down { color: var(--danger-text); background: var(--danger-bg); }
+.prediction { font-size: 14px; color: var(--text); }
+/* 补训建议卡片（培训进度页） */
+.tip-card {
+    display: flex; gap: 8px; align-items: flex-start;
+    padding: 10px 12px; margin-bottom: 8px;
+    border: 1px solid var(--ai-card-border);
+    border-radius: 10px;
+    background: var(--ai-card-bg);
+}
+.tip-icon {
+    flex: none; width: 18px; height: 18px; line-height: 18px;
+    text-align: center; border-radius: 50%;
+    font-size: 11px; color: var(--on-primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+.tip-text { font-size: 13px; line-height: 1.6; }
 
 /* 错误页大号表情 */
 .error-emoji { font-size: 48px; line-height: 1.2; }
@@ -1310,6 +1457,24 @@ body.h5-page .main-content { padding-bottom: 74px; }
 .snap-nav a:hover{background:var(--hover-bg)}
 .snap-nav a.disabled{pointer-events:none;color:var(--text-light);opacity:.5}
 </style>
+
+<script>
+/* 演示快照静态模式：拦截联网/写交互，统一友好提示 */
+(function () {
+    window.__SNAPSHOT__ = true;
+    var MSG = '演示快照为静态页面，写入与联网交互请在真实系统中体验';
+    function fakeResponse() {
+        if (typeof Response === 'function') {
+            return new Response(JSON.stringify({ok: false, reply: MSG, message: MSG}),
+                {status: 200, headers: {'Content-Type': 'application/json'}});
+        }
+        return { json: function () { return Promise.resolve({ok: false, reply: MSG, message: MSG}); } };
+    }
+    window.fetch = function () { return Promise.resolve(fakeResponse()); };
+    window.alert = function () {};
+    window.confirm = function () { return false; };
+})();
+</script>
 </head>
 <body class="h5-page">
     <div class="container">
@@ -1351,6 +1516,10 @@ body.h5-page .main-content { padding-bottom: 74px; }
     <a href="12_我的培训进度.html" class="mode-card">
         <span class="mode-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
         <span class="mode-text"><strong>我的培训进度</strong><small>查看通过率与薄弱点</small></span>
+    </a>
+    <a href="16_AI培训助手.html" class="mode-card">
+        <span class="mode-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <span class="mode-text"><strong>AI 培训助手</strong><small>问业务问题，结合你的错题给建议</small></span>
     </a>
 </div>
 
