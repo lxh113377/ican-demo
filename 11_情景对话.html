@@ -7,7 +7,7 @@
     <title>情景模拟对话 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6SA.7rm9MDdpos02Wu9Fy23sRg2ikjg">
+    <meta name="csrf-token" content="Ijc1NjEyODhjNDlkZDk4NGNhMzQ1OTkwODFiODc3MmFkOWIwYTQwMjki.aqGJhg.vKdAlPuoIyZRqItCkxTB7vowlkg">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -1448,6 +1448,34 @@ body.h5-page .main-content { padding-bottom: 74px; }
 .empty-state .empty-icon { display: block; margin-bottom: 8px; }
 .empty-state .empty-icon svg { color: var(--text-light); opacity: .55; }
 
+/* ═══════════ 25. 顾客情绪状态徽章（第五轮·情景对话情绪状态机） ═══════════ */
+.mood-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    padding: 8px 12px; margin: 10px 0 0;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+    font-size: 12px; color: var(--text-light);
+}
+.mood-bar[hidden] { display: none; }
+.mood-badge {
+    display: inline-flex; align-items: center; padding: 2px 10px;
+    border-radius: 999px; font-weight: 600; font-size: 12px;
+    background: var(--warning-bg); color: var(--warning-text);
+    border: 1px solid var(--warning-border);
+}
+.mood-badge[data-mood="satisfied"] { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="pleased"]   { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="annoyed"]   { background: var(--warning-bg); color: var(--warning-text); border-color: var(--warning-border); }
+.mood-badge[data-mood="angry"]     { background: var(--danger-bg);  color: var(--danger-text);  border-color: var(--danger-border); }
+.mood-track {
+    flex: 1 1 88px; min-width: 76px; height: 6px; border-radius: 999px;
+    background: var(--border); overflow: hidden;
+}
+.mood-fill { display: block; height: 100%; border-radius: 999px; background: var(--primary); transition: width .4s ease; }
+.mood-fill[data-level="low"]  { background: var(--danger); }
+.mood-fill[data-level="mid"]  { background: var(--warning); }
+.mood-patience { margin-left: auto; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .mood-fill { transition: none; } }
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1521,18 +1549,27 @@ body.h5-page .main-content { padding-bottom: 74px; }
     
 </div>
 
+
+
+<div class="mood-bar" id="moodBar" hidden>
+    <span>顾客情绪</span>
+    <span class="mood-badge" id="moodBadge" data-mood=""></span>
+    <span class="mood-track"><i class="mood-fill" id="moodFill" data-level="low" style="width: 0%"></i></span>
+    <span class="mood-patience">耐心值 <b id="moodPatience">0</b>/100</span>
+</div>
+
 <div class="chat-log">
     
 </div>
 
 
 <form method="GET" action="12_我的培训进度.html" class="chat-input-row" id="chatForm" data-ajax>
-    <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6SA.7rm9MDdpos02Wu9Fy23sRg2ikjg">
+    <input type="hidden" name="csrf_token" value="Ijc1NjEyODhjNDlkZDk4NGNhMzQ1OTkwODFiODc3MmFkOWIwYTQwMjki.aqGJhg.vKdAlPuoIyZRqItCkxTB7vowlkg">
     <input type="text" name="msg" class="form-control" placeholder="输入你的回复…" required>
     <button type="submit" class="btn btn-primary">发送</button>
 </form>
 <form method="GET" action="12_我的培训进度.html" class="mt-8">
-    <input type="hidden" name="csrf_token" value="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6SA.7rm9MDdpos02Wu9Fy23sRg2ikjg">
+    <input type="hidden" name="csrf_token" value="Ijc1NjEyODhjNDlkZDk4NGNhMzQ1OTkwODFiODc3MmFkOWIwYTQwMjki.aqGJhg.vKdAlPuoIyZRqItCkxTB7vowlkg">
     <input type="hidden" name="action" value="finish">
     <button type="submit" class="btn btn-outline btn-block">结束并查看点评</button>
 </form>
@@ -1635,6 +1672,24 @@ body.h5-page .main-content { padding-bottom: 74px; }
         bubble.appendChild(retry);
     }
 
+    // 顾客情绪徽章：本轮店员表现 → 耐心值/情绪档位（状态机实时反馈）
+    function updateMood(m) {
+        var bar = document.getElementById('moodBar');
+        if (!bar || !m || !m.mood) return;
+        var p = Number(m.patience || 0);
+        bar.hidden = false;
+        var badge = document.getElementById('moodBadge');
+        badge.textContent = m.label || '';
+        badge.setAttribute('data-mood', m.mood);
+        var fill = document.getElementById('moodFill');
+        if (fill) {
+            fill.style.width = p + '%';
+            fill.setAttribute('data-level', p < 35 ? 'low' : (p < 60 ? 'mid' : 'high'));
+        }
+        var num = document.getElementById('moodPatience');
+        if (num) num.textContent = String(Math.round(p));
+    }
+
     function send(text) {
         input.disabled = true;
         btn.disabled = true;
@@ -1655,6 +1710,7 @@ body.h5-page .main-content { padding-bottom: 74px; }
               if (j && j.ok) {
                   typing.innerHTML = '';
                   typing.textContent = j.reply;
+                  if (j.mood) updateMood(j.mood);
                   if (j.tip) {
                       var tip = document.createElement('div');
                       tip.className = 'tip-inline';

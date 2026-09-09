@@ -7,7 +7,7 @@
     <title>AI 培训考核 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6SA.7rm9MDdpos02Wu9Fy23sRg2ikjg">
+    <meta name="csrf-token" content="Ijc1NjEyODhjNDlkZDk4NGNhMzQ1OTkwODFiODc3MmFkOWIwYTQwMjki.aqGJhg.vKdAlPuoIyZRqItCkxTB7vowlkg">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -1447,6 +1447,34 @@ body.h5-page .main-content { padding-bottom: 74px; }
 /* 空状态情感化图标（复用 _icons 宏，低透明度品牌色） */
 .empty-state .empty-icon { display: block; margin-bottom: 8px; }
 .empty-state .empty-icon svg { color: var(--text-light); opacity: .55; }
+
+/* ═══════════ 25. 顾客情绪状态徽章（第五轮·情景对话情绪状态机） ═══════════ */
+.mood-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    padding: 8px 12px; margin: 10px 0 0;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+    font-size: 12px; color: var(--text-light);
+}
+.mood-bar[hidden] { display: none; }
+.mood-badge {
+    display: inline-flex; align-items: center; padding: 2px 10px;
+    border-radius: 999px; font-weight: 600; font-size: 12px;
+    background: var(--warning-bg); color: var(--warning-text);
+    border: 1px solid var(--warning-border);
+}
+.mood-badge[data-mood="satisfied"] { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="pleased"]   { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="annoyed"]   { background: var(--warning-bg); color: var(--warning-text); border-color: var(--warning-border); }
+.mood-badge[data-mood="angry"]     { background: var(--danger-bg);  color: var(--danger-text);  border-color: var(--danger-border); }
+.mood-track {
+    flex: 1 1 88px; min-width: 76px; height: 6px; border-radius: 999px;
+    background: var(--border); overflow: hidden;
+}
+.mood-fill { display: block; height: 100%; border-radius: 999px; background: var(--primary); transition: width .4s ease; }
+.mood-fill[data-level="low"]  { background: var(--danger); }
+.mood-fill[data-level="mid"]  { background: var(--warning); }
+.mood-patience { margin-left: auto; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .mood-fill { transition: none; } }
 
 
 /* 快照翻页导航（仅演示快照集页面） */

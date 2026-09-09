@@ -7,7 +7,7 @@
     <title>数据看板 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjY2M1MjZiOGJjNzQzYjE1NmIzN2ZkNzUzOGY4MzQ3MWVlYWRlYmUi.aqE6Rg.wMVBF2GSOsZg5DPW1mgqb1mCCoA">
+    <meta name="csrf-token" content="Ijc1NjEyODhjNDlkZDk4NGNhMzQ1OTkwODFiODc3MmFkOWIwYTQwMjki.aqGJhA.5wL6illF7lLcxOi_4RGjDMYxCxE">
     <script>
     // 主题初始化（渲染前执行，防闪烁）：手动选择优先，缺省默认「墨绿黑暗主题」（雾山青暗室）
     (function () {
@@ -1448,6 +1448,34 @@ body.h5-page .main-content { padding-bottom: 74px; }
 .empty-state .empty-icon { display: block; margin-bottom: 8px; }
 .empty-state .empty-icon svg { color: var(--text-light); opacity: .55; }
 
+/* ═══════════ 25. 顾客情绪状态徽章（第五轮·情景对话情绪状态机） ═══════════ */
+.mood-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    padding: 8px 12px; margin: 10px 0 0;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+    font-size: 12px; color: var(--text-light);
+}
+.mood-bar[hidden] { display: none; }
+.mood-badge {
+    display: inline-flex; align-items: center; padding: 2px 10px;
+    border-radius: 999px; font-weight: 600; font-size: 12px;
+    background: var(--warning-bg); color: var(--warning-text);
+    border: 1px solid var(--warning-border);
+}
+.mood-badge[data-mood="satisfied"] { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="pleased"]   { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.mood-badge[data-mood="annoyed"]   { background: var(--warning-bg); color: var(--warning-text); border-color: var(--warning-border); }
+.mood-badge[data-mood="angry"]     { background: var(--danger-bg);  color: var(--danger-text);  border-color: var(--danger-border); }
+.mood-track {
+    flex: 1 1 88px; min-width: 76px; height: 6px; border-radius: 999px;
+    background: var(--border); overflow: hidden;
+}
+.mood-fill { display: block; height: 100%; border-radius: 999px; background: var(--primary); transition: width .4s ease; }
+.mood-fill[data-level="low"]  { background: var(--danger); }
+.mood-fill[data-level="mid"]  { background: var(--warning); }
+.mood-patience { margin-left: auto; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .mood-fill { transition: none; } }
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1535,6 +1563,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
     
     <div class="stat-card stat-card--accent"><div class="stat-num" data-value="62.5">62.5%</div><div class="stat-label">毛利率</div></div>
     
+    
+    <div class="stat-card stat-card--accent"><div class="stat-num">积累中</div><div class="stat-label">AI 预测准确率<small>每次打开看板自动记录预测并回测</small></div></div>
+    
 </div>
 
 <div class="section">
@@ -1566,6 +1597,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1574,6 +1608,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1582,6 +1619,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1590,6 +1630,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1598,6 +1641,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1606,6 +1652,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-21</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1614,6 +1663,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1622,6 +1674,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1630,6 +1685,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1638,6 +1696,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-23</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1646,6 +1707,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-24</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 21.1% 超过预警阈值 15%</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1654,6 +1718,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-24</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1662,6 +1729,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1670,6 +1740,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 23.1% 超过预警阈值 15%</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
         <div class="record-item alert-pulse">
@@ -1678,6 +1751,9 @@ body.h5-page .main-content { padding-bottom: 74px; }
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
+            
+            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            
         </div>
         
     </div>
@@ -1711,9 +1787,8 @@ body.h5-page .main-content { padding-bottom: 74px; }
         <div class="ai-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 损耗提醒</div>
         
         <p class="ai-text">⚠️ 检测到 15 条损耗异常，集中在：柠檬水(4次)、芋泥波波(4次)、珍珠奶茶(3次)、杨枝甘露(2次)、烧仙草(2次)。
-建议：① 按《损耗控制》超过 15% 即异常的标准排查归因（备货过多/储存不当/操作浪费）；
-② 易损鲜果/鲜奶「少备勤补」，每日盘点；
-③ 原料变色、异味、胀包立即停用上报，禁止使用。</p>
+AI 归因分布（仅供参考）：待排查(15条)。
+主因「待排查」对策：建议连续观察 2-3 日损耗构成，定位属于备货、储存还是操作环节问题。</p>
         
     </div>
     
@@ -1815,7 +1890,7 @@ var Vr={},Br={};var Fr=function(){function t(t,e,n){var i=this;this._sleepAfterS
 </script>
 <script>
 
-var stats = {"anomalies": {"checked": 14, "ok": false, "points": []}, "basket": {"days": 7, "ok": false, "pairs": []}, "compare": {"ok": false, "qty_pct": null, "revenue_pct": null}, "daily": {"dates": ["08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25"], "qty": [174, 196, 177, 256, 257, 194, 263], "revenue": [2426.0, 2754.0, 2311.0, 3963.0, 3319.0, 3024.0, 3613.0]}, "forecast": {"ok": true, "qty": 256.9, "revenue": 3626.0}, "has_data": true, "kpi": {"avg_daily_revenue": 3058.57, "avg_per_unit": 14.11, "gross_margin": 62.5, "margin_cost_items": 38, "margin_total_items": 47, "report_days": 7, "staff_count": 2, "total_qty": 1517, "total_revenue": 21410.0}, "pie": {"names": ["\u828b\u6ce5\u6ce2\u6ce2", "\u70e7\u4ed9\u8349", "\u6768\u679d\u7518\u9732", "\u67e0\u6aac\u6c34", "\u73cd\u73e0\u5976\u8336"], "values": [392, 322, 286, 261, 256]}, "product_forecast": {"items": [{"avg7": 65.3, "confidence": 0.71, "next_qty": 65.3, "product": "\u828b\u6ce5\u6ce2\u6ce2", "trend": 1.0}, {"avg7": 53.7, "confidence": 0.68, "next_qty": 53.7, "product": "\u70e7\u4ed9\u8349", "trend": 1.0}, {"avg7": 43.5, "confidence": 0.59, "next_qty": 43.5, "product": "\u67e0\u6aac\u6c34", "trend": 1.0}, {"avg7": 40.9, "confidence": 0.81, "next_qty": 35.1, "product": "\u6768\u679d\u7518\u9732", "trend": 0.86}, {"avg7": 36.6, "confidence": 0.79, "next_qty": 25.6, "product": "\u73cd\u73e0\u5976\u8336", "trend": 0.7}], "ok": true}, "replenishment": {"items": [{"basis": "\u65e5\u5747\u9700\u6c42 65.3 + \u5b89\u5168\u5e93\u5b58 36.6 \u2212 \u73b0\u5b58 58.0", "demand": 65.3, "product": "\u828b\u6ce5\u6ce2\u6ce2", "remaining": 58.0, "safety_stock": 36.6, "sigma": 22.19, "suggest": 43.9}, {"basis": "\u65e5\u5747\u9700\u6c42 53.7 + \u5b89\u5168\u5e93\u5b58 36.2 \u2212 \u73b0\u5b58 55.0", "demand": 53.7, "product": "\u70e7\u4ed9\u8349", "remaining": 55.0, "safety_stock": 36.2, "sigma": 21.97, "suggest": 34.9}, {"basis": "\u65e5\u5747\u9700\u6c42 36.6 + \u5b89\u5168\u5e93\u5b58 25.9 \u2212 \u73b0\u5b58 40.0", "demand": 36.6, "product": "\u73cd\u73e0\u5976\u8336", "remaining": 40.0, "safety_stock": 25.9, "sigma": 15.72, "suggest": 22.5}, {"basis": "\u65e5\u5747\u9700\u6c42 43.5 + \u5b89\u5168\u5e93\u5b58 44.3 \u2212 \u73b0\u5b58 76.0", "demand": 43.5, "product": "\u67e0\u6aac\u6c34", "remaining": 76.0, "safety_stock": 44.3, "sigma": 26.86, "suggest": 11.8}, {"basis": "\u65e5\u5747\u9700\u6c42 40.9 + \u5b89\u5168\u5e93\u5b58 25.4 \u2212 \u73b0\u5b58 68.0", "demand": 40.9, "product": "\u6768\u679d\u7518\u9732", "remaining": 68.0, "safety_stock": 25.4, "sigma": 15.39, "suggest": 0.0}], "ok": true}, "top": {"names": ["\u828b\u6ce5\u6ce2\u6ce2", "\u6768\u679d\u7518\u9732", "\u70e7\u4ed9\u8349", "\u73cd\u73e0\u5976\u8336", "\u67e0\u6aac\u6c34"], "values": [6272.0, 5148.0, 4830.0, 3072.0, 2088.0]}, "waste_alerts": [{"date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336"}, {"date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732"}, {"date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"date": "2026-08-21", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732"}, {"date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349"}, {"date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336"}, {"date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"date": "2026-08-23", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"date": "2026-08-24", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u67e0\u6aac\u6c34"}, {"date": "2026-08-24", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349"}, {"date": "2026-08-25", "note": "\u539f\u6599\u635f\u8017\u7387 23.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u73cd\u73e0\u5976\u8336"}, {"date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}], "weekday": {"ok": true, "weekday_avg": 200.8, "weekend_avg": 256.5}};
+var stats = {"anomalies": {"checked": 14, "ok": false, "points": []}, "basket": {"days": 7, "ok": false, "pairs": []}, "compare": {"ok": false, "qty_pct": null, "revenue_pct": null}, "daily": {"dates": ["08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25"], "qty": [174, 196, 177, 256, 257, 194, 263], "revenue": [2426.0, 2754.0, 2311.0, 3963.0, 3319.0, 3024.0, 3613.0]}, "daily_iso": ["2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25"], "forecast": {"method": "\u6307\u6570\u5e73\u6ed1\u52a0\u6743\uff08\u8fd1 7 \u65e5\uff0c\u534a\u8870\u671f 3 \u5929\uff09 \u00d7 \u8d8b\u52bf\u7cfb\u6570 1.19\uff08\u8fd13\u65e5\u5747\u00f7\u524d4\u65e5\u5747\uff0c\u9650\u5e450.7~1.3\uff09", "ok": true, "qty": 269.2, "revenue": 3799.0, "target_date": "2026-08-26"}, "forecast_accuracy": {"accuracy": null, "count": 0, "hit_rate": null, "last": null, "mape": null, "ok": false}, "has_data": true, "kpi": {"avg_daily_revenue": 3058.57, "avg_per_unit": 14.11, "gross_margin": 62.5, "margin_cost_items": 38, "margin_total_items": 47, "report_days": 7, "staff_count": 2, "total_qty": 1517, "total_revenue": 21410.0}, "pie": {"names": ["\u828b\u6ce5\u6ce2\u6ce2", "\u70e7\u4ed9\u8349", "\u6768\u679d\u7518\u9732", "\u67e0\u6aac\u6c34", "\u73cd\u73e0\u5976\u8336"], "values": [392, 322, 286, 261, 256]}, "product_forecast": {"items": [{"avg7": 64.7, "confidence": 0.71, "next_qty": 64.7, "product": "\u828b\u6ce5\u6ce2\u6ce2", "trend": 1.0}, {"avg7": 59.7, "confidence": 0.68, "next_qty": 59.7, "product": "\u70e7\u4ed9\u8349", "trend": 1.0}, {"avg7": 44.8, "confidence": 0.59, "next_qty": 44.8, "product": "\u67e0\u6aac\u6c34", "trend": 1.0}, {"avg7": 40.8, "confidence": 0.81, "next_qty": 35.0, "product": "\u6768\u679d\u7518\u9732", "trend": 0.86}, {"avg7": 33.8, "confidence": 0.79, "next_qty": 23.7, "product": "\u73cd\u73e0\u5976\u8336", "trend": 0.7}], "ok": true}, "replenishment": {"items": [{"basis": "\u65e5\u5747\u9700\u6c42 65.3 + \u5b89\u5168\u5e93\u5b58 36.6 \u2212 \u73b0\u5b58 58.0", "demand": 65.3, "product": "\u828b\u6ce5\u6ce2\u6ce2", "remaining": 58.0, "safety_stock": 36.6, "sigma": 22.19, "suggest": 43.9}, {"basis": "\u65e5\u5747\u9700\u6c42 53.7 + \u5b89\u5168\u5e93\u5b58 36.2 \u2212 \u73b0\u5b58 55.0", "demand": 53.7, "product": "\u70e7\u4ed9\u8349", "remaining": 55.0, "safety_stock": 36.2, "sigma": 21.97, "suggest": 34.9}, {"basis": "\u65e5\u5747\u9700\u6c42 36.6 + \u5b89\u5168\u5e93\u5b58 25.9 \u2212 \u73b0\u5b58 40.0", "demand": 36.6, "product": "\u73cd\u73e0\u5976\u8336", "remaining": 40.0, "safety_stock": 25.9, "sigma": 15.72, "suggest": 22.5}, {"basis": "\u65e5\u5747\u9700\u6c42 43.5 + \u5b89\u5168\u5e93\u5b58 44.3 \u2212 \u73b0\u5b58 76.0", "demand": 43.5, "product": "\u67e0\u6aac\u6c34", "remaining": 76.0, "safety_stock": 44.3, "sigma": 26.86, "suggest": 11.8}, {"basis": "\u65e5\u5747\u9700\u6c42 40.9 + \u5b89\u5168\u5e93\u5b58 25.4 \u2212 \u73b0\u5b58 68.0", "demand": 40.9, "product": "\u6768\u679d\u7518\u9732", "remaining": 68.0, "safety_stock": 25.4, "sigma": 15.39, "suggest": 0.0}], "ok": true}, "top": {"names": ["\u828b\u6ce5\u6ce2\u6ce2", "\u6768\u679d\u7518\u9732", "\u70e7\u4ed9\u8349", "\u73cd\u73e0\u5976\u8336", "\u67e0\u6aac\u6c34"], "values": [6272.0, 5148.0, 4830.0, 3072.0, 2088.0]}, "waste_alerts": [{"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-21", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-23", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-24", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u67e0\u6aac\u6c34"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-24", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-25", "note": "\u539f\u6599\u635f\u8017\u7387 23.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u73cd\u73e0\u5976\u8336"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2"}], "waste_causes": {"items": [{"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34", "rate": 4.9}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336", "rate": 6.6}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-19", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2", "rate": 2.9}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732", "rate": 0.0}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-20", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34", "rate": 6.8}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-21", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u6768\u679d\u7518\u9732", "rate": 3.7}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349", "rate": 1.4}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u73cd\u73e0\u5976\u8336", "rate": 2.7}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-22", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2", "rate": 6.5}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-23", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u67e0\u6aac\u6c34", "rate": 1.8}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-24", "note": "\u67e0\u6aac\u5207\u7247\u6c27\u5316\u62a5\u5e9f", "product": "\u67e0\u6aac\u6c34", "rate": 21.1}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-24", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2", "rate": 6.2}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u70e7\u4ed9\u8349", "rate": 5.6}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-25", "note": "\u73cd\u73e0\u716e\u591a\uff0c\u6253\u70ca\u62a5\u5e9f", "product": "\u73cd\u73e0\u5976\u8336", "rate": 23.1}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-08-25", "note": "\u4e0b\u5348\u4eba\u6d41\u91cf\u8f83\u5c11", "product": "\u828b\u6ce5\u6ce2\u6ce2", "rate": 1.7}], "ok": true, "summary": {"labels": {"\u5f85\u6392\u67e5": 15}, "main": "\u5f85\u6392\u67e5"}}, "weekday": {"ok": true, "weekday_avg": 200.8, "weekend_avg": 256.5}};
 var rangeDays = 365;
 function fmtMoney(v) {
     return '¥' + Number(v).toLocaleString('zh-CN', { maximumFractionDigits: 2 });
