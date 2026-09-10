@@ -13,37 +13,48 @@
 </script>
 <style>
   :root {
-    --bg:#F3F4F6; --card:#FFFFFF; --text:#1F2937; --text-light:#6B7280; --border:#E5E7EB;
-    --primary:#0F766E; --shadow-sm:0 1px 3px rgba(0,0,0,.06); --shadow-lg:0 8px 24px rgba(0,0,0,.12);
+    --bg:#F5F7F6; --card:#FFFFFF; --text:#16211F; --text-light:#5B6B67; --border:#E3E8E6;
+    --primary:#0F766E; --soft:rgba(15,118,110,.09); --shadow-sm:0 1px 2px rgba(16,33,31,.05);
+    --shadow-lg:0 12px 34px -8px rgba(16,33,31,.18);
     color-scheme: light;
   }
   html[data-theme="dark"] {
-    --bg:#0B1B19; --card:#142826; --text:#E2E8F0; --text-light:#94A3B8; --border:#1F3A34;
-    --primary:#2DD4BF; --shadow-sm:0 1px 3px rgba(0,0,0,.4); --shadow-lg:0 8px 24px rgba(0,0,0,.55);
+    --bg:#0A1513; --card:#12211F; --text:#E4EBE9; --text-light:#8CA09B; --border:#1E3A34;
+    --primary:#2DD4BF; --soft:rgba(45,212,191,.12); --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+    --shadow-lg:0 14px 34px -8px rgba(0,0,0,.62);
     color-scheme: dark;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    background:var(--bg); color:var(--text); margin:0; padding:24px;
-    transition: background-color .25s, color .25s;
+    font-family:"DIN Alternate","Bahnschrift","PingFang SC","HarmonyOS Sans SC","MiSans","Segoe UI","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--text); margin:0; padding:32px 24px 56px;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
+    transition: background-color .2s ease, color .2s ease;
   }
   .wrap { max-width:960px; margin:0 auto; }
-  h1 { font-size:20px; margin:0 0 4px; }
-  .sub { color:var(--text-light); font-size:13px; margin-bottom:18px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
+  .head { display:flex; align-items:center; gap:10px; margin:0 0 6px; }
+  .mark {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:9px; flex:none;
+    background:linear-gradient(120deg,#0A4841,#0F766E 55%,#14B8A6); color:#fff;
+  }
+  h1 { font-size:22px; letter-spacing:-.01em; margin:0; }
+  .sub { color:var(--text-light); font-size:13px; margin:0 0 22px 42px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:14px; }
   .card {
-    background:var(--card); border:1px solid var(--border); border-radius:12px;
-    padding:14px 16px; text-decoration:none; color:inherit;
-    box-shadow:var(--shadow-sm); transition:.15s; display:block;
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:16px; text-decoration:none; color:inherit;
+    transition:transform .12s cubic-bezier(.22,.61,.36,1), box-shadow .12s ease, border-color .12s ease;
+    display:block;
   }
   .card:hover { transform:translateY(-2px); box-shadow:var(--shadow-lg); border-color:var(--primary); }
   .card:active { transform:scale(.98); }
-  .role { display:inline-block; font-size:11px; padding:2px 8px; border-radius:10px; margin-bottom:8px; color:#fff; }
-  .role-admin { background:linear-gradient(135deg,#0D9488,#14B8A6); }
-  .role-staff { background:linear-gradient(135deg,#10B981,#34D399); }
-  .t { font-size:15px; font-weight:700; margin-bottom:6px; }
-  .d { font-size:12px; color:var(--text-light); line-height:1.5; }
+  .card:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+  .role { display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:999px; margin-bottom:9px; }
+  .role-admin { background:var(--soft); color:var(--primary); border:1px solid var(--primary); }
+  .role-staff { background:var(--soft); color:var(--primary); border:1px dashed var(--primary); }
+  .t { font-size:15px; font-weight:650; margin-bottom:6px; }
+  .d { font-size:12px; color:var(--text-light); line-height:1.55; }
   .fab {
     position:fixed; right:16px; bottom:16px; z-index:200;
     width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer;
@@ -60,7 +71,10 @@
 </style></head>
 <body>
   <div class="wrap">
-    <h1>📊 iCAN 演示快照集</h1>
+    <div class="head">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="4" y1="20" x2="20" y2="20"/><line x1="7" y1="16" x2="7" y2="11"/><line x1="12" y1="16" x2="12" y2="6"/><line x1="17" y1="16" x2="17" y2="9"/></svg></span>
+      <h1>iCAN 演示快照集</h1>
+    </div>
     <div class="sub">面向单人自营门店的轻量化AI管理智能体 · 共 16 页 · 页内按钮可互跳 · 右下角按钮可切暗色（离线双击即用）</div>
     <div class="grid">
       <a class="card" href="01_管理员看板.html">
