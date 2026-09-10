@@ -7,7 +7,7 @@
     <title>数据看板 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjJkNTA2MDNjZWQ0ZDE3MTRlYWUzMDMzMjYxMDlhYjEyZTkzMWI1NDki.aqKIAg.cnVbGwMFI3EOy5BBvONpF3f1ZN4">
+    <meta name="csrf-token" content="IjlhMGIyYTc4MWQ3Y2U0MjdhMDk0YmNlNDUzZmQzMDU2NWY3NWUwMTci.aqLWOw.ztwHGFhHKzr4rCvq0b8Uqp0G8DA">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -120,6 +120,15 @@
     --dur-fast: 120ms; --dur: 200ms; --dur-slow: 340ms;
     --ease-out: cubic-bezier(.22, .61, .36, 1);
     --ease-spring: cubic-bezier(.34, 1.32, .5, 1);
+    /* ── 1.8 图表分类色板（ECharts 数据可视化专用；亮/暗双主题，看板/雷达经 cssVar 读取） ── */
+    --chart-1: #0F766E;   /* 青瓷主色 */
+    --chart-2: #D97706;   /* 琥珀（数据次位） */
+    --chart-3: #0E7490;   /* 天青 */
+    --chart-4: #9A3412;   /* 陶土 */
+    --chart-5: #4D7C0F;   /* 苔绿 */
+    --chart-6: #64748B;   /* 石板（兜底中性） */
+    --chart-split: rgba(22, 33, 31, .10);
+    --chart-axis: rgba(22, 33, 31, .30);
     /* 主题切换过渡 */
     color-scheme: light;
 }
@@ -167,13 +176,27 @@ html[data-theme="dark"] {
     --shadow-md: 0 2px 12px rgba(0, 0, 0, .5);
     --shadow-lg: 0 14px 34px -8px rgba(0, 0, 0, .62);
     --shadow-pop: 0 12px 32px -6px rgba(0, 0, 0, .7);
+    /* 图表分类色板（暗色：提高明度，保证深底可读） */
+    --chart-1: #2DD4BF;
+    --chart-2: #FBBF24;
+    --chart-3: #38BDF8;
+    --chart-4: #FB923C;
+    --chart-5: #A3E635;
+    --chart-6: #94A3B8;
+    --chart-split: rgba(228, 235, 233, .10);
+    --chart-axis: rgba(228, 235, 233, .30);
     color-scheme: dark;
 }
 
 /* ═══════════ 2. 基础 ═══════════ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { -webkit-tap-highlight-color: transparent; }
+html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;   /* iOS 横竖屏字体缩放兜底 */
+    text-size-adjust: 100%;
+    scroll-padding-top: 72px;          /* sticky 顶栏不遮挡锚点/焦点跳转 */
+}
 
 /* 键盘焦点环（无障碍）：非鼠标点击的聚焦醒目可见 */
 :focus-visible {
@@ -275,6 +298,8 @@ h1, h2, h3, h4 {
     -webkit-backdrop-filter: saturate(150%) blur(10px);
     backdrop-filter: saturate(150%) blur(10px);
 }
+/* 滚动分层：内容贴到顶栏下方时给一层边界（base.html 内联脚本切 .scrolled） */
+.top-nav.scrolled { box-shadow: var(--shadow-md); }
 
 .nav-brand {
     font-weight: 650;
@@ -522,11 +547,12 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 
 .btn-danger  { background: var(--danger);  color: #fff; }
 .btn-success { background: var(--success); color: #fff; }
+.btn-danger:hover, .btn-success:hover { filter: brightness(1.08); }
 
 .btn-sm { padding: 5px 12px; font-size: var(--fs-xs); border-radius: var(--radius-sm); min-height: 34px; }
 
-/* 更小尺寸按钮（AI 助手快捷提问等辅助入口） */
-.btn-xs { padding: 4px 10px; font-size: var(--fs-xs); border-radius: var(--radius-full); min-height: 0; }
+/* 更小尺寸按钮（AI 助手快捷提问等辅助入口）：保 32px 触控基线 */
+.btn-xs { padding: 5px 12px; font-size: var(--fs-xs); border-radius: var(--radius-full); min-height: 32px; }
 
 /* AI 助手快捷提问容器：横向排列，可换行 */
 .quick-questions {
@@ -883,6 +909,10 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 .staff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
 @media (min-width: 768px) {
     body.is-admin .staff-grid { grid-template-columns: repeat(4, 1fr); }
+}
+/* 窄屏单列：店员卡内含「重置密码」表单，两列会挤压输入区 */
+@media (max-width: 480px) {
+    .staff-grid { grid-template-columns: 1fr; }
 }
 
 .staff-card {
@@ -1265,7 +1295,8 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 /* RAG 知识出处与反馈按钮 */
 .ref-chip { display: inline-flex; align-items: center; gap: 6px; padding-right: 4px; }
 .ref-btn {
-    padding: 2px 9px; font-size: var(--fs-2xs); font-weight: 600; cursor: pointer;
+    padding: 4px 11px; font-size: var(--fs-2xs); font-weight: 600; cursor: pointer;
+    min-height: 26px;   /* 触控目标下限（店员端反馈按钮） */
     color: var(--primary); background: transparent;
     border: 1px solid var(--border-strong); border-radius: var(--radius-full);
     transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
@@ -1695,6 +1726,22 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .home-hero h1 { font-size: var(--fs-2xl); }
 }
 
+/* ═══════════ 28. 长列表折叠（V4 信息密度治理） ═══════════ */
+/* 服务端渲染 .is-collapsed（>5 条时）+ base.html 内联脚本增强；
+   无 JS 场景由 base.html 的 <noscript> 兜底全量展开并隐藏按钮 */
+.record-list.is-collapsed .record-item:nth-child(n+6) { display: none; }
+/* 折叠态下让第 5 条承担「末行」圆角与去分割线；展开态该规则自动失效 */
+.record-list.is-collapsed .record-item:nth-child(5) {
+    border-bottom: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.list-toggle { margin-top: var(--sp-2); }
+
+/* 窄屏图表降高：单屏可同见「图 + 后续内容」，减少滚动 */
+@media (max-width: 480px) {
+    .chart-box { height: 260px; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1825,9 +1872,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
 </div>
 
 
+
 <div class="section">
-    <h3>原料损耗异常提醒</h3>
-    <div class="record-list">
+    <h3>原料损耗异常提醒（15）</h3>
+    <div class="record-list is-collapsed" id="wasteList" data-collapse-list>
         
         <div class="record-item alert-pulse">
             <div class="record-header">
@@ -1836,165 +1884,171 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">珍珠奶茶</span>
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">芋泥波波</span>
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">杨枝甘露</span>
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">柠檬水</span>
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">杨枝甘露</span>
                 <span class="badge badge-danger">2026-08-21</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">烧仙草</span>
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">珍珠奶茶</span>
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">芋泥波波</span>
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">柠檬水</span>
                 <span class="badge badge-danger">2026-08-23</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">柠檬水</span>
                 <span class="badge badge-danger">2026-08-24</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 21.1% 超过预警阈值 15%</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">芋泥波波</span>
                 <span class="badge badge-danger">2026-08-24</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">烧仙草</span>
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">珍珠奶茶</span>
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 23.1% 超过预警阈值 15%</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
-        <div class="record-item alert-pulse">
+        <div class="record-item">
             <div class="record-header">
                 <span class="product-name">芋泥波波</span>
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 下午人流量较少</div>
             
-            <div class="record-note">AI 归因（仅供参考）：待排查 — </div>
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
             
         </div>
         
     </div>
+    
+    <button type="button" class="btn btn-outline btn-sm btn-block list-toggle" hidden
+            data-collapse-toggle="wasteList" aria-controls="wasteList" aria-expanded="false"
+            data-label-more="展开全部 15 条提醒"
+            data-label-less="收起（只看最新 5 条）">展开全部 15 条提醒</button>
+    
 </div>
 
 
@@ -2076,6 +2130,47 @@ AI 归因分布（仅供参考）：待排查(15条)。
         if (mq.addEventListener) mq.addEventListener('change', syncIcon);
     })();
     </script>
+    <noscript><style>
+    /* 无 JS：折叠列表全量展开（不出现「看不到全部」），折叠按钮隐藏（不出现「点了没反应」） */
+    .record-list.is-collapsed .record-item { display: block !important; }
+    .record-list.is-collapsed .record-item:nth-child(5) { border-bottom: 1px solid var(--border); border-radius: 0; }
+    .record-list.is-collapsed .record-item:last-child { border-bottom: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+    [data-collapse-toggle] { display: none !important; }
+    </style></noscript>
+    <script>
+    // 长列表折叠 + 顶栏滚动分层（内联：快照剥离 main.js 后仍生效）
+    (function () {
+        function initCollapse() {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-collapse-list]'), function (list) {
+                if (!list.id) return;
+                var btn = document.querySelector('[data-collapse-toggle="' + list.id + '"]');
+                if (!btn) return;
+                btn.hidden = false;
+                function sync() {
+                    var collapsed = list.classList.contains('is-collapsed');
+                    btn.textContent = collapsed ? (btn.getAttribute('data-label-more') || '展开全部')
+                                                : (btn.getAttribute('data-label-less') || '收起');
+                    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                }
+                btn.addEventListener('click', function () {
+                    list.classList.toggle('is-collapsed');
+                    sync();
+                });
+                sync();
+            });
+        }
+        function initNav() {
+            var nav = document.querySelector('.top-nav');
+            if (!nav) return;
+            function refresh() { nav.classList.toggle('scrolled', window.scrollY > 4); }
+            window.addEventListener('scroll', refresh, { passive: true });
+            refresh();
+        }
+        function init() { initCollapse(); initNav(); }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+        else { init(); }
+    })();
+    </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
 <script>
@@ -2148,24 +2243,37 @@ function rgba(hex, alpha) {
     var c = hexToRgb(hex);
     return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + alpha + ')';
 }
+// 图表主题工厂（V4）：轴/网格/图例/提示/滑块一处产出，暗色自动降对比
+function isDarkTheme() {
+    return document.documentElement.dataset.theme === 'dark' ||
+           (!document.documentElement.dataset.theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+}
+function chartTheme() {
+    var dark = isDarkTheme();
+    return {
+        dark: dark,
+        // 分类色板与网格/轴线全部读 CSS 令牌（--chart-1..6 / --chart-split / --chart-axis）
+        palette: [1, 2, 3, 4, 5, 6].map(function (i) { return cssVar('--chart-' + i, '#0F766E'); }),
+        bg: cssVar('--card-bg', dark ? '#12211F' : '#fff'),
+        border: cssVar('--border', dark ? '#1E3A34' : '#E3E8E6'),
+        text: cssVar('--text', dark ? '#E4EBE9' : '#16211F'),
+        sub: cssVar('--text-light', dark ? '#8CA09B' : '#5B6B67'),
+        split: cssVar('--chart-split', 'rgba(128,128,128,.12)'),
+        axis: cssVar('--chart-axis', 'rgba(128,128,128,.30)')
+    };
+}
 function renderCharts() {
-    var dark = document.documentElement.dataset.theme === 'dark' ||
-               (!document.documentElement.dataset.theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    // 品牌数据色板（雾山青衍生：主青 + 琥珀金 + 玫红 + 天蓝 + 翠绿 + 亮青）
-    var PRIMARY = cssVar('--primary', '#0F766E');
-    var PRIMARY_LIGHT = cssVar('--primary-light', '#14B8A6');
-    var PRIMARY_DARK = cssVar('--primary-dark', '#115E59');
-    var PALETTE = [PRIMARY, '#F59E0B', '#EC4899', '#0EA5E9', '#10B981', PRIMARY_LIGHT];
-    var tbg = cssVar('--card-bg', dark ? '#142826' : '#fff');
-    var tbd = cssVar('--border', dark ? '#1F3A34' : '#E5E7EB');
-    var ttx = cssVar('--text', dark ? '#E2E8F0' : '#1F2937');
-    var tsub = cssVar('--text-light', '#94A3B8');
+    var t = chartTheme();
+    var PRIMARY = t.palette[0];
+    var tip = { backgroundColor: t.bg, borderColor: t.border, textStyle: { color: t.text } };
     var chart = echarts.getInstanceByDom(document.getElementById('myChart')) ||
                 echarts.init(document.getElementById('myChart'));
     chart.setOption({
+        color: t.palette,
+        grid: { left: 8, right: 10, top: 44, bottom: 6, containLabel: true },
         tooltip: {
             trigger: 'axis',
-            backgroundColor: tbg, borderColor: tbd, textStyle: { color: ttx },
+            backgroundColor: tip.backgroundColor, borderColor: tip.borderColor, textStyle: tip.textStyle,
             // 双 Y 轴：按 seriesIndex 区分营收(0)→¥千分位 / 销量(1)→整数千分位
             formatter: function (params) {
                 var s = params[0].axisValue;
@@ -2178,22 +2286,37 @@ function renderCharts() {
                 return s;
             }
         },
-        legend: { data: ['营收(元)', '销量(份)'], textStyle: { color: tsub } },
-        xAxis: { type: 'category', data: stats.daily.dates, axisLabel: { color: tsub } },
+        legend: { data: ['营收(元)', '销量(份)'], textStyle: { color: t.sub }, icon: 'roundRect', itemWidth: 12, itemHeight: 8 },
+        xAxis: {
+            type: 'category', data: stats.daily.dates,
+            axisLabel: { color: t.sub }, axisTick: { show: false },
+            axisLine: { lineStyle: { color: t.axis } }, splitLine: { show: false }
+        },
         yAxis: [
-            { type: 'value', name: '营收 ', axisLabel: { color: tsub } },
-            { type: 'value', name: '销量 ', axisLabel: { color: tsub } }
+            { type: 'value', name: '营收 ', nameTextStyle: { color: t.sub },
+              axisLabel: { color: t.sub }, axisTick: { show: false }, axisLine: { show: false },
+              splitLine: { lineStyle: { color: t.split } } },
+            { type: 'value', name: '销量 ', nameTextStyle: { color: t.sub },
+              axisLabel: { color: t.sub }, axisTick: { show: false }, axisLine: { show: false },
+              splitLine: { show: false } }
         ],
         series: [
-            { name: '营收(元)', type: 'line', smooth: true, data: stats.daily.revenue,
+            { name: '营收(元)', type: 'line', smooth: true, showSymbol: false, data: stats.daily.revenue,
               lineStyle: { width: 3, color: PRIMARY },
+              itemStyle: { color: PRIMARY },
               areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-                  colorStops: [{ offset: 0, color: rgba(PRIMARY, dark ? 0.45 : 0.25) },
+                  colorStops: [{ offset: 0, color: rgba(PRIMARY, t.dark ? 0.45 : 0.25) },
                                { offset: 1, color: rgba(PRIMARY, 0) }] } } },
-            { name: '销量(份)', type: 'bar', yAxisIndex: 1, data: stats.daily.qty, itemStyle: { color: '#F59E0B', borderRadius: [4,4,0,0] } }
+            { name: '销量(份)', type: 'bar', yAxisIndex: 1, data: stats.daily.qty,
+              itemStyle: { color: t.palette[1], borderRadius: [4, 4, 0, 0] } }
         ],
         dataZoom: (rangeDays === 90 || rangeDays === 365)
-            ? [{ type: 'inside' }, { type: 'slider', height: 18 }]
+            ? [{ type: 'inside' },
+               { type: 'slider', height: 18, bottom: 2,
+                 borderColor: t.border, backgroundColor: 'transparent',
+                 fillerColor: rgba(PRIMARY, .12), handleStyle: { color: PRIMARY },
+                 moveHandleStyle: { color: PRIMARY }, textStyle: { color: t.sub },
+                 dataBackground: { lineStyle: { color: t.split }, areaStyle: { color: t.split } } }]
             : undefined
     });
 
@@ -2201,17 +2324,19 @@ function renderCharts() {
     var pie = echarts.getInstanceByDom(document.getElementById('pieChart')) ||
               echarts.init(document.getElementById('pieChart'));
     pie.setOption({
-        tooltip: { trigger: 'item', formatter: '{b}: {c} 份 ({d}%)', backgroundColor: tbg, borderColor: tbd, textStyle: { color: ttx } },
-        legend: { bottom: 0, textStyle: { color: tsub } },
+        color: t.palette,
+        tooltip: { trigger: 'item', formatter: '{b}: {c} 份 ({d}%)',
+                   backgroundColor: tip.backgroundColor, borderColor: tip.borderColor, textStyle: tip.textStyle },
+        legend: { bottom: 0, textStyle: { color: t.sub }, icon: 'circle', itemWidth: 8, itemHeight: 8 },
         graphic: [{
-            type: 'text', left: 'center', top: '42%',
+            type: 'text', left: 'center', top: '40%',
             style: { text: '总销量\n' + totalQty.toLocaleString('zh-CN') + ' 份', textAlign: 'center',
-                     fill: tsub, fontSize: 12, lineHeight: 18 }
+                     fill: t.sub, fontSize: 12, lineHeight: 18 }
         }],
         series: [{
             type: 'pie', radius: ['45%', '65%'], center: ['50%', '44%'],
-            color: PALETTE,
-            itemStyle: { borderRadius: 6, borderColor: dark ? '#1E293B' : '#fff', borderWidth: 2 },
+            label: { color: t.sub },
+            itemStyle: { borderRadius: 6, borderColor: t.bg, borderWidth: 2 },
             data: stats.pie.names.map(function (n, i) { return { name: n, value: stats.pie.values[i] }; })
         }]
     });
@@ -2219,16 +2344,22 @@ function renderCharts() {
     var top = echarts.getInstanceByDom(document.getElementById('topChart')) ||
               echarts.init(document.getElementById('topChart'));
     top.setOption({
-        tooltip: { trigger: 'axis', valueFormatter: function (v) { return fmtMoney(v); }, backgroundColor: tbg, borderColor: tbd, textStyle: { color: ttx } },
-        xAxis: { type: 'value', axisLabel: { color: tsub } },
-        yAxis: { type: 'category', data: stats.top.names.slice().reverse(), axisLabel: { color: tsub } },
+        color: t.palette,
+        grid: { left: 8, right: 18, top: 14, bottom: 6, containLabel: true },
+        tooltip: { trigger: 'axis', valueFormatter: function (v) { return fmtMoney(v); },
+                   backgroundColor: tip.backgroundColor, borderColor: tip.borderColor, textStyle: tip.textStyle },
+        xAxis: { type: 'value', axisLabel: { color: t.sub }, axisTick: { show: false },
+                 axisLine: { show: false }, splitLine: { lineStyle: { color: t.split } } },
+        yAxis: { type: 'category', data: stats.top.names.slice().reverse(),
+                 axisLabel: { color: t.sub }, axisTick: { show: false },
+                 axisLine: { lineStyle: { color: t.axis } } },
         series: [{
             type: 'bar', data: stats.top.values.slice().reverse(),
             barWidth: '60%',
             itemStyle: {
                 borderRadius: [0, 6, 6, 0],
                 color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 0,
-                    colorStops: [{ offset: 0, color: PRIMARY_DARK }, { offset: 1, color: PRIMARY }] }
+                    colorStops: [{ offset: 0, color: rgba(PRIMARY, t.dark ? .5 : .55) }, { offset: 1, color: PRIMARY }] }
             }
         }]
     });
@@ -2237,8 +2368,10 @@ function renderCharts() {
 }
 renderCharts();
 window.addEventListener('resize', function () {
-    var chart = echarts.getInstanceByDom(document.getElementById('myChart'));
-    if (chart) chart.resize();
+    ['myChart', 'pieChart', 'topChart'].forEach(function (id) {
+        var c = echarts.getInstanceByDom(document.getElementById(id));
+        if (c) c.resize();
+    });
 });
 // 主题即时切换（无整页 reload）后重绘，让坐标轴/tooltip 读最新计算样式
 document.addEventListener('ichart-theme', renderCharts);

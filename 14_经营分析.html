@@ -7,7 +7,7 @@
     <title>AI 经营分析 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjJkNTA2MDNjZWQ0ZDE3MTRlYWUzMDMzMjYxMDlhYjEyZTkzMWI1NDki.aqKIAw.TsfLyYliexjEabs_ZyvWtj30V2Y">
+    <meta name="csrf-token" content="IjlhMGIyYTc4MWQ3Y2U0MjdhMDk0YmNlNDUzZmQzMDU2NWY3NWUwMTci.aqLWPQ.4ENetHee6kCT9wdgXtnATWSSFTk">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -120,6 +120,15 @@
     --dur-fast: 120ms; --dur: 200ms; --dur-slow: 340ms;
     --ease-out: cubic-bezier(.22, .61, .36, 1);
     --ease-spring: cubic-bezier(.34, 1.32, .5, 1);
+    /* ── 1.8 图表分类色板（ECharts 数据可视化专用；亮/暗双主题，看板/雷达经 cssVar 读取） ── */
+    --chart-1: #0F766E;   /* 青瓷主色 */
+    --chart-2: #D97706;   /* 琥珀（数据次位） */
+    --chart-3: #0E7490;   /* 天青 */
+    --chart-4: #9A3412;   /* 陶土 */
+    --chart-5: #4D7C0F;   /* 苔绿 */
+    --chart-6: #64748B;   /* 石板（兜底中性） */
+    --chart-split: rgba(22, 33, 31, .10);
+    --chart-axis: rgba(22, 33, 31, .30);
     /* 主题切换过渡 */
     color-scheme: light;
 }
@@ -167,13 +176,27 @@ html[data-theme="dark"] {
     --shadow-md: 0 2px 12px rgba(0, 0, 0, .5);
     --shadow-lg: 0 14px 34px -8px rgba(0, 0, 0, .62);
     --shadow-pop: 0 12px 32px -6px rgba(0, 0, 0, .7);
+    /* 图表分类色板（暗色：提高明度，保证深底可读） */
+    --chart-1: #2DD4BF;
+    --chart-2: #FBBF24;
+    --chart-3: #38BDF8;
+    --chart-4: #FB923C;
+    --chart-5: #A3E635;
+    --chart-6: #94A3B8;
+    --chart-split: rgba(228, 235, 233, .10);
+    --chart-axis: rgba(228, 235, 233, .30);
     color-scheme: dark;
 }
 
 /* ═══════════ 2. 基础 ═══════════ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { -webkit-tap-highlight-color: transparent; }
+html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;   /* iOS 横竖屏字体缩放兜底 */
+    text-size-adjust: 100%;
+    scroll-padding-top: 72px;          /* sticky 顶栏不遮挡锚点/焦点跳转 */
+}
 
 /* 键盘焦点环（无障碍）：非鼠标点击的聚焦醒目可见 */
 :focus-visible {
@@ -275,6 +298,8 @@ h1, h2, h3, h4 {
     -webkit-backdrop-filter: saturate(150%) blur(10px);
     backdrop-filter: saturate(150%) blur(10px);
 }
+/* 滚动分层：内容贴到顶栏下方时给一层边界（base.html 内联脚本切 .scrolled） */
+.top-nav.scrolled { box-shadow: var(--shadow-md); }
 
 .nav-brand {
     font-weight: 650;
@@ -522,11 +547,12 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 
 .btn-danger  { background: var(--danger);  color: #fff; }
 .btn-success { background: var(--success); color: #fff; }
+.btn-danger:hover, .btn-success:hover { filter: brightness(1.08); }
 
 .btn-sm { padding: 5px 12px; font-size: var(--fs-xs); border-radius: var(--radius-sm); min-height: 34px; }
 
-/* 更小尺寸按钮（AI 助手快捷提问等辅助入口） */
-.btn-xs { padding: 4px 10px; font-size: var(--fs-xs); border-radius: var(--radius-full); min-height: 0; }
+/* 更小尺寸按钮（AI 助手快捷提问等辅助入口）：保 32px 触控基线 */
+.btn-xs { padding: 5px 12px; font-size: var(--fs-xs); border-radius: var(--radius-full); min-height: 32px; }
 
 /* AI 助手快捷提问容器：横向排列，可换行 */
 .quick-questions {
@@ -883,6 +909,10 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 .staff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
 @media (min-width: 768px) {
     body.is-admin .staff-grid { grid-template-columns: repeat(4, 1fr); }
+}
+/* 窄屏单列：店员卡内含「重置密码」表单，两列会挤压输入区 */
+@media (max-width: 480px) {
+    .staff-grid { grid-template-columns: 1fr; }
 }
 
 .staff-card {
@@ -1265,7 +1295,8 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 /* RAG 知识出处与反馈按钮 */
 .ref-chip { display: inline-flex; align-items: center; gap: 6px; padding-right: 4px; }
 .ref-btn {
-    padding: 2px 9px; font-size: var(--fs-2xs); font-weight: 600; cursor: pointer;
+    padding: 4px 11px; font-size: var(--fs-2xs); font-weight: 600; cursor: pointer;
+    min-height: 26px;   /* 触控目标下限（店员端反馈按钮） */
     color: var(--primary); background: transparent;
     border: 1px solid var(--border-strong); border-radius: var(--radius-full);
     transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
@@ -1695,6 +1726,22 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .home-hero h1 { font-size: var(--fs-2xl); }
 }
 
+/* ═══════════ 28. 长列表折叠（V4 信息密度治理） ═══════════ */
+/* 服务端渲染 .is-collapsed（>5 条时）+ base.html 内联脚本增强；
+   无 JS 场景由 base.html 的 <noscript> 兜底全量展开并隐藏按钮 */
+.record-list.is-collapsed .record-item:nth-child(n+6) { display: none; }
+/* 折叠态下让第 5 条承担「末行」圆角与去分割线；展开态该规则自动失效 */
+.record-list.is-collapsed .record-item:nth-child(5) {
+    border-bottom: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.list-toggle { margin-top: var(--sp-2); }
+
+/* 窄屏图表降高：单屏可同见「图 + 后续内容」，减少滚动 */
+@media (max-width: 480px) {
+    .chart-box { height: 260px; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1953,87 +2000,186 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
         
     
-    <p class="note">生成时间：2026-09-10 10:35（规则版·演示）</p>
+    <p class="note">生成时间：2026-09-10 16:09（规则版·演示）</p>
 </div>
 
 
+
 <div class="section">
-    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗预警</h3>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-19 · 柠檬水</span>
-        <span class="record-note">下午人流量较少</span>
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗预警（15）</h3>
+    <div class="record-list is-collapsed" id="bizWasteList" data-collapse-list>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-19</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">珍珠奶茶</span>
+                <span class="badge badge-danger">2026-08-19</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">芋泥波波</span>
+                <span class="badge badge-danger">2026-08-19</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">杨枝甘露</span>
+                <span class="badge badge-danger">2026-08-20</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-20</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">杨枝甘露</span>
+                <span class="badge badge-danger">2026-08-21</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">烧仙草</span>
+                <span class="badge badge-danger">2026-08-22</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">珍珠奶茶</span>
+                <span class="badge badge-danger">2026-08-22</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">芋泥波波</span>
+                <span class="badge badge-danger">2026-08-22</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-23</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-24</span>
+            </div>
+            <div class="record-note">原料损耗率 21.1% 超过预警阈值 15%</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">芋泥波波</span>
+                <span class="badge badge-danger">2026-08-24</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">烧仙草</span>
+                <span class="badge badge-danger">2026-08-25</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">珍珠奶茶</span>
+                <span class="badge badge-danger">2026-08-25</span>
+            </div>
+            <div class="record-note">原料损耗率 23.1% 超过预警阈值 15%</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">芋泥波波</span>
+                <span class="badge badge-danger">2026-08-25</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
     </div>
     
-    <div class="record-item">
-        <span class="product-name">2026-08-19 · 珍珠奶茶</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-19 · 芋泥波波</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-20 · 杨枝甘露</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-20 · 柠檬水</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-21 · 杨枝甘露</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-22 · 烧仙草</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-22 · 珍珠奶茶</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-22 · 芋泥波波</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-23 · 柠檬水</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-24 · 柠檬水</span>
-        <span class="record-note">原料损耗率 21.1% 超过预警阈值 15%</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-24 · 芋泥波波</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-25 · 烧仙草</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-25 · 珍珠奶茶</span>
-        <span class="record-note">原料损耗率 23.1% 超过预警阈值 15%</span>
-    </div>
-    
-    <div class="record-item">
-        <span class="product-name">2026-08-25 · 芋泥波波</span>
-        <span class="record-note">下午人流量较少</span>
-    </div>
+    <button type="button" class="btn btn-outline btn-sm btn-block list-toggle" hidden
+            data-collapse-toggle="bizWasteList" aria-controls="bizWasteList" aria-expanded="false"
+            data-label-more="展开全部 15 条"
+            data-label-less="收起（只看最新 5 条）">展开全部 15 条</button>
     
 </div>
 
@@ -2083,6 +2229,47 @@ body.h5-page .main-content { padding-bottom: 84px; }
             document.dispatchEvent(new Event('ichart-theme'));
         });
         if (mq.addEventListener) mq.addEventListener('change', syncIcon);
+    })();
+    </script>
+    <noscript><style>
+    /* 无 JS：折叠列表全量展开（不出现「看不到全部」），折叠按钮隐藏（不出现「点了没反应」） */
+    .record-list.is-collapsed .record-item { display: block !important; }
+    .record-list.is-collapsed .record-item:nth-child(5) { border-bottom: 1px solid var(--border); border-radius: 0; }
+    .record-list.is-collapsed .record-item:last-child { border-bottom: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+    [data-collapse-toggle] { display: none !important; }
+    </style></noscript>
+    <script>
+    // 长列表折叠 + 顶栏滚动分层（内联：快照剥离 main.js 后仍生效）
+    (function () {
+        function initCollapse() {
+            Array.prototype.forEach.call(document.querySelectorAll('[data-collapse-list]'), function (list) {
+                if (!list.id) return;
+                var btn = document.querySelector('[data-collapse-toggle="' + list.id + '"]');
+                if (!btn) return;
+                btn.hidden = false;
+                function sync() {
+                    var collapsed = list.classList.contains('is-collapsed');
+                    btn.textContent = collapsed ? (btn.getAttribute('data-label-more') || '展开全部')
+                                                : (btn.getAttribute('data-label-less') || '收起');
+                    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                }
+                btn.addEventListener('click', function () {
+                    list.classList.toggle('is-collapsed');
+                    sync();
+                });
+                sync();
+            });
+        }
+        function initNav() {
+            var nav = document.querySelector('.top-nav');
+            if (!nav) return;
+            function refresh() { nav.classList.toggle('scrolled', window.scrollY > 4); }
+            window.addEventListener('scroll', refresh, { passive: true });
+            refresh();
+        }
+        function init() { initCollapse(); initNav(); }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+        else { init(); }
     })();
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
