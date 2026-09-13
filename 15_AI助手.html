@@ -7,7 +7,7 @@
     <title>AI 智能助手 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+    <meta name="csrf-token" content="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Ew.gLCkdtaAZlx4tXTKm7hgbSJURdY">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,7 +2048,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Ew.gLCkdtaAZlx4tXTKm7hgbSJURdY">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2072,11 +2072,23 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Ew.gLCkdtaAZlx4tXTKm7hgbSJURdY">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
-                    <option value="1" selected>默认门店（当前）</option>
+                    <option value="1" selected>奶茶示范店（当前）</option>
+                    
+                    <option value="2">水果生鲜示范店</option>
+                    
+                    <option value="3">便利店示范店</option>
+                    
+                    <option value="4">烘焙轻食示范店</option>
+                    
+                    <option value="5">美业示范店</option>
+                    
+                    <option value="6">宠物服务示范店</option>
+                    
+                    <option value="7">服装零售示范店</option>
                     
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
@@ -2085,9 +2097,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="nav-user">
                 
-                <span>admin</span>
+                
+                <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                    <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Ew.gLCkdtaAZlx4tXTKm7hgbSJURdY">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2123,7 +2136,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 <form method="GET" action="15_AI助手.html" class="chat-input-row"
       id="assistantForm" data-ajax data-degraded-text="AI 服务暂不可用，已切换为演示模式，请稍后重试。">
-    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+    <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Ew.gLCkdtaAZlx4tXTKm7hgbSJURdY">
     <input type="text" name="ask" class="form-control auto-grow" placeholder="例如：这个月营收多少？明天备货建议？"
            autocomplete="off" autocapitalize="off" enterkeyhint="send" required>
     <button type="submit" class="btn btn-primary">提问</button>

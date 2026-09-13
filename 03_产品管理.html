@@ -7,7 +7,7 @@
     <title>产品管理 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+    <meta name="csrf-token" content="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Eg.dkIChJD1sBCt3KKqvip21GnWfpM">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,7 +2048,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Eg.dkIChJD1sBCt3KKqvip21GnWfpM">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2072,11 +2072,23 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Eg.dkIChJD1sBCt3KKqvip21GnWfpM">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
-                    <option value="1" selected>默认门店（当前）</option>
+                    <option value="1" selected>奶茶示范店（当前）</option>
+                    
+                    <option value="2">水果生鲜示范店</option>
+                    
+                    <option value="3">便利店示范店</option>
+                    
+                    <option value="4">烘焙轻食示范店</option>
+                    
+                    <option value="5">美业示范店</option>
+                    
+                    <option value="6">宠物服务示范店</option>
+                    
+                    <option value="7">服装零售示范店</option>
                     
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
@@ -2085,9 +2097,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="nav-user">
                 
-                <span>admin</span>
+                
+                <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+                    <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Eg.dkIChJD1sBCt3KKqvip21GnWfpM">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2166,7 +2179,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
 </div>
 
 <form method="GET" action="03_产品管理.html" class="sales-form inline-form">
-    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+    <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4Eg.dkIChJD1sBCt3KKqvip21GnWfpM">
     <div class="form-row">
         <div class="form-group flex-2">
             <input type="text" name="product_name" class="form-control" placeholder="产品名称" required>
@@ -2199,9 +2212,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
         </thead>
         <tbody>
         
-        <tr class="" data-id="81"
+        <tr class="" data-id="6"
             data-name="生椰拿铁" data-cat="咖啡">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="81" aria-label="选择 生椰拿铁"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="6" aria-label="选择 生椰拿铁"></td>
             <td data-label="产品">生椰拿铁</td>
             <td data-label="单价">¥20.00</td>
             <td data-label="成本价">¥7.20</td>
@@ -2212,21 +2225,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 生椰拿铁"
                         title="点击下架"
-                        data-id="81" data-active="1">
+                        data-id="6" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="81"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="6"
                         title="编辑" aria-label="编辑 生椰拿铁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="81"
+                <button type="button" class="icon-btn inline-delete" data-id="6"
                         data-name="生椰拿铁"
                         title="删除" aria-label="删除 生椰拿铁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="81" data-for="81" hidden>
+        <tr class="inline-edit-row" data-id="6" data-for="6" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="81">
+                <form class="inline-edit-form" data-id="6">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="生椰拿铁" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="20.00" aria-label="单价">
@@ -2242,9 +2255,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="84"
+        <tr class="" data-id="9"
             data-name="抹茶奶绿" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="84" aria-label="选择 抹茶奶绿"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="9" aria-label="选择 抹茶奶绿"></td>
             <td data-label="产品">抹茶奶绿</td>
             <td data-label="单价">¥15.00</td>
             <td data-label="成本价">¥5.20</td>
@@ -2255,21 +2268,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 抹茶奶绿"
                         title="点击下架"
-                        data-id="84" data-active="1">
+                        data-id="9" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="84"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="9"
                         title="编辑" aria-label="编辑 抹茶奶绿"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="84"
+                <button type="button" class="icon-btn inline-delete" data-id="9"
                         data-name="抹茶奶绿"
                         title="删除" aria-label="删除 抹茶奶绿"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="84" data-for="84" hidden>
+        <tr class="inline-edit-row" data-id="9" data-for="9" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="84">
+                <form class="inline-edit-form" data-id="9">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="抹茶奶绿" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="15.00" aria-label="单价">
@@ -2285,9 +2298,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="88"
+        <tr class="" data-id="13"
             data-name="椰果奶茶" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="88" aria-label="选择 椰果奶茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="13" aria-label="选择 椰果奶茶"></td>
             <td data-label="产品">椰果奶茶</td>
             <td data-label="单价">¥13.00</td>
             <td data-label="成本价">¥4.60</td>
@@ -2298,21 +2311,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 椰果奶茶"
                         title="点击下架"
-                        data-id="88" data-active="1">
+                        data-id="13" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="88"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="13"
                         title="编辑" aria-label="编辑 椰果奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="88"
+                <button type="button" class="icon-btn inline-delete" data-id="13"
                         data-name="椰果奶茶"
                         title="删除" aria-label="删除 椰果奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="88" data-for="88" hidden>
+        <tr class="inline-edit-row" data-id="13" data-for="13" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="88">
+                <form class="inline-edit-form" data-id="13">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="椰果奶茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="13.00" aria-label="单价">
@@ -2328,9 +2341,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="78"
+        <tr class="" data-id="3"
             data-name="烧仙草" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="78" aria-label="选择 烧仙草"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="3" aria-label="选择 烧仙草"></td>
             <td data-label="产品">烧仙草</td>
             <td data-label="单价">¥15.00</td>
             <td data-label="成本价">¥5.60</td>
@@ -2341,21 +2354,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 烧仙草"
                         title="点击下架"
-                        data-id="78" data-active="1">
+                        data-id="3" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="78"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="3"
                         title="编辑" aria-label="编辑 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="78"
+                <button type="button" class="icon-btn inline-delete" data-id="3"
                         data-name="烧仙草"
                         title="删除" aria-label="删除 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="78" data-for="78" hidden>
+        <tr class="inline-edit-row" data-id="3" data-for="3" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="78">
+                <form class="inline-edit-form" data-id="3">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="烧仙草" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="15.00" aria-label="单价">
@@ -2371,9 +2384,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="76"
+        <tr class="" data-id="1"
             data-name="珍珠奶茶" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="76" aria-label="选择 珍珠奶茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="1" aria-label="选择 珍珠奶茶"></td>
             <td data-label="产品">珍珠奶茶</td>
             <td data-label="单价">¥12.00</td>
             <td data-label="成本价">¥4.50</td>
@@ -2384,21 +2397,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 珍珠奶茶"
                         title="点击下架"
-                        data-id="76" data-active="1">
+                        data-id="1" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="76"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="1"
                         title="编辑" aria-label="编辑 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="76"
+                <button type="button" class="icon-btn inline-delete" data-id="1"
                         data-name="珍珠奶茶"
                         title="删除" aria-label="删除 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="76" data-for="76" hidden>
+        <tr class="inline-edit-row" data-id="1" data-for="1" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="76">
+                <form class="inline-edit-form" data-id="1">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="珍珠奶茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="12.00" aria-label="单价">
@@ -2414,9 +2427,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="80"
+        <tr class="" data-id="5"
             data-name="芋泥波波" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="80" aria-label="选择 芋泥波波"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="5" aria-label="选择 芋泥波波"></td>
             <td data-label="产品">芋泥波波</td>
             <td data-label="单价">¥16.00</td>
             <td data-label="成本价">¥6.00</td>
@@ -2427,21 +2440,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 芋泥波波"
                         title="点击下架"
-                        data-id="80" data-active="1">
+                        data-id="5" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="80"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="5"
                         title="编辑" aria-label="编辑 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="80"
+                <button type="button" class="icon-btn inline-delete" data-id="5"
                         data-name="芋泥波波"
                         title="删除" aria-label="删除 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="80" data-for="80" hidden>
+        <tr class="inline-edit-row" data-id="5" data-for="5" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="80">
+                <form class="inline-edit-form" data-id="5">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="芋泥波波" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="16.00" aria-label="单价">
@@ -2457,9 +2470,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="85"
+        <tr class="" data-id="10"
             data-name="黑糖珍珠鲜奶" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="85" aria-label="选择 黑糖珍珠鲜奶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="10" aria-label="选择 黑糖珍珠鲜奶"></td>
             <td data-label="产品">黑糖珍珠鲜奶</td>
             <td data-label="单价">¥19.00</td>
             <td data-label="成本价">¥6.90</td>
@@ -2470,21 +2483,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 黑糖珍珠鲜奶"
                         title="点击下架"
-                        data-id="85" data-active="1">
+                        data-id="10" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="85"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="10"
                         title="编辑" aria-label="编辑 黑糖珍珠鲜奶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="85"
+                <button type="button" class="icon-btn inline-delete" data-id="10"
                         data-name="黑糖珍珠鲜奶"
                         title="删除" aria-label="删除 黑糖珍珠鲜奶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="85" data-for="85" hidden>
+        <tr class="inline-edit-row" data-id="10" data-for="10" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="85">
+                <form class="inline-edit-form" data-id="10">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="黑糖珍珠鲜奶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="19.00" aria-label="单价">
@@ -2500,9 +2513,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="89"
+        <tr class="" data-id="14"
             data-name="双拼果茶" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="89" aria-label="选择 双拼果茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="14" aria-label="选择 双拼果茶"></td>
             <td data-label="产品">双拼果茶</td>
             <td data-label="单价">¥20.00</td>
             <td data-label="成本价">¥7.00</td>
@@ -2513,21 +2526,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 双拼果茶"
                         title="点击下架"
-                        data-id="89" data-active="1">
+                        data-id="14" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="89"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="14"
                         title="编辑" aria-label="编辑 双拼果茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="89"
+                <button type="button" class="icon-btn inline-delete" data-id="14"
                         data-name="双拼果茶"
                         title="删除" aria-label="删除 双拼果茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="89" data-for="89" hidden>
+        <tr class="inline-edit-row" data-id="14" data-for="14" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="89">
+                <form class="inline-edit-form" data-id="14">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="双拼果茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="20.00" aria-label="单价">
@@ -2543,9 +2556,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="77"
+        <tr class="" data-id="2"
             data-name="杨枝甘露" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="77" aria-label="选择 杨枝甘露"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="2" aria-label="选择 杨枝甘露"></td>
             <td data-label="产品">杨枝甘露</td>
             <td data-label="单价">¥18.00</td>
             <td data-label="成本价">¥6.80</td>
@@ -2556,21 +2569,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 杨枝甘露"
                         title="点击下架"
-                        data-id="77" data-active="1">
+                        data-id="2" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="77"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="2"
                         title="编辑" aria-label="编辑 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="77"
+                <button type="button" class="icon-btn inline-delete" data-id="2"
                         data-name="杨枝甘露"
                         title="删除" aria-label="删除 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="77" data-for="77" hidden>
+        <tr class="inline-edit-row" data-id="2" data-for="2" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="77">
+                <form class="inline-edit-form" data-id="2">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="杨枝甘露" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="18.00" aria-label="单价">
@@ -2586,9 +2599,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="79"
+        <tr class="" data-id="4"
             data-name="柠檬水" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="79" aria-label="选择 柠檬水"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="4" aria-label="选择 柠檬水"></td>
             <td data-label="产品">柠檬水</td>
             <td data-label="单价">¥8.00</td>
             <td data-label="成本价"><span class="text-muted">待录入</span></td>
@@ -2599,21 +2612,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 柠檬水"
                         title="点击下架"
-                        data-id="79" data-active="1">
+                        data-id="4" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="79"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="4"
                         title="编辑" aria-label="编辑 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="79"
+                <button type="button" class="icon-btn inline-delete" data-id="4"
                         data-name="柠檬水"
                         title="删除" aria-label="删除 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="79" data-for="79" hidden>
+        <tr class="inline-edit-row" data-id="4" data-for="4" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="79">
+                <form class="inline-edit-form" data-id="4">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="柠檬水" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="8.00" aria-label="单价">
@@ -2629,9 +2642,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="86"
+        <tr class="" data-id="11"
             data-name="柠檬蜂蜜茶" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="86" aria-label="选择 柠檬蜂蜜茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="11" aria-label="选择 柠檬蜂蜜茶"></td>
             <td data-label="产品">柠檬蜂蜜茶</td>
             <td data-label="单价">¥13.00</td>
             <td data-label="成本价">¥4.20</td>
@@ -2642,21 +2655,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 柠檬蜂蜜茶"
                         title="点击下架"
-                        data-id="86" data-active="1">
+                        data-id="11" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="86"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="11"
                         title="编辑" aria-label="编辑 柠檬蜂蜜茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="86"
+                <button type="button" class="icon-btn inline-delete" data-id="11"
                         data-name="柠檬蜂蜜茶"
                         title="删除" aria-label="删除 柠檬蜂蜜茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="86" data-for="86" hidden>
+        <tr class="inline-edit-row" data-id="11" data-for="11" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="86">
+                <form class="inline-edit-form" data-id="11">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="柠檬蜂蜜茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="13.00" aria-label="单价">
@@ -2672,9 +2685,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="87"
+        <tr class="" data-id="12"
             data-name="芝士葡萄" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="87" aria-label="选择 芝士葡萄"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="12" aria-label="选择 芝士葡萄"></td>
             <td data-label="产品">芝士葡萄</td>
             <td data-label="单价">¥22.00</td>
             <td data-label="成本价">¥8.40</td>
@@ -2685,21 +2698,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 芝士葡萄"
                         title="点击下架"
-                        data-id="87" data-active="1">
+                        data-id="12" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="87"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="12"
                         title="编辑" aria-label="编辑 芝士葡萄"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="87"
+                <button type="button" class="icon-btn inline-delete" data-id="12"
                         data-name="芝士葡萄"
                         title="删除" aria-label="删除 芝士葡萄"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="87" data-for="87" hidden>
+        <tr class="inline-edit-row" data-id="12" data-for="12" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="87">
+                <form class="inline-edit-form" data-id="12">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="芝士葡萄" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="22.00" aria-label="单价">
@@ -2715,9 +2728,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="83"
+        <tr class="" data-id="8"
             data-name="蜜桃乌龙" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="83" aria-label="选择 蜜桃乌龙"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="8" aria-label="选择 蜜桃乌龙"></td>
             <td data-label="产品">蜜桃乌龙</td>
             <td data-label="单价">¥17.00</td>
             <td data-label="成本价">¥5.80</td>
@@ -2728,21 +2741,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 蜜桃乌龙"
                         title="点击下架"
-                        data-id="83" data-active="1">
+                        data-id="8" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="83"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="8"
                         title="编辑" aria-label="编辑 蜜桃乌龙"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="83"
+                <button type="button" class="icon-btn inline-delete" data-id="8"
                         data-name="蜜桃乌龙"
                         title="删除" aria-label="删除 蜜桃乌龙"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="83" data-for="83" hidden>
+        <tr class="inline-edit-row" data-id="8" data-for="8" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="83">
+                <form class="inline-edit-form" data-id="8">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="蜜桃乌龙" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="17.00" aria-label="单价">
@@ -2758,9 +2771,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="82"
+        <tr class="" data-id="7"
             data-name="四季春茶" data-cat="纯茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="82" aria-label="选择 四季春茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="7" aria-label="选择 四季春茶"></td>
             <td data-label="产品">四季春茶</td>
             <td data-label="单价">¥10.00</td>
             <td data-label="成本价">¥3.00</td>
@@ -2771,21 +2784,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 四季春茶"
                         title="点击下架"
-                        data-id="82" data-active="1">
+                        data-id="7" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="82"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="7"
                         title="编辑" aria-label="编辑 四季春茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="82"
+                <button type="button" class="icon-btn inline-delete" data-id="7"
                         data-name="四季春茶"
                         title="删除" aria-label="删除 四季春茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="82" data-for="82" hidden>
+        <tr class="inline-edit-row" data-id="7" data-for="7" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="82">
+                <form class="inline-edit-form" data-id="7">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="四季春茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="10.00" aria-label="单价">
@@ -2801,9 +2814,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="90"
+        <tr class="" data-id="15"
             data-name="茉莉绿茶" data-cat="纯茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="90" aria-label="选择 茉莉绿茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="15" aria-label="选择 茉莉绿茶"></td>
             <td data-label="产品">茉莉绿茶</td>
             <td data-label="单价">¥9.00</td>
             <td data-label="成本价">¥2.50</td>
@@ -2814,21 +2827,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 茉莉绿茶"
                         title="点击下架"
-                        data-id="90" data-active="1">
+                        data-id="15" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="90"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="15"
                         title="编辑" aria-label="编辑 茉莉绿茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="90"
+                <button type="button" class="icon-btn inline-delete" data-id="15"
                         data-name="茉莉绿茶"
                         title="删除" aria-label="删除 茉莉绿茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="90" data-for="90" hidden>
+        <tr class="inline-edit-row" data-id="15" data-for="15" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="90">
+                <form class="inline-edit-form" data-id="15">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="茉莉绿茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="9.00" aria-label="单价">

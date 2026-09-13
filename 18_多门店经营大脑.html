@@ -7,7 +7,7 @@
     <title>多门店经营大脑 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+    <meta name="csrf-token" content="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4FA.Bkn3tJ4EQwjNSHhC0T_mgOKCpLE">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,7 +2048,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4FA.Bkn3tJ4EQwjNSHhC0T_mgOKCpLE">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2072,11 +2072,23 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+                <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4FA.Bkn3tJ4EQwjNSHhC0T_mgOKCpLE">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
-                    <option value="1" selected>默认门店（当前）</option>
+                    <option value="1" selected>奶茶示范店（当前）</option>
+                    
+                    <option value="2">水果生鲜示范店</option>
+                    
+                    <option value="3">便利店示范店</option>
+                    
+                    <option value="4">烘焙轻食示范店</option>
+                    
+                    <option value="5">美业示范店</option>
+                    
+                    <option value="6">宠物服务示范店</option>
+                    
+                    <option value="7">服装零售示范店</option>
                     
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
@@ -2085,9 +2097,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="nav-user">
                 
-                <span>admin</span>
+                
+                <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+                    <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4FA.Bkn3tJ4EQwjNSHhC0T_mgOKCpLE">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2105,13 +2118,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
 <div class="page-header">
     <h2>多门店经营大脑</h2>
-    <span class="chip">近 14 天 · 1 家门店（有数据 0）</span>
+    <span class="chip">近 14 天 · 7 家门店（有数据 7）</span>
 </div>
 
 <section class="panel">
     <div class="metric-strip">
-        <div class="metric"><span class="metric-label">总营收</span><strong>0.00</strong></div>
-        <div class="metric"><span class="metric-label">填报记录</span><strong>0</strong></div>
+        <div class="metric"><span class="metric-label">总营收</span><strong>2439190.46</strong></div>
+        <div class="metric"><span class="metric-label">填报记录</span><strong>980</strong></div>
         <div class="metric"><span class="metric-label">异常门店</span><strong>0</strong></div>
         <div class="metric"><span class="metric-label">今日分析用量</span><strong>0/30</strong></div>
     </div>
@@ -2124,9 +2137,51 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <div class="list-rows">
         
         <div class="list-row">
-            <span>#1 默认门店<small class="text-muted">（无数据）</small></span>
-            <span>营收 0.00 · 记录 0 · 损耗 0.0%
+            <span>#1 服装零售示范店</span>
+            <span>营收 1221379.00 · 记录 140 · 损耗 2.1%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/7">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#2 美业示范店</span>
+            <span>营收 640568.00 · 记录 140 · 损耗 1.9%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/5">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#3 宠物服务示范店</span>
+            <span>营收 395722.00 · 记录 140 · 损耗 2.0%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/6">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#4 奶茶示范店</span>
+            <span>营收 62607.00 · 记录 140 · 损耗 1.8%
                 <a class="btn btn-outline btn-sm" href="/admin/multi/store/1">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#5 烘焙轻食示范店</span>
+            <span>营收 52993.50 · 记录 140 · 损耗 1.9%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/4">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#6 水果生鲜示范店</span>
+            <span>营收 46042.86 · 记录 140 · 损耗 1.8%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/2">下钻</a>
+            </span>
+        </div>
+        
+        <div class="list-row">
+            <span>#7 便利店示范店</span>
+            <span>营收 19878.10 · 记录 140 · 损耗 2.1%
+                <a class="btn btn-outline btn-sm" href="/admin/multi/store/3">下钻</a>
             </span>
         </div>
         
@@ -2137,7 +2192,33 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <h3>跨店趋势</h3>
     <div class="list-rows">
         
-        <p class="text-muted">本期暂无流水数据。</p>
+        <div class="list-row"><span>2026-08-31</span><span>营收 162527.54 · 数量 2062</span></div>
+        
+        <div class="list-row"><span>2026-09-01</span><span>营收 186158.18 · 数量 2023</span></div>
+        
+        <div class="list-row"><span>2026-09-02</span><span>营收 199799.88 · 数量 2092</span></div>
+        
+        <div class="list-row"><span>2026-09-03</span><span>营收 132385.34 · 数量 2030</span></div>
+        
+        <div class="list-row"><span>2026-09-04</span><span>营收 157659.00 · 数量 2000</span></div>
+        
+        <div class="list-row"><span>2026-09-05</span><span>营收 219608.52 · 数量 1956</span></div>
+        
+        <div class="list-row"><span>2026-09-06</span><span>营收 163224.73 · 数量 2003</span></div>
+        
+        <div class="list-row"><span>2026-09-07</span><span>营收 172256.62 · 数量 2074</span></div>
+        
+        <div class="list-row"><span>2026-09-08</span><span>营收 196519.39 · 数量 2073</span></div>
+        
+        <div class="list-row"><span>2026-09-09</span><span>营收 133616.66 · 数量 1941</span></div>
+        
+        <div class="list-row"><span>2026-09-10</span><span>营收 187195.92 · 数量 2166</span></div>
+        
+        <div class="list-row"><span>2026-09-11</span><span>营收 204874.11 · 数量 1936</span></div>
+        
+        <div class="list-row"><span>2026-09-12</span><span>营收 127832.13 · 数量 1882</span></div>
+        
+        <div class="list-row"><span>2026-09-13</span><span>营收 195532.44 · 数量 2294</span></div>
         
     </div>
 </section>
@@ -2145,7 +2226,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
 <section class="panel">
     <h3>AI 跨店分析</h3>
     <form method="POST" action="/admin/multi/analyze" class="inline-form">
-        <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+        <input type="hidden" name="csrf_token" value="IjBiYzVhMWNhMzNmZTUzNTk2ZGRiNWQ2MzI3M2YzNjcxZDg3Yjk4NmUi.aqb4FA.Bkn3tJ4EQwjNSHhC0T_mgOKCpLE">
         <button type="submit" class="btn btn-primary btn-sm">生成跨店分析</button>
     </form>
     
