@@ -7,7 +7,7 @@
     <title>员工考核记录 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,9 +2048,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
+                    
+                    <option value="apparel">服装零售店</option>
+                    
+                    <option value="bakery">烘焙轻食店</option>
+                    
+                    <option value="beauty">美容美发/美甲店</option>
                     
                     <option value="convenience">便利店</option>
                     
@@ -2058,15 +2064,30 @@ body.h5-page .main-content { padding-bottom: 84px; }
                     
                     <option value="milk_tea" selected>奶茶店（当前）</option>
                     
+                    <option value="pet">宠物服务店</option>
+                    
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
+            </form>
+            
+            
+            <form method="post" action="/admin/stores/switch" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                <label for="adminStoreSelect">门店</label>
+                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
+                    
+                    <option value="1" selected>默认门店（当前）</option>
+                    
+                </select>
+                <button type="submit" class="btn-pack-switch">切换</button>
+                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
             </form>
             
             <div class="nav-user">
                 
                 <span>admin</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2095,46 +2116,316 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <tr>
             <td>小王</td>
             <td>情景</td>
-            <td>【情景】顾客担心冰块太多影响口感，用哪些服务话术回应？</td>
+            <td>【商品与陈列】橱窗与模特怎么搭配？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>08-22 22:00</td>
+            <td>08-12 22:00</td>
         </tr>
         
         <tr>
             <td>小王</td>
             <td>情景</td>
-            <td>【情景】顾客对价格有异议、嫌杨枝甘露太贵要砍价，你怎么应对？</td>
-            <td>0.00</td>
-            <td><span class="badge badge-danger">未通过</span></td>
-            <td>08-22 19:00</td>
-        </tr>
-        
-        <tr>
-            <td>小王</td>
-            <td>问答</td>
-            <td>门店晚间备货与原料损耗控制应遵循什么原则？</td>
+            <td>【原料与发酵】黄油分哪几类，各用在什么地方？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>08-22 16:00</td>
+            <td>08-12 22:00</td>
         </tr>
         
         <tr>
             <td>小王</td>
-            <td>问答</td>
-            <td>顾客对芋泥波波过敏，从食品安全角度应如何建议？</td>
-            <td>0.00</td>
-            <td><span class="badge badge-danger">未通过</span></td>
-            <td>08-22 13:00</td>
-        </tr>
-        
-        <tr>
-            <td>小王</td>
-            <td>问答</td>
-            <td>珍珠奶茶的原料配料比例与保存要求是什么？</td>
+            <td>情景</td>
+            <td>【服务流程】染发上色过程要检查哪几个节点？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>08-22 10:00</td>
+            <td>08-12 22:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>情景</td>
+            <td>【保质期管理】临期商品怎么界定和处理？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 22:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>情景</td>
+            <td>【损耗控制】每日损耗率怎么算？超过多少算异常？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 22:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>情景</td>
+            <td>【异议处理】顾客嫌价格贵要砍价，正确话术是？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 22:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>情景</td>
+            <td>【洗护流程】打结毛发怎么处理？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 22:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品与陈列】商品陈列的基本原则是什么？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料与发酵】怎么判断面团发酵到位？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【服务流程】剪发前沟通要确认哪几项？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品陈列】冷柜陈列有什么要求？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【鲜度管理】顾客问「今天的水果新不新鲜」怎么回答？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料规范】每日盘点的损耗率超过多少视为异常，需查明原因？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【洗护流程】洗护前要做哪些检查？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 19:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品与陈列】天然纤维和化纤各有什么优缺点？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料与发酵】面团发酵的适宜温度和湿度是多少？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【服务流程】烫染前为什么要做发质检测？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品陈列】促销堆头怎么摆？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【鲜度管理】西瓜切开后能卖多久？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料规范】鲜奶开封后在冷藏 2-6℃ 条件下的最长使用时间是？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【洗护流程】猫咪洗护和犬只有什么不同？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 16:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品与陈列】面料成分标签怎么看？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料与发酵】酵母开封后怎么保存、能用多久？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【服务流程】顾客到店后第一步做什么？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品陈列】排面整理的「前进陈列」是什么？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【鲜度管理】香蕉为什么不能放冷藏柜？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料规范】珍珠（粉圆）煮好后最佳保存时长是？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【洗护流程】洗澡水温与吹干标准是多少？</td>
+            <td>0.00</td>
+            <td><span class="badge badge-danger">未通过</span></td>
+            <td>08-12 13:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品与陈列】常见尺码怎么对照身高体重？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料与发酵】高筋面粉和低筋面粉分别适合做什么？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【服务流程】洗剪吹的标准流程分几步？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【商品陈列】便利店黄金陈列位是哪里？放什么商品？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【鲜度管理】草莓、蓝莓这类莓果怎么储存保鲜？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【原料规范】本店招牌杨枝甘露的标准配料是什么？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
+        </tr>
+        
+        <tr>
+            <td>小王</td>
+            <td>问答</td>
+            <td>【洗护流程】犬只基础洗护的标准流程是什么？</td>
+            <td>100.00</td>
+            <td><span class="badge badge-success">通过</span></td>
+            <td>08-12 10:00</td>
         </tr>
         
         </tbody>

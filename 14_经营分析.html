@@ -7,7 +7,7 @@
     <title>AI 经营分析 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,9 +2048,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
+                    
+                    <option value="apparel">服装零售店</option>
+                    
+                    <option value="bakery">烘焙轻食店</option>
+                    
+                    <option value="beauty">美容美发/美甲店</option>
                     
                     <option value="convenience">便利店</option>
                     
@@ -2058,15 +2064,30 @@ body.h5-page .main-content { padding-bottom: 84px; }
                     
                     <option value="milk_tea" selected>奶茶店（当前）</option>
                     
+                    <option value="pet">宠物服务店</option>
+                    
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
+            </form>
+            
+            
+            <form method="post" action="/admin/stores/switch" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                <label for="adminStoreSelect">门店</label>
+                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
+                    
+                    <option value="1" selected>默认门店（当前）</option>
+                    
+                </select>
+                <button type="submit" class="btn-pack-switch">切换</button>
+                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
             </form>
             
             <div class="nav-user">
                 
                 <span>admin</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2099,10 +2120,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 
 <div class="stat-cards">
-    <div class="stat-card"><div class="stat-num">¥21410.0</div><div class="stat-label">总营收</div></div>
-    <div class="stat-card"><div class="stat-num">1517</div><div class="stat-label">总销量(杯)</div></div>
-    <div class="stat-card"><div class="stat-num">¥3058.57</div><div class="stat-label">日均营收</div></div>
-    <div class="stat-card"><div class="stat-num">¥14.11</div><div class="stat-label">单均营收</div></div>
+    <div class="stat-card"><div class="stat-num">¥44290.0</div><div class="stat-label">总营收</div></div>
+    <div class="stat-card"><div class="stat-num">2853</div><div class="stat-label">总销量(杯)</div></div>
+    <div class="stat-card"><div class="stat-num">¥3163.57</div><div class="stat-label">日均营收</div></div>
+    <div class="stat-card"><div class="stat-num">¥15.52</div><div class="stat-label">单均营收</div></div>
 </div>
 
 
@@ -2110,18 +2131,32 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 <div class="ai-insights">
     
+    <div class="insight-card">
+        <h4>周期对比（近 7 日 vs 前 7 日）</h4>
+        
+        <span class="trend-badge up">
+            ↑ 销量 11.2%
+        </span>
+        
+        
+        <span class="trend-badge up">
+            ↑ 营收 4.2%
+        </span>
+        
+    </div>
+    
     
     <div class="insight-card">
         <h4>销量预测</h4>
-        <div class="prediction">明日约 <strong>269.2</strong> 杯
-             · 营收 ≈ ¥3799
+        <div class="prediction">明日约 <strong>217.1</strong> 杯
+             · 营收 ≈ ¥3370
         </div>
     </div>
     
     
     <div class="insight-card">
         <h4>工作日 / 周末规律</h4>
-        <div class="prediction">工作日日均 200.8 杯 · 周末日均 256.5 杯</div>
+        <div class="prediction">工作日日均 207.4 杯 · 周末日均 194.8 杯</div>
     </div>
     
     
@@ -2129,14 +2164,23 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <div class="insight-card">
         <h4>AI 备货建议（安全库存）</h4>
         
-        <div class="prediction">芋泥波波：补 <strong>43.9</strong> 杯</div>
+        <div class="prediction">双拼果茶：补 <strong>32.3</strong> 杯</div>
         
-        <div class="prediction">烧仙草：补 <strong>34.9</strong> 杯</div>
+        <div class="prediction">珍珠奶茶：补 <strong>32.1</strong> 杯</div>
         
-        <div class="prediction">珍珠奶茶：补 <strong>22.5</strong> 杯</div>
+        <div class="prediction">生椰拿铁：补 <strong>27.3</strong> 杯</div>
         
     </div>
     
+    
+    <div class="insight-card">
+        <h4>AI 组合推荐（购物篮）</h4>
+        <div class="prediction">
+            「四季春茶」+「烧仙草」
+            提升度 <strong>2.33</strong>
+        </div>
+        <div class="record-note neutral">建议搭售或相邻陈列，小范围试点验证</div>
+    </div>
     
 </div>
 
@@ -2146,10 +2190,25 @@ body.h5-page .main-content { padding-bottom: 84px; }
 <div class="section">
     <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg> AI 结论置信度与依据</h3>
     <p class="text-muted trainer-hint">
-        共 4 条结论，平均置信度
-        <strong>88%（高）</strong>
+        共 6 条结论，平均置信度
+        <strong>90%（高）</strong>
         <small> · 置信度由样本量与数据充分度推导，样本越少越保守</small>
     </p>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">周期对比</span>
+            <span class="badge badge-success">
+                置信度 95%（高）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
+        <p>近 7 日销量较前 7 日上升 11.2%，营收上升 4.2%。</p>
+        <ul class="evidence-list">
+            <li>对比窗口：近 7 日 vs 前 7 日（共 14 个统计日）</li><li>销量变动 11.2%，营收变动 4.2%</li>
+        </ul>
+        <div class="record-note neutral">局限：未剔除节假日与促销活动的结构性影响</div>
+    </div>
     
     <div class="evidence-card">
         <div class="record-header">
@@ -2159,9 +2218,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>预计明日销量约 269.2 杯，营收约 ¥3799。</p>
+        <p>预计明日销量约 217.1 杯，营收约 ¥3370。</p>
         <ul class="evidence-list">
-            <li>方法：指数平滑加权（近 7 日，半衰期 3 天） × 趋势系数 1.19（近3日均÷前4日均，限幅0.7~1.3）</li>
+            <li>方法：指数平滑加权（近 14 日，半衰期 3 天） × 趋势系数 0.99（近3日均÷前4日均，限幅0.7~1.3） × 星期周期因子 1.03（明天周三，按历史周内节律季节调整）</li>
         </ul>
         <div class="record-note neutral">局限：趋势外推不适用于突变场景（天气骤变、临时活动、停业）</div>
     </div>
@@ -2174,9 +2233,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 68%"></span></div>
-        <p>「芋泥波波」明日需求约 64.7 份，为当前需求最高的单品。</p>
+        <p>「芝士葡萄」明日需求约 40.9 份，为当前需求最高的单品。</p>
         <ul class="evidence-list">
-            <li>近 14 日指数平滑加权均值 64.7 份（半衰期 3 天） × 趋势系数 1.0</li><li>模型自评稳定度 0.71（含波动率惩罚）</li>
+            <li>近 14 日指数平滑加权均值 40.9 份（半衰期 3 天） × 趋势系数 1.0</li><li>模型自评稳定度 0.65（含波动率惩罚）</li>
         </ul>
         <div class="record-note neutral">局限：单品样本天数少于 3 天时不输出预测</div>
     </div>
@@ -2189,11 +2248,26 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>建议为「芋泥波波」补 43.9 份原料/成品。</p>
+        <p>建议为「双拼果茶」补 32.3 份原料/成品。</p>
         <ul class="evidence-list">
-            <li>计算口径：日均需求 65.3 + 安全库存 36.6 − 现存 58.0</li><li>服务水平 95%（安全库存 = 1.65 × 波动 σ=22.19）</li>
+            <li>计算口径：日均需求 35.5 + 安全库存 30.8 − 现存 34.0</li><li>服务水平 95%（安全库存 = 1.65 × 波动 σ=18.68）</li>
         </ul>
         <div class="record-note neutral">局限：未考虑在途订货与临期原料，实际下单请结合盘点结果</div>
+    </div>
+    
+    <div class="evidence-card">
+        <div class="record-header">
+            <span class="product-name">组合推荐</span>
+            <span class="badge badge-success">
+                置信度 95%（高）
+            </span>
+        </div>
+        <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
+        <p>「四季春茶」与「烧仙草」存在正向关联（提升度 2.33），建议做搭售或相邻陈列。</p>
+        <ul class="evidence-list">
+            <li>共现天数 2 / 总营业日 14（支持度 0.143）</li><li>置信度 1.0 · 提升度 2.33（&gt;1 为正相关）</li>
+        </ul>
+        <div class="record-note neutral">局限：相关性不等于因果，搭售效果需小范围试点验证</div>
     </div>
     
     <div class="evidence-card">
@@ -2204,7 +2278,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>存在 15 条原料损耗/异常记录，建议优先排查。</p>
+        <p>存在 25 条原料损耗/异常记录，建议优先排查。</p>
         <ul class="evidence-list">
             <li>最新：2026-08-25 · 烧仙草 · 下午人流量较少</li><li>判定规则：损耗率 &gt; 15% 或存在异常备注</li>
         </ul>
@@ -2226,7 +2300,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>统计期总营收 ¥21,410，总销量 1517 杯，日均营收 ¥3,059，客单价 ¥14。</p>
+                    <p>统计期总营收 ¥44,290，总销量 2853 杯，日均营收 ¥3,164，客单价 ¥16。</p>
                 
             
                 
@@ -2234,15 +2308,19 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>销量近 7 日日均 217 杯，与前 7 日基本持平。热销 TOP：芋泥波波、杨枝甘露、烧仙草；销售结构：芋泥波波(392杯)、烧仙草(322杯)、杨枝甘露(286杯)、柠檬水(261杯)。</p>
+                    <p>销量近 7 日日均 215 杯，较前 7 日增长 11%。热销 TOP：黑糖珍珠鲜奶、芝士葡萄、双拼果茶；销售结构：黑糖珍珠鲜奶(330杯)、柠檬水(311杯)、珍珠奶茶(269杯)、芝士葡萄(244杯)。</p>
                 
             
                 
-                    <p>周末日均销量 256.5 杯高于工作日 200.8 杯，周末可适当加量备货。</p>
+                    <p>近 7 日较前 7 日：销量上涨11.2%、营收上涨4.2%。</p>
                 
             
                 
-                    <p>综合毛利率 62.5%（按已录成本口径，38/47 条填报核入）。</p>
+                    <p>工作日日均销量 207.4 杯高于周末 194.8 杯，工作日下午高峰期需备足。</p>
+                
+            
+                
+                    <p>综合毛利率 63.9%（按已录成本口径，92/101 条填报核入）。</p>
                 
             
                 
@@ -2250,7 +2328,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>近期 15 条原料损耗预警，集中在 芋泥波波、柠檬水、珍珠奶茶，建议按《损耗控制》逐项排查。</p>
+                    <p>近期 25 条原料损耗预警，集中在 珍珠奶茶、柠檬水、抹茶奶绿，建议按《损耗控制》逐项排查。</p>
                 
             
                 
@@ -2258,11 +2336,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>预计明日销量约 269.2 杯、营收约 ¥3,799（基于近 7 日趋势外推，仅供参考），建议按此量级预备原料与人力。</p>
+                    <p>预计明日销量约 217.1 杯、营收约 ¥3,370（基于近 7 日趋势外推，仅供参考），建议按此量级预备原料与人力。</p>
                 
             
                 
-                    <p>安全库存模型测算需补货：芋泥波波 约 43.9 份、烧仙草 约 34.9 份（按 95% 服务水平）。</p>
+                    <p>安全库存模型测算需补货：双拼果茶 约 32.3 份、珍珠奶茶 约 32.1 份（按 95% 服务水平）。</p>
+                
+            
+                
+                    <p>购物篮分析显示「四季春茶」与「烧仙草」正相关（提升度 2.33，共现 2 天），建议做搭售或相邻陈列。</p>
                 
             
                 
@@ -2271,7 +2353,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
         
     
-    <p class="note">生成时间：2026-09-13 11:29（规则版·演示）</p>
+    <p class="note">生成时间：2026-09-13 18:27（规则版·演示）</p>
 </div>
 
 
@@ -2280,7 +2362,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <summary class="trace-summary">
         <span class="badge badge-warning">规则版</span>
         <span class="trace-title">AI 决策轨迹</span>
-        <span class="trace-meta">4 步 · 0 ms</span>
+        <span class="trace-meta">6 步 · 0 ms</span>
     </summary>
     <ol class="trace-steps">
     
@@ -2293,7 +2375,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="trace-io"><span class="trace-io-k">输入</span><span class="trace-io-v">读取门店真实经营数据</span></div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">总营收 ¥21410.0、总销量 1517、日均 ¥3058.57</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">总营收 ¥44290.0、总销量 2853、日均 ¥3163.57</span></div>
         </li>
     
         <li class="trace-step">
@@ -2303,7 +2385,27 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 <span class="trace-ms">0 ms</span>
             </div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">明日约 269.2 杯，营收约 ¥3799.0</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">明日约 217.1 杯，营收约 ¥3370.0</span></div>
+        </li>
+    
+        <li class="trace-step">
+            <div class="trace-step-head">
+                <span class="trace-step-name">period.compare</span>
+                <span class="badge badge-warning">本地计算</span>
+                <span class="trace-ms">0 ms</span>
+            </div>
+            
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">销量 11.2% / 营收 4.2%</span></div>
+        </li>
+    
+        <li class="trace-step">
+            <div class="trace-step-head">
+                <span class="trace-step-name">basket.assoc</span>
+                <span class="badge badge-warning">本地计算</span>
+                <span class="trace-ms">0 ms</span>
+            </div>
+            
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">「四季春茶」+「烧仙草」提升度 2.33</span></div>
         </li>
     
         <li class="trace-step">
@@ -2315,7 +2417,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="trace-io"><span class="trace-io-k">输入</span><span class="trace-io-v">汇总数据 → 生成分析报告</span></div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">【① 经营概况】 统计期总营收 ¥21,410，总销量 1517 杯，日均营收 ¥3,059，客单价 ¥14。 【② 趋势与结构】 销量近 7 日日均 217 杯，与前 7 日基本持平。热销 TOP：芋泥波波、杨枝甘露、烧仙草；销售结构：芋泥波波(392杯)、烧仙草(322杯)、杨枝甘露(286杯)、柠檬水(261杯…</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">【① 经营概况】 统计期总营收 ¥44,290，总销量 2853 杯，日均营收 ¥3,164，客单价 ¥16。 【② 趋势与结构】 销量近 7 日日均 215 杯，较前 7 日增长 11%。热销 TOP：黑糖珍珠鲜奶、芝士葡萄、双拼果茶；销售结构：黑糖珍珠鲜奶(330杯)、柠檬水(311杯)、珍珠奶茶(269杯)、芝…</span></div>
         </li>
     
         <li class="trace-step">
@@ -2327,7 +2429,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="trace-io"><span class="trace-io-k">输入</span><span class="trace-io-v">逐条结论的置信度与数据依据</span></div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">4 条结论，平均置信度 88%</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">6 条结论，平均置信度 90%</span></div>
         </li>
     
     </ol>
@@ -2338,7 +2440,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 
 <div class="section">
-    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗预警（15）</h3>
+    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗预警（25）</h3>
     <div class="record-list is-collapsed" id="bizWasteList" data-collapse-list>
         
         <div class="record-item">
@@ -2365,7 +2467,18 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">芋泥波波</span>
+                <span class="product-name">芝士葡萄</span>
+                <span class="badge badge-danger">2026-08-25</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">蜜桃乌龙</span>
                 <span class="badge badge-danger">2026-08-25</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2387,7 +2500,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">芋泥波波</span>
+                <span class="product-name">珍珠奶茶</span>
                 <span class="badge badge-danger">2026-08-24</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2398,7 +2511,18 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">柠檬水</span>
+                <span class="product-name">蜜桃乌龙</span>
+                <span class="badge badge-danger">2026-08-24</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">珍珠奶茶</span>
                 <span class="badge badge-danger">2026-08-23</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2409,7 +2533,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">烧仙草</span>
+                <span class="product-name">抹茶奶绿</span>
                 <span class="badge badge-danger">2026-08-22</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2420,29 +2544,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">珍珠奶茶</span>
-                <span class="badge badge-danger">2026-08-22</span>
-            </div>
-            <div class="record-note">下午人流量较少</div>
-            
-            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
-            
-        </div>
-        
-        <div class="record-item">
-            <div class="record-header">
-                <span class="product-name">芋泥波波</span>
-                <span class="badge badge-danger">2026-08-22</span>
-            </div>
-            <div class="record-note">下午人流量较少</div>
-            
-            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
-            
-        </div>
-        
-        <div class="record-item">
-            <div class="record-header">
-                <span class="product-name">杨枝甘露</span>
+                <span class="product-name">抹茶奶绿</span>
                 <span class="badge badge-danger">2026-08-21</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2453,6 +2555,17 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
+                <span class="product-name">四季春茶</span>
+                <span class="badge badge-danger">2026-08-20</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
                 <span class="product-name">杨枝甘露</span>
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
@@ -2464,7 +2577,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">柠檬水</span>
+                <span class="product-name">烧仙草</span>
                 <span class="badge badge-danger">2026-08-20</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2475,7 +2588,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">柠檬水</span>
+                <span class="product-name">抹茶奶绿</span>
                 <span class="badge badge-danger">2026-08-19</span>
             </div>
             <div class="record-note">下午人流量较少</div>
@@ -2486,8 +2599,74 @@ body.h5-page .main-content { padding-bottom: 84px; }
         
         <div class="record-item">
             <div class="record-header">
-                <span class="product-name">珍珠奶茶</span>
-                <span class="badge badge-danger">2026-08-19</span>
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-17</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">椰果奶茶</span>
+                <span class="badge badge-danger">2026-08-17</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬蜂蜜茶</span>
+                <span class="badge badge-danger">2026-08-16</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">茉莉绿茶</span>
+                <span class="badge badge-danger">2026-08-16</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬水</span>
+                <span class="badge badge-danger">2026-08-15</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">双拼果茶</span>
+                <span class="badge badge-danger">2026-08-14</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">柠檬蜂蜜茶</span>
+                <span class="badge badge-danger">2026-08-14</span>
             </div>
             <div class="record-note">下午人流量较少</div>
             
@@ -2498,7 +2677,40 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="record-item">
             <div class="record-header">
                 <span class="product-name">芋泥波波</span>
-                <span class="badge badge-danger">2026-08-19</span>
+                <span class="badge badge-danger">2026-08-14</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">椰果奶茶</span>
+                <span class="badge badge-danger">2026-08-13</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">生椰拿铁</span>
+                <span class="badge badge-danger">2026-08-13</span>
+            </div>
+            <div class="record-note">下午人流量较少</div>
+            
+            <div class="record-note neutral">AI 归因（仅供参考）：待排查 — </div>
+            
+        </div>
+        
+        <div class="record-item">
+            <div class="record-header">
+                <span class="product-name">杨枝甘露</span>
+                <span class="badge badge-danger">2026-08-12</span>
             </div>
             <div class="record-note">下午人流量较少</div>
             
@@ -2510,8 +2722,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
     
     <button type="button" class="btn btn-outline btn-sm btn-block list-toggle" hidden
             data-collapse-toggle="bizWasteList" aria-controls="bizWasteList" aria-expanded="false"
-            data-label-more="展开全部 15 条"
-            data-label-less="收起（只看最新 5 条）">展开全部 15 条</button>
+            data-label-more="展开全部 25 条"
+            data-label-less="收起（只看最新 5 条）">展开全部 25 条</button>
     
 </div>
 

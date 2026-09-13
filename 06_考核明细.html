@@ -7,7 +7,7 @@
     <title>考核明细 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,9 +2048,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
+                    
+                    <option value="apparel">服装零售店</option>
+                    
+                    <option value="bakery">烘焙轻食店</option>
+                    
+                    <option value="beauty">美容美发/美甲店</option>
                     
                     <option value="convenience">便利店</option>
                     
@@ -2058,15 +2064,30 @@ body.h5-page .main-content { padding-bottom: 84px; }
                     
                     <option value="milk_tea" selected>奶茶店（当前）</option>
                     
+                    <option value="pet">宠物服务店</option>
+                    
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
+            </form>
+            
+            
+            <form method="post" action="/admin/stores/switch" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
+                <label for="adminStoreSelect">门店</label>
+                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
+                    
+                    <option value="1" selected>默认门店（当前）</option>
+                    
+                </select>
+                <button type="submit" class="btn-pack-switch">切换</button>
+                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
             </form>
             
             <div class="nav-user">
                 
                 <span>admin</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEg.jN7iIiY3LvUTXc7pMphk_4fdJR4">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2095,21 +2116,153 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <span class="product-name">情景</span>
             <span class="badge badge-success">100.00分</span>
         </div>
-        <div class="record-detail"><strong>题：</strong>【情景】顾客担心冰块太多影响口感，用哪些服务话术回应？</div>
-        <div class="record-detail">答：主动询问冰量并可做少冰/去冰</div>
-        <div class="record-note">点评：处理得体，主动提供定制化选项提升体验。</div>
-        <div class="record-detail mt-4">2026-08-22 22:00</div>
+        <div class="record-detail"><strong>题：</strong>【商品与陈列】橱窗与模特怎么搭配？</div>
+        <div class="record-detail">答：模特搭配成套（含配饰），突出当季主推色；每月更新主题，模特服装保持无褶皱、吊牌隐藏，价格牌可查。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料与发酵】黄油分哪几类，各用在什么地方？</div>
+        <div class="record-detail">答：有盐黄油适合直接涂抹与咸味点心；无盐黄油用于蛋糕、曲奇，便于控制盐量；起酥黄油熔点高，专用于可颂等起酥类。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【服务流程】染发上色过程要检查哪几个节点？</div>
+        <div class="record-detail">答：上色后 10 分钟、20 分钟各查一次发根上色情况，按时检查是否出现发烫、刺痛等异常，发现异常立即冲洗并停止操作。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【保质期管理】临期商品怎么界定和处理？</div>
+        <div class="record-detail">答：保质期过 2/3 即为临期：设临期专区打折或捆绑搭赠加速消化；过期商品立即下架报损，禁止任何形式售卖。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【损耗控制】每日损耗率怎么算？超过多少算异常？</div>
+        <div class="record-detail">答：损耗率 = 损耗量 ÷（剩余量 + 损耗量），每日闭店盘点后核算，超过 8% 即异常，需排查：进货过量 / 冷藏不当 / 翻检不及时 / 顾客挑拣损伤。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【异议处理】顾客嫌价格贵要砍价，正确话术是？</div>
+        <div class="record-detail">答：先共情不硬拒，强调真材实料的价值；给替代而非降价（推荐柠檬水等低价走量品）；再引导会员优惠（周三第二杯半价），不轻易破价。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">情景</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【洗护流程】打结毛发怎么处理？</div>
+        <div class="record-detail">答：先用手分层拆结，再用开结梳由毛尖向毛根梳理；严重打结不硬扯，与主人沟通后剪除，避免拉伤皮肤与宠物应激。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 22:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
             <span class="badge badge-danger">0.00分</span>
         </div>
-        <div class="record-detail"><strong>题：</strong>【情景】顾客对价格有异议、嫌杨枝甘露太贵要砍价，你怎么应对？</div>
-        <div class="record-detail">答：直接降价5元</div>
-        <div class="record-note">点评：可先强调真材实料与份量，再给小赠品替代直接降价，保利润。</div>
-        <div class="record-detail mt-4">2026-08-22 19:00</div>
+        <div class="record-detail"><strong>题：</strong>【商品与陈列】商品陈列的基本原则是什么？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：主推款前置、色系由浅到深分组、同款按尺码顺序排列；黄金位放高毛利与当季主推，每周至少调整一次主陈列。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料与发酵】怎么判断面团发酵到位？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：一看体积（约 2 倍大）、二按指压（缓慢回弹留浅坑）、三看组织（有均匀气孔）；回弹过快＝不足，塌陷＝过度。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【服务流程】剪发前沟通要确认哪几项？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：确认长度、层次、刘海处理、日常打理习惯与禁忌（如不接受打薄），并复述一遍让顾客确认，避免「剪完才发现不一样」。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品陈列】冷柜陈列有什么要求？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：饮料分类分区（乳品/饮料/速食），商品不过冷柜装载线（超出影响制冷）；早班检查冷柜温度记录（0-7℃）并签名。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【鲜度管理】顾客问「今天的水果新不新鲜」怎么回答？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：如实说明到货时间（当日凌晨到货），出示冷柜温度与验货记录，可现场切块试吃；不夸大、不隐瞒，有问题直接换货。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料规范】每日盘点的损耗率超过多少视为异常，需查明原因？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：损耗率 = 损耗量 /（剩余量 + 损耗量），超过 15% 即视为异常，需查明是备货过多、储存不当还是操作浪费，并少备勤补易损鲜果、鲜奶。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【洗护流程】洗护前要做哪些检查？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：检查皮肤（红肿、结痂、寄生虫）、耳道（异味、污垢）、指甲与肛门腺，并询问主人近期健康与用药情况；发现问题先告知再决定是否继续。</div>
+        <div class="record-detail mt-4">2026-08-12 19:00</div>
     </div>
     
     <div class="record-item">
@@ -2117,21 +2270,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <span class="product-name">问答</span>
             <span class="badge badge-success">100.00分</span>
         </div>
-        <div class="record-detail"><strong>题：</strong>门店晚间备货与原料损耗控制应遵循什么原则？</div>
-        <div class="record-detail">答：按历史销量预估+留少量机动</div>
-        <div class="record-note">点评：思路正确，建议结合近7天销量数据动态调整。</div>
-        <div class="record-detail mt-4">2026-08-22 16:00</div>
-    </div>
-    
-    <div class="record-item">
-        <div class="record-header">
-            <span class="product-name">问答</span>
-            <span class="badge badge-danger">0.00分</span>
-        </div>
-        <div class="record-detail"><strong>题：</strong>顾客对芋泥波波过敏，从食品安全角度应如何建议？</div>
-        <div class="record-detail">答：直接说没有这个产品</div>
-        <div class="record-note">点评：应礼貌说明含芋泥并建议替代产品（如烧仙草），而非简单说没有。</div>
-        <div class="record-detail mt-4">2026-08-22 13:00</div>
+        <div class="record-detail"><strong>题：</strong>【商品与陈列】天然纤维和化纤各有什么优缺点？</div>
+        <div class="record-detail">答：棉麻丝毛透气亲肤但易皱易缩；涤纶锦纶耐磨挺括但透气性差。混纺兼顾两者，需按具体比例说明优缺点，不夸大。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
     </div>
     
     <div class="record-item">
@@ -2139,10 +2281,219 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <span class="product-name">问答</span>
             <span class="badge badge-success">100.00分</span>
         </div>
-        <div class="record-detail"><strong>题：</strong>珍珠奶茶的原料配料比例与保存要求是什么？</div>
-        <div class="record-detail">答：茶底:奶=3:1，加适量珍珠</div>
-        <div class="record-note">点评：回答准确，配比正确。</div>
-        <div class="record-detail mt-4">2026-08-22 10:00</div>
+        <div class="record-detail"><strong>题：</strong>【原料与发酵】面团发酵的适宜温度和湿度是多少？</div>
+        <div class="record-detail">答：基础发酵 26-28℃、湿度 75% 左右；二次发酵 32-35℃、湿度 80-85%。温度过高发酵过快易发酸，过低则发酵不足。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【服务流程】烫染前为什么要做发质检测？</div>
+        <div class="record-detail">答：判断发质受损程度与是否耐受药水，受损严重的直接烫染会断裂；检测结果要口头告知顾客并记录，作为方案与风险说明依据。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品陈列】促销堆头怎么摆？</div>
+        <div class="record-detail">答：选通道尽头或入口处量感陈列，配爆炸贴突出降幅与门槛（「第二件半价」「满25减4」）；每班次整理，活动结束当日清撤。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【鲜度管理】西瓜切开后能卖多久？</div>
+        <div class="record-detail">答：整只西瓜阴凉存放 5 天；切开后必须贴保鲜膜冷藏，4 小时内售完，过时下架报损，禁止隔日返柜。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料规范】鲜奶开封后在冷藏 2-6℃ 条件下的最长使用时间是？</div>
+        <div class="record-detail">答：开封后 48 小时内用完；超过效期或出现异味、胀包立即停用并上报，严禁继续使用。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【洗护流程】猫咪洗护和犬只有什么不同？</div>
+        <div class="record-detail">答：猫咪应激更强，需独立安静区域、减少束缚与噪音，尽量缩短时间；不熟悉的猫不做强制吹风，必要时改为免洗或分次完成。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 16:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品与陈列】面料成分标签怎么看？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：看成分比例（如 95% 棉 5% 氨纶）、洗涤符号与产地；成分决定弹性、透气与打理方式，导购需能读懂并如实告知顾客。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料与发酵】酵母开封后怎么保存、能用多久？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：干酵母开封后密封冷藏（0-4℃），开封后 1 个月内用完；鲜酵母冷藏 2 周内用完。结块、异味、失活的酵母立即停用。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【服务流程】顾客到店后第一步做什么？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：先确认预约信息与需求，安排对应技师并说明预计时长与价格；不让顾客长时间无人接待，等待超过 10 分钟须主动解释。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品陈列】排面整理的「前进陈列」是什么？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：把后排库存往前补，货永远摆最前排；标价签朝外对齐，同一商品排面连贯不空缺；补货先翻检效期再上排面。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【鲜度管理】香蕉为什么不能放冷藏柜？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：香蕉 13℃ 以下会发生冷害、表皮发黑。应常温悬挂存放避免挤压，与苹果分开放（乙烯催熟），青熟分离陈列、分批进货。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料规范】珍珠（粉圆）煮好后最佳保存时长是？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：煮好过冰水后用糖水浸泡，常温 4 小时内、冷藏不超过 24 小时；超过时间发硬发酸必须丢弃，禁止售卖。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-danger">0.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【洗护流程】洗澡水温与吹干标准是多少？</div>
+        <div class="record-detail">答：（答错示例）</div>
+        <div class="record-note">点评：参考答案：水温 36-38℃（接近宠物体温），冬季可略高 1-2℃；吹干要求毛根无潮气、腋下腹部耳后干燥，长毛犬需边吹边梳防止打结。</div>
+        <div class="record-detail mt-4">2026-08-12 13:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品与陈列】常见尺码怎么对照身高体重？</div>
+        <div class="record-detail">答：女装 S 约 155-160cm/45-52kg、M 约 160-165cm/52-58kg、L 约 165-170cm/58-65kg；男装按胸围分档。尺码仅作参考，最终以肩宽胸围实测为准。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料与发酵】高筋面粉和低筋面粉分别适合做什么？</div>
+        <div class="record-detail">答：高筋粉蛋白质高、筋度强，适合吐司、欧包、贝果；低筋粉筋度低，适合蛋糕、曲奇、挞皮。中筋粉用于部分软欧与中式点心。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【服务流程】洗剪吹的标准流程分几步？</div>
+        <div class="record-detail">答：六步：迎宾入座 → 需求沟通 → 洗发 → 剪发 → 吹整造型 → 复检交付，全程确认顾客满意度，交付前提醒日常打理要点。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【商品陈列】便利店黄金陈列位是哪里？放什么商品？</div>
+        <div class="record-detail">答：收银台旁与视线平行层（约 1.5m）为黄金位，放高毛利促销品与新品；重物放下层，儿童视线高度不放酒类。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【鲜度管理】草莓、蓝莓这类莓果怎么储存保鲜？</div>
+        <div class="record-detail">答：冷藏 0-4℃ 原盒存放，不叠压、不清洗；上货只补不翻，当日未售出的挑除坏果后降价促销或报损。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【原料规范】本店招牌杨枝甘露的标准配料是什么？</div>
+        <div class="record-detail">答：西米、芒果、椰浆、西柚粒。芒果需选成熟金煌芒，西米煮至透明无白芯，椰浆比例 1:3 兑水。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
+    </div>
+    
+    <div class="record-item">
+        <div class="record-header">
+            <span class="product-name">问答</span>
+            <span class="badge badge-success">100.00分</span>
+        </div>
+        <div class="record-detail"><strong>题：</strong>【洗护流程】犬只基础洗护的标准流程是什么？</div>
+        <div class="record-detail">答：五步：接宠检查（皮肤、耳道、指甲）→ 梳理去结 → 温水洗护 → 彻底吹干 → 复检交付；每一步异常都要记录并告知主人。</div>
+        <div class="record-note">点评：回答准确，要点完整。</div>
+        <div class="record-detail mt-4">2026-08-12 10:00</div>
     </div>
     
 </div>

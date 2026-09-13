@@ -7,7 +7,7 @@
     <title>店员账号管理 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2048,9 +2048,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
+                    
+                    <option value="apparel">服装零售店</option>
+                    
+                    <option value="bakery">烘焙轻食店</option>
+                    
+                    <option value="beauty">美容美发/美甲店</option>
                     
                     <option value="convenience">便利店</option>
                     
@@ -2058,15 +2064,30 @@ body.h5-page .main-content { padding-bottom: 84px; }
                     
                     <option value="milk_tea" selected>奶茶店（当前）</option>
                     
+                    <option value="pet">宠物服务店</option>
+                    
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
+            </form>
+            
+            
+            <form method="post" action="/admin/stores/switch" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+                <label for="adminStoreSelect">门店</label>
+                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
+                    
+                    <option value="1" selected>默认门店（当前）</option>
+                    
+                </select>
+                <button type="submit" class="btn-pack-switch">切换</button>
+                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
             </form>
             
             <div class="nav-user">
                 
                 <span>admin</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2096,14 +2117,14 @@ body.h5-page .main-content { padding-bottom: 84px; }
         </div>
         <small>账号：staff02</small>
         <small>电话：13800138002</small>
-        <small>门店：南昌·红谷滩店</small>
+        <small>门店：默认门店</small>
         
         <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+            <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
             <button type="submit" class="btn btn-outline btn-sm">停用</button>
         </form>
         <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+            <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
             <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
             <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
         </form>
@@ -2116,14 +2137,14 @@ body.h5-page .main-content { padding-bottom: 84px; }
         </div>
         <small>账号：staff01</small>
         <small>电话：13800138001</small>
-        <small>门店：南昌·红谷滩店</small>
+        <small>门店：默认门店</small>
         
         <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+            <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
             <button type="submit" class="btn btn-outline btn-sm">停用</button>
         </form>
         <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjEyYzgyNTcwOWMxMTFiYzAyOTE3NjQ2OWE0MzgzNTBlZjI3ZmYzZmUi.aqaJAQ.HKuV5Zk14-BLvpXmr2nCinZGlxg">
+            <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
             <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
             <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
         </form>

@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>新增店员 · 门店管理助手</title>
+    <title>商家注册 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
+    <meta name="csrf-token" content="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2040,59 +2040,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
 })();
 </script>
 </head>
-<body class="is-admin">
+<body class="">
     <a class="skip-link" href="#main">跳到主要内容</a>
     <div class="container">
-        
-        <nav class="top-nav">
-            <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
-            
-            <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
-                <label for="adminPackSelect">行业包</label>
-                <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
-                    
-                    <option value="apparel">服装零售店</option>
-                    
-                    <option value="bakery">烘焙轻食店</option>
-                    
-                    <option value="beauty">美容美发/美甲店</option>
-                    
-                    <option value="convenience">便利店</option>
-                    
-                    <option value="fruit">水果生鲜店</option>
-                    
-                    <option value="milk_tea" selected>奶茶店（当前）</option>
-                    
-                    <option value="pet">宠物服务店</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-            </form>
-            
-            
-            <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
-                <label for="adminStoreSelect">门店</label>
-                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
-                    
-                    <option value="1" selected>默认门店（当前）</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
-            </form>
-            
-            <div class="nav-user">
-                
-                <span>admin</span>
-                <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
-                    <button type="submit" class="btn-logout">退出</button>
-                </form>
-                
-            </div>
-        </nav>
         
 
         <div class="flash-messages" role="status" aria-live="polite">
@@ -2103,35 +2053,32 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
         <main class="main-content" id="main" tabindex="-1">
             
-<div class="page-header">
-    <a href="02_店员管理.html" class="btn-back">← 返回店员列表</a>
-    <h2>新增店员</h2>
+<div class="login-page">
+    <div class="login-card">
+        <h1>商家注册</h1>
+        <span class="chip">一个账号一个商家 · 可管理多家门店</span>
+        
+        <div class="flash flash-warning" role="status">
+            <span>当前未开放自助注册（邮件服务未配置）。请联系平台管理员人工开户。</span>
+        </div>
+        
+        <form method="POST" action="/register" class="login-form">
+            <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEw.zdqXIEQ7lx9qX4Veyf_980AaOmo">
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" name="email" id="email" class="form-control" required
+                       placeholder="用于接收验证码" autocomplete="email"
+                       disabled>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"
+                    disabled>发送验证码</button>
+        </form>
+        <div class="login-hint">
+            <p><a href="index.html">返回登录</a></p>
+            <p class="mt-6 text-muted">验证码仅存哈希，10 分钟内有效，最多校验 5 次。</p>
+        </div>
+    </div>
 </div>
-
-<form method="GET" action="02_店员管理.html" class="sales-form">
-    <input type="hidden" name="csrf_token" value="ImQ3NjlmZTNlNzg4YzU1NjgwYTNiZjY1NTZkOWFhNjFmMGYzNDUwYTMi.aqbrEQ.kx8bKy2JyGbVoRWXoagjKk-_8rg">
-    <div class="form-group">
-        <label for="username">登录账号</label>
-        <input type="text" name="username" id="username" class="form-control" required placeholder="如 staff03">
-    </div>
-    <div class="form-group">
-        <label for="password">初始密码</label>
-        <input type="text" name="password" id="password" class="form-control" required placeholder="初始密码">
-    </div>
-    <div class="form-group">
-        <label for="display_name">显示名</label>
-        <input type="text" name="display_name" id="display_name" class="form-control" required placeholder="如 张三">
-    </div>
-    <div class="form-group">
-        <label for="phone">电话（可选）</label>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="选填">
-    </div>
-    <div class="form-group">
-        <label for="store_name">所属门店</label>
-        <input type="text" name="store_name" id="store_name" class="form-control" value="南昌·红谷滩店">
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">保存店员</button>
-</form>
 
         </main>
     </div>
@@ -2219,5 +2166,5 @@ body.h5-page .main-content { padding-bottom: 84px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<nav class="snap-nav" aria-label="页面导航"><a href="02_店员管理.html">← 上一页</a><a href="index.html">返回总览</a><a href="03_产品管理.html">下一页 →</a></nav></body>
+<nav class="snap-nav" aria-label="页面导航"><a href="19_门店与成员.html">← 上一页</a><a href="index.html">返回总览</a><a class="disabled" aria-disabled="true">下一页 →</a></nav></body>
 </html>
