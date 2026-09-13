@@ -7,7 +7,7 @@
     <title>产品管理 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImY0MjI0ZjEwNjhmMGRhYzc5M2U5MmIxOTFjZTVkMzM2ZmQ4YTE0ZTAi.aqLtgw.VrHXwmRxA3oFY8aRbJgn_L2l-2E">
+    <meta name="csrf-token" content="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IA.aiUTQPBSNTd9Yl9gwX_dGb6XBTU">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -313,9 +313,16 @@ h1, h2, h3, h4 {
 
 .nav-user { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-sm); }
 
+/* P7-E / S-13：退出改 POST 表单按钮，外观与旧 <a> 保持一致 */
+.logout-form { display: inline; margin: 0; }
+
 .btn-logout {
     color: rgba(255, 255, 255, .88);
     text-decoration: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    line-height: 1.5;
     padding: 5px 11px;
     border: 1px solid rgba(255, 255, 255, .26);
     border-radius: var(--radius-full);
@@ -362,6 +369,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 .flash-messages:empty { padding: 0; }
 
 .flash {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
     padding: 11px 14px;
     border-radius: var(--radius-md);
     margin-bottom: var(--sp-2);
@@ -370,6 +380,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
     border-left: 3px solid currentColor;
     animation: fadeIn var(--dur-slow) var(--ease-out);
 }
+.flash svg { flex: none; margin-top: 1px; }
 
 .flash-success { background: var(--success-bg); color: var(--success-text); border-color: var(--success); }
 .flash-danger  { background: var(--danger-bg);  color: var(--danger-text);  border-color: var(--danger); }
@@ -418,6 +429,27 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 .login-subtitle { color: var(--text-light); font-size: var(--fs-sm); margin-bottom: var(--sp-4); }
 
 .login-form { text-align: left; margin-top: var(--sp-5); }
+
+/* 登录身份分段选择：替代下拉框，两选项并排、激活态品牌高亮 */
+.role-seg { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+.role-opt {
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-3);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+.role-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.role-opt-icon { color: var(--text-light); transition: color var(--dur-fast) ease; flex: none; }
+.role-opt-text { display: flex; flex-direction: column; line-height: 1.25; }
+.role-opt-text strong { font-size: var(--fs-sm); color: var(--text); }
+.role-opt-text small { font-size: var(--fs-2xs); color: var(--text-light); }
+.role-opt.is-active { border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--ring); }
+.role-opt.is-active .role-opt-icon { color: var(--primary); }
+.role-opt.is-active .role-opt-text strong { color: var(--primary-ink); }
+.role-opt:focus-within { border-color: var(--primary); box-shadow: var(--ring); }
 
 .login-hint {
     margin-top: var(--sp-5);
@@ -483,16 +515,13 @@ textarea.form-control { resize: vertical; min-height: 76px; line-height: var(--l
 select.form-control {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235B6B67' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='currentColor' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 34px;
 }
 
-/* 暗色模式下箭头提亮，保证在深底上可读 */
-html[data-theme="dark"] select.form-control {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238CA09B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-}
+/* 下拉箭头走 form-control 的文本色（currentColor），亮/暗主题自动跟随，不再硬编码 */
 
 .form-hint {
     display: block;
@@ -1678,7 +1707,111 @@ body.h5-page .main-content { padding-bottom: 84px; }
 .mood-patience { margin-left: auto; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .mood-fill { transition: none; } }
 
-/* ═══════════ 26. 工具类 ═══════════ */
+/* ═══════════ 26. 动态谈判面板与复盘卡（P5） ═══════════ */
+/* 谈判面板：心理价区间 / 当前谈价 / 让步进度。隐藏底线只以区间提示呈现。 */
+.nego-panel {
+    padding: var(--sp-3) var(--sp-4); margin: var(--sp-3) 0 0;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-xs); color: var(--text-light);
+}
+.nego-panel[hidden] { display: none; }
+.nego-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2); }
+.nego-chip {
+    display: inline-flex; align-items: center; gap: 3px; padding: 2px 10px;
+    border-radius: var(--radius-full);
+    background: var(--neutral-bg); color: var(--neutral-text); white-space: nowrap;
+}
+.nego-chip b { color: var(--text); font-variant-numeric: tabular-nums; }
+.nego-status { flex: 1 1 100%; margin-top: 2px; line-height: var(--lh-snug); }
+.nego-status[data-result="deal"] { color: var(--success-text); font-weight: 650; }
+.nego-status[data-result="lost"] { color: var(--danger-text); font-weight: 650; }
+.nego-progress { display: flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-2); }
+.nego-progress-label { white-space: nowrap; }
+.nego-track {
+    flex: 1 1 88px; min-width: 76px; height: 6px;
+    border-radius: var(--radius-full); background: var(--neutral-bg); overflow: hidden;
+}
+.nego-fill {
+    display: block; height: 100%; border-radius: var(--radius-full);
+    background: var(--warning); transition: width var(--dur-slow) var(--ease-out);
+}
+.nego-fill[data-level="high"] { background: var(--primary); }
+.nego-pct { margin-left: auto; white-space: nowrap; }
+.nego-pct b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* 谈判复盘卡：成交/流失结论 + 让利幅度 + 四维评分条 + 改进建议 */
+.review-card {
+    padding: var(--sp-4); margin-bottom: var(--sp-4);
+    border-radius: var(--radius-md); border: 1px solid transparent;
+    font-size: var(--fs-sm); line-height: var(--lh-snug);
+}
+.review-card.ok { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.review-card.no { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border); }
+
+/* ═══════════ 27. AI 决策轨迹时间线（P6） ═══════════ */
+/* 竖向时间线：步骤圆点 + 工具名 + 证据摘要 + 耗时 + 来源徽章；默认折叠为一行摘要。
+   规则版与大模型版共用同一结构，保证离线演示也能看到完整推理链路。 */
+.agent-trace { margin: var(--sp-3) 0 0; border-top: 1px solid var(--border); }
+.trace-summary {
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-3) 0; cursor: pointer; list-style: none;
+    font-size: var(--fs-xs); color: var(--text-light);
+    transition: color var(--dur-fast) ease;
+}
+.trace-summary::-webkit-details-marker { display: none; }
+.trace-summary:hover { color: var(--text); }
+/* 折叠指示三角（原生 details 无 JS，展开状态由 [open] 驱动） */
+.trace-summary::before {
+    content: '▸'; font-size: var(--fs-2xs); color: var(--text-light);
+    transition: transform var(--dur-fast) var(--ease-out);
+}
+.agent-trace[open] > .trace-summary::before { transform: rotate(90deg); }
+.trace-title { font-weight: 600; color: var(--text); }
+.trace-meta { margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.trace-steps {
+    list-style: none; margin: 0 0 var(--sp-3); padding: var(--sp-2) 0 0 var(--sp-4);
+    border-left: 1px solid var(--border-strong);
+}
+.trace-step { position: relative; padding: 0 0 var(--sp-3) var(--sp-4); }
+.trace-step::before {
+    content: ''; position: absolute; left: calc(-1 * var(--sp-4) - 4px); top: 6px;
+    width: 8px; height: 8px; border-radius: var(--radius-full);
+    background: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.trace-step.is-fail::before { background: var(--danger); box-shadow: 0 0 0 3px var(--danger-bg); }
+.trace-step-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.trace-step-name {
+    font-size: var(--fs-xs); font-weight: 650; color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.trace-ms {
+    margin-left: auto; font-size: var(--fs-2xs);
+    color: var(--text-light); font-variant-numeric: tabular-nums;
+}
+.trace-io { display: flex; gap: 6px; margin-top: 2px; font-size: var(--fs-2xs); line-height: var(--lh-snug); }
+.trace-io-k { flex: 0 0 auto; color: var(--text-disabled); }
+.trace-io-v { color: var(--text-light); word-break: break-all; }
+@media (prefers-reduced-motion: reduce) {
+    .trace-summary::before { transition: none; }
+}
+.review-head {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-2);
+}
+.review-verdict { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-md); font-weight: 700; }
+.review-total b { font-size: var(--fs-lg); font-variant-numeric: tabular-nums; }
+.review-reason { margin-bottom: var(--sp-3); opacity: .92; }
+.review-scores { display: flex; flex-direction: column; gap: var(--sp-1); }
+.review-score-row { display: flex; align-items: center; gap: var(--sp-2); }
+.review-score-label { flex: 0 0 64px; white-space: nowrap; }
+.review-score-row .mastery-bar { flex: 1; margin: 0; }
+.review-score-num { flex: 0 0 28px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 650; }
+.review-advice { margin: var(--sp-3) 0 0; padding-left: var(--sp-5); }
+.review-advice li { margin-bottom: 4px; }
+@media (prefers-reduced-motion: reduce) { .nego-fill { transition: none; } }
+
+/* ═══════════ 27. 工具类 ═══════════ */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 4px; } .mt-6 { margin-top: 6px; }
 .mt-8 { margin-top: var(--sp-2); } .mt-16 { margin-top: var(--sp-4); }
@@ -1743,6 +1876,92 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .chart-box { height: 260px; }
 }
 
+/* ═══════════ 29. 行业包配置后台（P4） ═══════════ */
+/* 编辑器两栏：≥768px 左侧分区锚点 + 右侧分区表单；窄屏锚点降为顶部横滑 */
+.pack-editor { display: block; }
+
+.pack-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-5);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--border);
+}
+
+.pack-anchors a {
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text-light);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.pack-anchors a:hover { background: var(--hover-bg); color: var(--text); }
+
+.pack-sections > .section { margin-bottom: var(--sp-8); }
+
+/* 分区内的可重复行（知识域 / 题库 / 情景 / 产品 / 指标） */
+.pack-row {
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.pack-row:last-child { border-bottom: none; }
+
+.pack-row.is-removed { opacity: .5; }
+
+.pack-metric-row {
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--sp-3);
+}
+
+/* 每区底部操作条：保存 + 恢复内置默认 */
+.pack-save-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    align-items: center;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+}
+
+/* 知识条目 md 编辑器：等宽字体便于对齐 markdown 结构 */
+.pack-md {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    min-height: 140px;
+}
+
+@media (min-width: 768px) {
+    .pack-editor {
+        display: grid;
+        grid-template-columns: 168px 1fr;
+        gap: var(--sp-6);
+        align-items: start;
+    }
+    .pack-anchors {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        position: sticky;
+        top: var(--sp-6);
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pack-anchors a { transition: none; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1798,7 +2017,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-user">
                 
                 <span>admin</span>
-                <a href="index.html" class="btn-logout">退出</a>
+                <form method="post" action="/logout" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IA.aiUTQPBSNTd9Yl9gwX_dGb6XBTU">
+                    <button type="submit" class="btn-logout">退出</button>
+                </form>
                 
             </div>
         </nav>
@@ -1815,7 +2037,12 @@ body.h5-page .main-content { padding-bottom: 84px; }
 <div class="page-header">
     <a href="01_管理员看板.html" class="btn-back">← 返回看板</a>
     <h2>产品管理</h2>
+    
+    <span class="badge badge-secondary">奶茶店</span>
+    
 </div>
+
+<p class="form-hint">当前展示的是「奶茶店」的产品清单；切换行业包后此处与店员填报下拉同步变化。</p>
 
 
 
@@ -1846,7 +2073,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
 </div>
 
 <form method="GET" action="03_产品管理.html" class="sales-form inline-form">
-    <input type="hidden" name="csrf_token" value="ImY0MjI0ZjEwNjhmMGRhYzc5M2U5MmIxOTFjZTVkMzM2ZmQ4YTE0ZTAi.aqLtgw.VrHXwmRxA3oFY8aRbJgn_L2l-2E">
+    <input type="hidden" name="csrf_token" value="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IA.aiUTQPBSNTd9Yl9gwX_dGb6XBTU">
     <div class="form-row">
         <div class="form-group flex-2">
             <input type="text" name="product_name" class="form-control" placeholder="产品名称" required>
@@ -1879,9 +2106,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
         </thead>
         <tbody>
         
-        <tr class="" data-id="3"
+        <tr class="" data-id="15"
             data-name="烧仙草" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="3" aria-label="选择 烧仙草"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="15" aria-label="选择 烧仙草"></td>
             <td data-label="产品">烧仙草</td>
             <td data-label="单价">¥15.00</td>
             <td data-label="成本价">¥5.60</td>
@@ -1892,21 +2119,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 烧仙草"
                         title="点击下架"
-                        data-id="3" data-active="1">
+                        data-id="15" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="3"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="15"
                         title="编辑" aria-label="编辑 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="3"
+                <button type="button" class="icon-btn inline-delete" data-id="15"
                         data-name="烧仙草"
                         title="删除" aria-label="删除 烧仙草"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="3" data-for="3" hidden>
+        <tr class="inline-edit-row" data-id="15" data-for="15" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="3">
+                <form class="inline-edit-form" data-id="15">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="烧仙草" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="15.00" aria-label="单价">
@@ -1922,9 +2149,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="1"
+        <tr class="" data-id="13"
             data-name="珍珠奶茶" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="1" aria-label="选择 珍珠奶茶"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="13" aria-label="选择 珍珠奶茶"></td>
             <td data-label="产品">珍珠奶茶</td>
             <td data-label="单价">¥12.00</td>
             <td data-label="成本价">¥4.50</td>
@@ -1935,21 +2162,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 珍珠奶茶"
                         title="点击下架"
-                        data-id="1" data-active="1">
+                        data-id="13" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="1"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="13"
                         title="编辑" aria-label="编辑 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="1"
+                <button type="button" class="icon-btn inline-delete" data-id="13"
                         data-name="珍珠奶茶"
                         title="删除" aria-label="删除 珍珠奶茶"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="1" data-for="1" hidden>
+        <tr class="inline-edit-row" data-id="13" data-for="13" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="1">
+                <form class="inline-edit-form" data-id="13">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="珍珠奶茶" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="12.00" aria-label="单价">
@@ -1965,9 +2192,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="5"
+        <tr class="" data-id="17"
             data-name="芋泥波波" data-cat="奶茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="5" aria-label="选择 芋泥波波"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="17" aria-label="选择 芋泥波波"></td>
             <td data-label="产品">芋泥波波</td>
             <td data-label="单价">¥16.00</td>
             <td data-label="成本价">¥6.00</td>
@@ -1978,21 +2205,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 芋泥波波"
                         title="点击下架"
-                        data-id="5" data-active="1">
+                        data-id="17" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="5"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="17"
                         title="编辑" aria-label="编辑 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="5"
+                <button type="button" class="icon-btn inline-delete" data-id="17"
                         data-name="芋泥波波"
                         title="删除" aria-label="删除 芋泥波波"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="5" data-for="5" hidden>
+        <tr class="inline-edit-row" data-id="17" data-for="17" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="5">
+                <form class="inline-edit-form" data-id="17">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="芋泥波波" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="16.00" aria-label="单价">
@@ -2008,9 +2235,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="2"
+        <tr class="" data-id="14"
             data-name="杨枝甘露" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="2" aria-label="选择 杨枝甘露"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="14" aria-label="选择 杨枝甘露"></td>
             <td data-label="产品">杨枝甘露</td>
             <td data-label="单价">¥18.00</td>
             <td data-label="成本价">¥6.80</td>
@@ -2021,21 +2248,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 杨枝甘露"
                         title="点击下架"
-                        data-id="2" data-active="1">
+                        data-id="14" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="2"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="14"
                         title="编辑" aria-label="编辑 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="2"
+                <button type="button" class="icon-btn inline-delete" data-id="14"
                         data-name="杨枝甘露"
                         title="删除" aria-label="删除 杨枝甘露"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="2" data-for="2" hidden>
+        <tr class="inline-edit-row" data-id="14" data-for="14" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="2">
+                <form class="inline-edit-form" data-id="14">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="杨枝甘露" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="18.00" aria-label="单价">
@@ -2051,9 +2278,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </td>
         </tr>
         
-        <tr class="" data-id="4"
+        <tr class="" data-id="16"
             data-name="柠檬水" data-cat="果茶">
-            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="4" aria-label="选择 柠檬水"></td>
+            <td class="col-check" data-label="选择"><input type="checkbox" class="row-select" data-id="16" aria-label="选择 柠檬水"></td>
             <td data-label="产品">柠檬水</td>
             <td data-label="单价">¥8.00</td>
             <td data-label="成本价"><span class="text-muted">待录入</span></td>
@@ -2064,21 +2291,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
                         aria-checked="true"
                         aria-label="下架 柠檬水"
                         title="点击下架"
-                        data-id="4" data-active="1">
+                        data-id="16" data-active="1">
                     <span class="toggle-knob"></span>
                 </button>
             </td>
             <td class="col-actions row-actions" data-label="操作">
-                <button type="button" class="icon-btn inline-edit-trigger" data-id="4"
+                <button type="button" class="icon-btn inline-edit-trigger" data-id="16"
                         title="编辑" aria-label="编辑 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
-                <button type="button" class="icon-btn inline-delete" data-id="4"
+                <button type="button" class="icon-btn inline-delete" data-id="16"
                         data-name="柠檬水"
                         title="删除" aria-label="删除 柠檬水"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
             </td>
         </tr>
-        <tr class="inline-edit-row" data-id="4" data-for="4" hidden>
+        <tr class="inline-edit-row" data-id="16" data-for="16" hidden>
             <td colspan="7">
-                <form class="inline-edit-form" data-id="4">
+                <form class="inline-edit-form" data-id="16">
                     <div class="inline-edit-fields">
                         <input type="text" name="product_name" class="form-control" value="柠檬水" required aria-label="产品名称">
                         <input type="number" name="unit_price" class="form-control" step="0.01" min="0" value="8.00" aria-label="单价">

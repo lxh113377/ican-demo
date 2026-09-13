@@ -7,7 +7,7 @@
     <title>AI 智能助手 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="ImY0MjI0ZjEwNjhmMGRhYzc5M2U5MmIxOTFjZTVkMzM2ZmQ4YTE0ZTAi.aqLthA.y8EUoJRS8Cs4TrA2y0Oinsyjnx4">
+    <meta name="csrf-token" content="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IQ.J8Wdb7heSGJ3etygw5wCE0ySxs4">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -313,9 +313,16 @@ h1, h2, h3, h4 {
 
 .nav-user { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-sm); }
 
+/* P7-E / S-13：退出改 POST 表单按钮，外观与旧 <a> 保持一致 */
+.logout-form { display: inline; margin: 0; }
+
 .btn-logout {
     color: rgba(255, 255, 255, .88);
     text-decoration: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    line-height: 1.5;
     padding: 5px 11px;
     border: 1px solid rgba(255, 255, 255, .26);
     border-radius: var(--radius-full);
@@ -362,6 +369,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 .flash-messages:empty { padding: 0; }
 
 .flash {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
     padding: 11px 14px;
     border-radius: var(--radius-md);
     margin-bottom: var(--sp-2);
@@ -370,6 +380,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
     border-left: 3px solid currentColor;
     animation: fadeIn var(--dur-slow) var(--ease-out);
 }
+.flash svg { flex: none; margin-top: 1px; }
 
 .flash-success { background: var(--success-bg); color: var(--success-text); border-color: var(--success); }
 .flash-danger  { background: var(--danger-bg);  color: var(--danger-text);  border-color: var(--danger); }
@@ -418,6 +429,27 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 .login-subtitle { color: var(--text-light); font-size: var(--fs-sm); margin-bottom: var(--sp-4); }
 
 .login-form { text-align: left; margin-top: var(--sp-5); }
+
+/* 登录身份分段选择：替代下拉框，两选项并排、激活态品牌高亮 */
+.role-seg { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+.role-opt {
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-3);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+.role-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.role-opt-icon { color: var(--text-light); transition: color var(--dur-fast) ease; flex: none; }
+.role-opt-text { display: flex; flex-direction: column; line-height: 1.25; }
+.role-opt-text strong { font-size: var(--fs-sm); color: var(--text); }
+.role-opt-text small { font-size: var(--fs-2xs); color: var(--text-light); }
+.role-opt.is-active { border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--ring); }
+.role-opt.is-active .role-opt-icon { color: var(--primary); }
+.role-opt.is-active .role-opt-text strong { color: var(--primary-ink); }
+.role-opt:focus-within { border-color: var(--primary); box-shadow: var(--ring); }
 
 .login-hint {
     margin-top: var(--sp-5);
@@ -483,16 +515,13 @@ textarea.form-control { resize: vertical; min-height: 76px; line-height: var(--l
 select.form-control {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235B6B67' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='currentColor' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 34px;
 }
 
-/* 暗色模式下箭头提亮，保证在深底上可读 */
-html[data-theme="dark"] select.form-control {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238CA09B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-}
+/* 下拉箭头走 form-control 的文本色（currentColor），亮/暗主题自动跟随，不再硬编码 */
 
 .form-hint {
     display: block;
@@ -1678,7 +1707,111 @@ body.h5-page .main-content { padding-bottom: 84px; }
 .mood-patience { margin-left: auto; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .mood-fill { transition: none; } }
 
-/* ═══════════ 26. 工具类 ═══════════ */
+/* ═══════════ 26. 动态谈判面板与复盘卡（P5） ═══════════ */
+/* 谈判面板：心理价区间 / 当前谈价 / 让步进度。隐藏底线只以区间提示呈现。 */
+.nego-panel {
+    padding: var(--sp-3) var(--sp-4); margin: var(--sp-3) 0 0;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-xs); color: var(--text-light);
+}
+.nego-panel[hidden] { display: none; }
+.nego-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2); }
+.nego-chip {
+    display: inline-flex; align-items: center; gap: 3px; padding: 2px 10px;
+    border-radius: var(--radius-full);
+    background: var(--neutral-bg); color: var(--neutral-text); white-space: nowrap;
+}
+.nego-chip b { color: var(--text); font-variant-numeric: tabular-nums; }
+.nego-status { flex: 1 1 100%; margin-top: 2px; line-height: var(--lh-snug); }
+.nego-status[data-result="deal"] { color: var(--success-text); font-weight: 650; }
+.nego-status[data-result="lost"] { color: var(--danger-text); font-weight: 650; }
+.nego-progress { display: flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-2); }
+.nego-progress-label { white-space: nowrap; }
+.nego-track {
+    flex: 1 1 88px; min-width: 76px; height: 6px;
+    border-radius: var(--radius-full); background: var(--neutral-bg); overflow: hidden;
+}
+.nego-fill {
+    display: block; height: 100%; border-radius: var(--radius-full);
+    background: var(--warning); transition: width var(--dur-slow) var(--ease-out);
+}
+.nego-fill[data-level="high"] { background: var(--primary); }
+.nego-pct { margin-left: auto; white-space: nowrap; }
+.nego-pct b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* 谈判复盘卡：成交/流失结论 + 让利幅度 + 四维评分条 + 改进建议 */
+.review-card {
+    padding: var(--sp-4); margin-bottom: var(--sp-4);
+    border-radius: var(--radius-md); border: 1px solid transparent;
+    font-size: var(--fs-sm); line-height: var(--lh-snug);
+}
+.review-card.ok { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.review-card.no { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border); }
+
+/* ═══════════ 27. AI 决策轨迹时间线（P6） ═══════════ */
+/* 竖向时间线：步骤圆点 + 工具名 + 证据摘要 + 耗时 + 来源徽章；默认折叠为一行摘要。
+   规则版与大模型版共用同一结构，保证离线演示也能看到完整推理链路。 */
+.agent-trace { margin: var(--sp-3) 0 0; border-top: 1px solid var(--border); }
+.trace-summary {
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-3) 0; cursor: pointer; list-style: none;
+    font-size: var(--fs-xs); color: var(--text-light);
+    transition: color var(--dur-fast) ease;
+}
+.trace-summary::-webkit-details-marker { display: none; }
+.trace-summary:hover { color: var(--text); }
+/* 折叠指示三角（原生 details 无 JS，展开状态由 [open] 驱动） */
+.trace-summary::before {
+    content: '▸'; font-size: var(--fs-2xs); color: var(--text-light);
+    transition: transform var(--dur-fast) var(--ease-out);
+}
+.agent-trace[open] > .trace-summary::before { transform: rotate(90deg); }
+.trace-title { font-weight: 600; color: var(--text); }
+.trace-meta { margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.trace-steps {
+    list-style: none; margin: 0 0 var(--sp-3); padding: var(--sp-2) 0 0 var(--sp-4);
+    border-left: 1px solid var(--border-strong);
+}
+.trace-step { position: relative; padding: 0 0 var(--sp-3) var(--sp-4); }
+.trace-step::before {
+    content: ''; position: absolute; left: calc(-1 * var(--sp-4) - 4px); top: 6px;
+    width: 8px; height: 8px; border-radius: var(--radius-full);
+    background: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.trace-step.is-fail::before { background: var(--danger); box-shadow: 0 0 0 3px var(--danger-bg); }
+.trace-step-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.trace-step-name {
+    font-size: var(--fs-xs); font-weight: 650; color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.trace-ms {
+    margin-left: auto; font-size: var(--fs-2xs);
+    color: var(--text-light); font-variant-numeric: tabular-nums;
+}
+.trace-io { display: flex; gap: 6px; margin-top: 2px; font-size: var(--fs-2xs); line-height: var(--lh-snug); }
+.trace-io-k { flex: 0 0 auto; color: var(--text-disabled); }
+.trace-io-v { color: var(--text-light); word-break: break-all; }
+@media (prefers-reduced-motion: reduce) {
+    .trace-summary::before { transition: none; }
+}
+.review-head {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-2);
+}
+.review-verdict { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-md); font-weight: 700; }
+.review-total b { font-size: var(--fs-lg); font-variant-numeric: tabular-nums; }
+.review-reason { margin-bottom: var(--sp-3); opacity: .92; }
+.review-scores { display: flex; flex-direction: column; gap: var(--sp-1); }
+.review-score-row { display: flex; align-items: center; gap: var(--sp-2); }
+.review-score-label { flex: 0 0 64px; white-space: nowrap; }
+.review-score-row .mastery-bar { flex: 1; margin: 0; }
+.review-score-num { flex: 0 0 28px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 650; }
+.review-advice { margin: var(--sp-3) 0 0; padding-left: var(--sp-5); }
+.review-advice li { margin-bottom: 4px; }
+@media (prefers-reduced-motion: reduce) { .nego-fill { transition: none; } }
+
+/* ═══════════ 27. 工具类 ═══════════ */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 4px; } .mt-6 { margin-top: 6px; }
 .mt-8 { margin-top: var(--sp-2); } .mt-16 { margin-top: var(--sp-4); }
@@ -1743,6 +1876,92 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .chart-box { height: 260px; }
 }
 
+/* ═══════════ 29. 行业包配置后台（P4） ═══════════ */
+/* 编辑器两栏：≥768px 左侧分区锚点 + 右侧分区表单；窄屏锚点降为顶部横滑 */
+.pack-editor { display: block; }
+
+.pack-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-5);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--border);
+}
+
+.pack-anchors a {
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text-light);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.pack-anchors a:hover { background: var(--hover-bg); color: var(--text); }
+
+.pack-sections > .section { margin-bottom: var(--sp-8); }
+
+/* 分区内的可重复行（知识域 / 题库 / 情景 / 产品 / 指标） */
+.pack-row {
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.pack-row:last-child { border-bottom: none; }
+
+.pack-row.is-removed { opacity: .5; }
+
+.pack-metric-row {
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--sp-3);
+}
+
+/* 每区底部操作条：保存 + 恢复内置默认 */
+.pack-save-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    align-items: center;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+}
+
+/* 知识条目 md 编辑器：等宽字体便于对齐 markdown 结构 */
+.pack-md {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    min-height: 140px;
+}
+
+@media (min-width: 768px) {
+    .pack-editor {
+        display: grid;
+        grid-template-columns: 168px 1fr;
+        gap: var(--sp-6);
+        align-items: start;
+    }
+    .pack-anchors {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        position: sticky;
+        top: var(--sp-6);
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pack-anchors a { transition: none; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -1798,7 +2017,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-user">
                 
                 <span>admin</span>
-                <a href="index.html" class="btn-logout">退出</a>
+                <form method="post" action="/logout" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IQ.J8Wdb7heSGJ3etygw5wCE0ySxs4">
+                    <button type="submit" class="btn-logout">退出</button>
+                </form>
                 
             </div>
         </nav>
@@ -1826,8 +2048,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
     
 </div>
 
-<form method="GET" action="15_AI助手.html" class="chat-input-row" id="assistantForm" data-ajax>
-    <input type="hidden" name="csrf_token" value="ImY0MjI0ZjEwNjhmMGRhYzc5M2U5MmIxOTFjZTVkMzM2ZmQ4YTE0ZTAi.aqLthA.y8EUoJRS8Cs4TrA2y0Oinsyjnx4">
+
+
+
+
+<form method="GET" action="15_AI助手.html" class="chat-input-row"
+      id="assistantForm" data-ajax data-degraded-text="AI 服务暂不可用，已切换为演示模式，请稍后重试。">
+    <input type="hidden" name="csrf_token" value="ImE3ZDlkMTU5MmE2ZmM5NThjNDIwNzI3ZTFmYmRmZmY2YTMyZTc2ZTYi.aqZ4IQ.J8Wdb7heSGJ3etygw5wCE0ySxs4">
     <input type="text" name="ask" class="form-control auto-grow" placeholder="例如：这个月营收多少？明天备货建议？"
            autocomplete="off" autocapitalize="off" enterkeyhint="send" required>
     <button type="submit" class="btn btn-primary">提问</button>
@@ -1932,73 +2159,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<script>
-// AI 智能助手 AJAX 化：无刷新提问 +「思考中」反馈 + 失败内联重试
-// 原生 form 兜底：fetch 失败时整页提交，行为不劣化
-(function () {
-    var form = document.getElementById('assistantForm');
-    var log = document.getElementById('assistantLog');
-    var input = form ? form.querySelector('input[name="ask"]') : null;
-    var btn = form ? form.querySelector('button[type="submit"]') : null;
-    if (!form || !input || !log) return;
 
-    function appendBubble(cls, text) {
-        var b = document.createElement('div');
-        b.className = 'bubble ' + cls;
-        b.textContent = text;
-        log.appendChild(b);
-        log.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        return b;
-    }
-    function showInlineError(bubble, text) {
-        bubble.innerHTML = '';
-        var err = document.createElement('div');
-        err.className = 'record-note'; err.textContent = text;
-        bubble.appendChild(err);
-    }
-    function send(text) {
-        input.disabled = true; btn.disabled = true; btn.textContent = '思考中…';
-        appendBubble('staff', text);
-        var typing = appendBubble('customer', '▪▪▪ 正在生成回答…');
-
-        var fd = new FormData(form);
-        fd.set('ask', text);
-        fetch(form.action, {
-            method: 'POST',
-            body: fd,
-            headers: { 'X-Requested-With': 'fetch' }
-        }).then(function (r) { return r.json(); })
-          .then(function (j) {
-              if (j && j.ok) {
-                  typing.textContent = j.reply;
-              } else {
-                  showInlineError(typing, (j && j.reply) || 'AI 服务暂不可用，请稍后重试。');
-              }
-          })
-          .catch(function () {
-              showInlineError(typing, '网络开了个小差，请稍后重试。');
-          })
-          .finally(function () {
-              input.value = '';
-              input.disabled = false; btn.disabled = false; btn.textContent = '提问';
-          });
-    }
-
-    form.addEventListener('submit', function (e) {
-        var text = input.value.trim();
-        if (!text) { e.preventDefault(); return; }
-        e.preventDefault();
-        send(text);
-    });
-
-    // 快捷提问按钮
-    document.querySelectorAll('.quick-questions button[data-quick]').forEach(function (b) {
-        b.addEventListener('click', function () {
-            send(b.getAttribute('data-quick'));
-        });
-    });
-})();
-</script>
 
 <nav class="snap-nav" aria-label="页面导航"><a href="14_经营分析.html">← 上一页</a><a href="index.html">返回总览</a><a href="07_店员看板.html">下一页 →</a></nav></body>
 </html>
