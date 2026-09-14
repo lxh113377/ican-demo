@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>多门店经营大脑 · 门店管理助手</title>
+    <title>我的任务 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
+    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWQ.Lp61870SkgpIkRScDU1znF6VDA8">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2090,70 +2090,21 @@ body.h5-page .main-content { padding-bottom: 84px; }
 })();
 </script>
 </head>
-<body class="is-admin">
+<body class="is-staff">
     <a class="skip-link" href="#main">跳到主要内容</a>
     <div class="container">
         
         <nav class="top-nav">
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
-            <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
-                <label for="adminPackSelect">行业包</label>
-                <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
-                    
-                    <option value="apparel">服装零售店</option>
-                    
-                    <option value="bakery">烘焙轻食店</option>
-                    
-                    <option value="beauty">美容美发/美甲店</option>
-                    
-                    <option value="convenience">便利店</option>
-                    
-                    <option value="fruit">水果生鲜店</option>
-                    
-                    <option value="milk_tea" selected>奶茶店（当前）</option>
-                    
-                    <option value="pet">宠物服务店</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-            </form>
-            
-            
-            <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
-                <label for="adminStoreSelect">门店</label>
-                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
-                    
-                    <option value="1" selected>奶茶示范店（当前）</option>
-                    
-                    <option value="2">水果生鲜示范店</option>
-                    
-                    <option value="3">便利店示范店</option>
-                    
-                    <option value="4">烘焙轻食示范店</option>
-                    
-                    <option value="5">美业示范店</option>
-                    
-                    <option value="6">宠物服务示范店</option>
-                    
-                    <option value="7">服装零售示范店</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
-            </form>
             
             <div class="nav-user">
                 
                 
                 
-                <a class="btn-pack-switch" href="22_责任任务.html">任务</a>
-                
-                <span>owner_demo</span>
+                <span>奶茶示范店店员1</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
+                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWQ.Lp61870SkgpIkRScDU1znF6VDA8">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2170,125 +2121,59 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <main class="main-content" id="main" tabindex="-1">
             
 <div class="page-header">
-    <h2>多门店经营大脑</h2>
-    <span class="chip">近 14 天 · 7 家门店（有数据 7）</span>
+    <h2>我的任务</h2>
+    <span class="chip">共 1 项</span>
 </div>
 
-<section class="panel">
-    <div class="metric-strip">
-        <div class="metric"><span class="metric-label">总营收</span><strong>2531923.77</strong></div>
-        <div class="metric"><span class="metric-label">填报记录</span><strong>980</strong></div>
-        <div class="metric"><span class="metric-label">异常门店</span><strong>0</strong></div>
-        <div class="metric"><span class="metric-label">今日分析用量</span><strong>0/30</strong></div>
-    </div>
-</section>
-
-
-
-<section class="panel">
-    <h3>门店排行</h3>
-    <div class="list-rows">
-        
-        <div class="list-row">
-            <span>#1 服装零售示范店</span>
-            <span>营收 1317492.00 · 记录 140 · 损耗 1.8%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/7">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#2 美业示范店</span>
-            <span>营收 631324.00 · 记录 140 · 损耗 2.0%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/5">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#3 宠物服务示范店</span>
-            <span>营收 398799.00 · 记录 140 · 损耗 1.9%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/6">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#4 奶茶示范店</span>
-            <span>营收 63722.00 · 记录 140 · 损耗 2.2%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/1">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#5 烘焙轻食示范店</span>
-            <span>营收 56614.00 · 记录 140 · 损耗 2.0%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/4">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#6 水果生鲜示范店</span>
-            <span>营收 44689.57 · 记录 140 · 损耗 2.1%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/2">下钻</a>
-            </span>
-        </div>
-        
-        <div class="list-row">
-            <span>#7 便利店示范店</span>
-            <span>营收 19283.20 · 记录 140 · 损耗 2.0%
-                <a class="btn btn-outline btn-sm" href="/admin/multi/store/3">下钻</a>
-            </span>
-        </div>
-        
-    </div>
-</section>
-
-<section class="panel">
-    <h3>跨店趋势</h3>
-    <div class="list-rows">
-        
-        <div class="list-row"><span>2026-09-01</span><span>营收 140566.77 · 数量 2133</span></div>
-        
-        <div class="list-row"><span>2026-09-02</span><span>营收 186177.64 · 数量 2082</span></div>
-        
-        <div class="list-row"><span>2026-09-03</span><span>营收 203004.48 · 数量 2096</span></div>
-        
-        <div class="list-row"><span>2026-09-04</span><span>营收 176900.34 · 数量 1996</span></div>
-        
-        <div class="list-row"><span>2026-09-05</span><span>营收 208494.86 · 数量 2246</span></div>
-        
-        <div class="list-row"><span>2026-09-06</span><span>营收 187913.47 · 数量 2066</span></div>
-        
-        <div class="list-row"><span>2026-09-07</span><span>营收 143642.04 · 数量 2138</span></div>
-        
-        <div class="list-row"><span>2026-09-08</span><span>营收 174779.48 · 数量 2112</span></div>
-        
-        <div class="list-row"><span>2026-09-09</span><span>营收 217458.11 · 数量 2178</span></div>
-        
-        <div class="list-row"><span>2026-09-10</span><span>营收 193031.23 · 数量 2240</span></div>
-        
-        <div class="list-row"><span>2026-09-11</span><span>营收 178138.34 · 数量 2038</span></div>
-        
-        <div class="list-row"><span>2026-09-12</span><span>营收 199792.21 · 数量 2102</span></div>
-        
-        <div class="list-row"><span>2026-09-13</span><span>营收 162094.22 · 数量 2049</span></div>
-        
-        <div class="list-row"><span>2026-09-14</span><span>营收 159930.58 · 数量 1813</span></div>
-        
-    </div>
-</section>
-
-<section class="panel">
-    <h3>AI 跨店分析</h3>
-    <form method="POST" action="/admin/multi/analyze" class="inline-form">
-        <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
-        <button type="submit" class="btn btn-primary btn-sm">生成跨店分析</button>
-    </form>
+<div class="list-rows">
     
-</section>
+    <article class="record-item">
+        <div class="record-main">
+            <strong>核查奶茶示范店损耗异常</strong>
+            <small class="text-muted">奶茶示范店 · 截止 2026-09-16</small>
+            <p>对照跨店分析证据，检查备货量与储存条件，完成后填写效果回看。</p>
+        </div>
+        <div class="task-actions">
+            <span class="badge badge-neutral">待处理</span>
+            
+            <form method="GET" action="23_我的任务.html" class="inline-form">
+                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWQ.Lp61870SkgpIkRScDU1znF6VDA8">
+                <input type="hidden" name="status" value="in_progress">
+                <button class="btn btn-outline btn-sm" type="submit">开始</button>
+            </form>
+            
+        </div>
+    </article>
+    
+</div>
 
         </main>
     </div>
 
     <!-- 店员端固定底部 Tab 导航（4 页高频切换；仅店员身份渲染，管理员端保持 PC 网格导航） -->
+    
+    <nav class="bottom-tabs" aria-label="店员端主导航">
+        <a href="07_店员看板.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></span><span class="tab-text">填报</span>
+        </a>
+        <a href="08_填报历史.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="tab-text">历史</span>
+        </a>
+        <a href="12_我的培训进度.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="tab-text">培训</span>
+        </a>
+        <a href="09_AI培训主页.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg></span><span class="tab-text">AI</span>
+        </a>
+        <a href="23_我的任务.html" class="tab-item active"
+           aria-current="page">
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tab-text">任务</span>
+        </a>
+    </nav>
     
 
     <!-- 主题切换（全局浮动 fab，内联脚本保证快照剥离 main.js 后仍可切换） -->
@@ -2371,5 +2256,5 @@ body.h5-page .main-content { padding-bottom: 84px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<nav class="snap-nav" aria-label="页面导航"><a href="17_建包工作台.html">← 上一页</a><a href="index.html">返回总览</a><a href="19_门店与成员.html">下一页 →</a></nav></body>
+<nav class="snap-nav" aria-label="页面导航"><a href="22_责任任务.html">← 上一页</a><a href="index.html">返回总览</a><a class="disabled" aria-disabled="true">下一页 →</a></nav></body>
 </html>

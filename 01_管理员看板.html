@@ -7,7 +7,7 @@
     <title>数据看板 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_Pg.0ptFyeK6pZGqrkLb3MUiJgXNUcM">
+    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVQ.oSOEBQW3vkjV1OUQqAZdGWIpB_s">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -1994,6 +1994,56 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .pack-anchors a { transition: none; }
 }
 
+/* ═══════════ 责任任务闭环（PH4-2） ═══════════ */
+.task-form .form-group { margin-bottom: var(--sp-3); }
+.task-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+}
+.task-filter .btn.active {
+    background: var(--primary-soft-strong);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.task-row { align-items: center; }
+.task-title { display: block; margin-bottom: var(--sp-1); }
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+.task-actions .inline-form { margin-bottom: 0; }
+.task-overdue { border-left: 3px solid var(--danger); }
+.task-create-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+.task-create-form .form-control { max-width: 220px; }
+.task-evidence {
+    margin-top: var(--sp-2);
+    padding: var(--sp-3);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+    .task-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .task-actions { width: 100%; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -2048,7 +2098,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_Pg.0ptFyeK6pZGqrkLb3MUiJgXNUcM">
+                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVQ.oSOEBQW3vkjV1OUQqAZdGWIpB_s">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2072,7 +2122,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_Pg.0ptFyeK6pZGqrkLb3MUiJgXNUcM">
+                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVQ.oSOEBQW3vkjV1OUQqAZdGWIpB_s">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
@@ -2098,9 +2148,12 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-user">
                 
                 
+                
+                <a class="btn-pack-switch" href="22_责任任务.html">任务</a>
+                
                 <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_Pg.0ptFyeK6pZGqrkLb3MUiJgXNUcM">
+                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVQ.oSOEBQW3vkjV1OUQqAZdGWIpB_s">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2145,10 +2198,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 <p class="range-note">统计区间：全年 · 共 30 个营业日</p>
 <div class="stat-cards">
-    <div class="stat-card stat-card--accent"><div class="stat-num" data-value="137557.0">¥137557.0</div><div class="stat-label">总营收</div></div>
-    <div class="stat-card"><div class="stat-num" data-value="9101">9101</div><div class="stat-label">总销量(杯)</div></div>
-    <div class="stat-card"><div class="stat-num" data-value="4585.23">¥4585.23</div><div class="stat-label">日均营收</div></div>
-    <div class="stat-card"><div class="stat-num" data-value="15.11">¥15.11</div><div class="stat-label">单均营收</div></div>
+    <div class="stat-card stat-card--accent"><div class="stat-num" data-value="134129.0">¥134129.0</div><div class="stat-label">总营收</div></div>
+    <div class="stat-card"><div class="stat-num" data-value="8890">8890</div><div class="stat-label">总销量(杯)</div></div>
+    <div class="stat-card"><div class="stat-num" data-value="4470.97">¥4470.97</div><div class="stat-label">日均营收</div></div>
+    <div class="stat-card"><div class="stat-num" data-value="15.09">¥15.09</div><div class="stat-label">单均营收</div></div>
     <div class="stat-card"><div class="stat-num" data-value="2">2</div><div class="stat-label">店员数</div></div>
     <div class="stat-card"><div class="stat-num" data-value="30">30</div><div class="stat-label">营业天数</div></div>
     
@@ -2159,32 +2212,32 @@ body.h5-page .main-content { padding-bottom: 84px; }
     
     
     
-    <div class="stat-card"><div class="stat-num" data-value="1.7">1.7%</div><div class="stat-label">损耗率<small>损耗÷（剩余+损耗），预警线 15%</small></div></div>
+    <div class="stat-card"><div class="stat-num" data-value="2.0">2.0%</div><div class="stat-label">损耗率<small>损耗÷（剩余+损耗），预警线 15%</small></div></div>
     
     
-    <div class="stat-card"><div class="stat-num" data-value="35.8">35.8%</div><div class="stat-label">动销率<small>销量÷（销量+剩余）</small></div></div>
+    <div class="stat-card"><div class="stat-num" data-value="35.0">35.0%</div><div class="stat-label">动销率<small>销量÷（销量+剩余）</small></div></div>
     
     
-    <div class="stat-card"><div class="stat-num" data-value="0.56">0.56次</div><div class="stat-label">库存周转<small>窗口累计销量÷剩余量</small></div></div>
+    <div class="stat-card"><div class="stat-num" data-value="0.54">0.54次</div><div class="stat-label">库存周转<small>窗口累计销量÷剩余量</small></div></div>
     
 </div>
 
 <div class="section">
     <h3>日营收 / 销量趋势</h3>
     <div id="myChart" class="chart-box"></div>
-    <p class="sr-only">统计区间全年：总营收 137557.0 元，总销量 9101 杯，日均营收 4585.23 元。</p>
+    <p class="sr-only">统计区间全年：总营收 134129.0 元，总销量 8890 杯，日均营收 4470.97 元。</p>
 </div>
 
 <div class="section">
     <h3>产品销售占比</h3>
     <div id="pieChart" class="chart-box"></div>
-    <p class="sr-only">产品销售占比：柠檬水、蜜桃乌龙、生椰拿铁 等 15 个产品，其中 柠檬水 占比最高。</p>
+    <p class="sr-only">产品销售占比：生椰拿铁、柠檬水、四季春茶 等 15 个产品，其中 生椰拿铁 占比最高。</p>
 </div>
 
 <div class="section">
     <h3>热销排行（按营收）</h3>
     <div id="topChart" class="chart-box"></div>
-    <p class="sr-only">热销排行：按营收由高到低，生椰拿铁、芝士葡萄、黑糖珍珠鲜奶。</p>
+    <p class="sr-only">热销排行：按营收由高到低，生椰拿铁、黑糖珍珠鲜奶、芝士葡萄。</p>
 </div>
 
 
@@ -2196,7 +2249,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="record-item alert-pulse">
             <div class="record-header">
                 <span class="product-name">生椰拿铁</span>
-                <span class="badge badge-danger">2026-09-13</span>
+                <span class="badge badge-danger">2026-09-14</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 21.1% 超过预警阈值 15%</div>
             
@@ -2207,7 +2260,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="record-item">
             <div class="record-header">
                 <span class="product-name">柠檬蜂蜜茶</span>
-                <span class="badge badge-danger">2026-09-12</span>
+                <span class="badge badge-danger">2026-09-13</span>
             </div>
             <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 原料损耗率 21.1% 超过预警阈值 15%</div>
             
@@ -2236,7 +2289,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="ai-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> 备货建议</div>
         
         <p class="ai-text">📦 次日备货建议（规则版，基于近期真实销售）
-1. 热销 TOP3：生椰拿铁、芝士葡萄、黑糖珍珠鲜奶，按平日 1.1 倍预备。
+1. 近 7 日销量整体回落（近 7 日日均 293 杯，较前 7 日回落 6%），热销 TOP3：生椰拿铁、黑糖珍珠鲜奶、芝士葡萄，建议按 0.9 倍微降预备。
 2. 生椰拿铁、柠檬蜂蜜茶 近期损耗偏高，按「少备勤补」降低批量，易损鲜果（芒果/西柚/鲜奶）当日按需采购。
 3. 配置 Dify 后可结合天气、节假日与库存效期做更精准预测（当前为规则演示版）。</p>
         
@@ -2391,7 +2444,7 @@ var Vr={},Br={};var Fr=function(){function t(t,e,n){var i=this;this._sleepAfterS
 </script>
 <script>
 
-var stats = {"anomalies": {"checked": 60, "ok": true, "points": [{"date": "2026-08-18", "deviation_pct": 23.8, "expected": 4585.23, "method": "z-score", "metric": "\u8425\u6536", "value": 5676.0}, {"date": "2026-08-18", "deviation_pct": 23.6, "expected": 303.37, "method": "z-score", "metric": "\u9500\u91cf", "value": 375.0}, {"date": "2026-08-19", "deviation_pct": 26.6, "expected": 303.37, "method": "z-score", "metric": "\u9500\u91cf", "value": 384.0}, {"date": "2026-08-29", "deviation_pct": 23.4, "expected": 4585.23, "method": "z-score", "metric": "\u8425\u6536", "value": 5657.0}]}, "basket": {"days": 30, "ok": true, "pairs": [{"a": "\u56db\u5b63\u6625\u8336", "b": "\u62b9\u8336\u5976\u7eff", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u751f\u6930\u62ff\u94c1", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u871c\u6843\u4e4c\u9f99", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u62b9\u8336\u5976\u7eff", "b": "\u751f\u6930\u62ff\u94c1", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}]}, "capabilities": {"custom_metrics": [], "note": true, "waste": true}, "compare": {"ok": true, "qty_pct": 0.5, "revenue_pct": -0.3}, "daily": {"dates": ["08-15", "08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02", "09-03", "09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"], "qty": [344, 307, 294, 375, 384, 259, 324, 298, 282, 301, 341, 259, 271, 282, 346, 322, 272, 319, 271, 266, 318, 299, 306, 322, 302, 338, 293, 238, 298, 270], "revenue": [5099.0, 4527.0, 4771.0, 5676.0, 5426.0, 4205.0, 4636.0, 4349.0, 4369.0, 4494.0, 5007.0, 3896.0, 4095.0, 4083.0, 5657.0, 4660.0, 3738.0, 5039.0, 4116.0, 4050.0, 4944.0, 4747.0, 4719.0, 4913.0, 4385.0, 4773.0, 4739.0, 3630.0, 4282.0, 4532.0]}, "daily_iso": ["2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-29", "2026-08-30", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13"], "derived_metrics": [{"alert": false, "desc": "\u635f\u8017\u00f7\uff08\u5269\u4f59+\u635f\u8017\uff09\uff0c\u9884\u8b66\u7ebf 15%", "key": "waste_rate", "label": "\u635f\u8017\u7387", "unit": "%", "value": 1.7}, {"alert": false, "desc": "\u9500\u91cf\u00f7\uff08\u9500\u91cf+\u5269\u4f59\uff09", "key": "sell_through", "label": "\u52a8\u9500\u7387", "unit": "%", "value": 35.8}, {"alert": false, "desc": "\u7a97\u53e3\u7d2f\u8ba1\u9500\u91cf\u00f7\u5269\u4f59\u91cf", "key": "stock_turnover", "label": "\u5e93\u5b58\u5468\u8f6c", "unit": "\u6b21", "value": 0.56}], "forecast": {"method": "\u6307\u6570\u5e73\u6ed1\u52a0\u6743\uff08\u8fd1 14 \u65e5\uff0c\u534a\u8870\u671f 3 \u5929\uff09 \u00d7 \u8d8b\u52bf\u7cfb\u6570 0.86\uff08\u8fd13\u65e5\u5747\u00f7\u524d4\u65e5\u5747\uff0c\u9650\u5e450.7~1.3\uff09 \u00d7 \u661f\u671f\u5468\u671f\u56e0\u5b50 0.98\uff08\u660e\u5929\u5468\u4e00\uff0c\u6309\u5386\u53f2\u5468\u5185\u8282\u5f8b\u5b63\u8282\u8c03\u6574\uff09", "ok": true, "qty": 244.0, "revenue": 3688.0, "target_date": "2026-09-14"}, "forecast_accuracy": {"accuracy": null, "count": 0, "hit_rate": null, "last": null, "mape": null, "ok": false}, "has_data": true, "kpi": {"avg_daily_revenue": 4585.23, "avg_per_unit": 15.11, "gross_margin": 64.5, "margin_cost_items": 280, "margin_total_items": 300, "report_days": 30, "staff_count": 2, "total_qty": 9101, "total_revenue": 137557.0}, "pie": {"names": ["\u67e0\u6aac\u6c34", "\u871c\u6843\u4e4c\u9f99", "\u751f\u6930\u62ff\u94c1", "\u70e7\u4ed9\u8349", "\u62b9\u8336\u5976\u7eff", "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "\u56db\u5b63\u6625\u8336", "\u6768\u679d\u7518\u9732", "\u73cd\u73e0\u5976\u8336", "\u6930\u679c\u5976\u8336", "\u53cc\u62fc\u679c\u8336", "\u829d\u58eb\u8461\u8404", "\u828b\u6ce5\u6ce2\u6ce2", "\u8309\u8389\u7eff\u8336", "\u67e0\u6aac\u8702\u871c\u8336"], "values": [692, 672, 655, 629, 627, 620, 612, 592, 590, 584, 580, 575, 574, 573, 526]}, "product_forecast": {"items": [{"avg7": 34.9, "confidence": 0.82, "next_qty": 45.4, "product": "\u751f\u6930\u62ff\u94c1", "trend": 1.3}, {"avg7": 34.5, "confidence": 0.82, "next_qty": 44.9, "product": "\u53cc\u62fc\u679c\u8336", "trend": 1.3}, {"avg7": 35.1, "confidence": 0.84, "next_qty": 34.6, "product": "\u871c\u6843\u4e4c\u9f99", "trend": 0.98}, {"avg7": 33.6, "confidence": 0.83, "next_qty": 33.4, "product": "\u70e7\u4ed9\u8349", "trend": 0.99}, {"avg7": 25.6, "confidence": 0.79, "next_qty": 33.3, "product": "\u73cd\u73e0\u5976\u8336", "trend": 1.3}, {"avg7": 30.6, "confidence": 0.86, "next_qty": 32.5, "product": "\u67e0\u6aac\u6c34", "trend": 1.06}, {"avg7": 27.9, "confidence": 0.79, "next_qty": 29.8, "product": "\u67e0\u6aac\u8702\u871c\u8336", "trend": 1.07}, {"avg7": 27.0, "confidence": 0.82, "next_qty": 29.5, "product": "\u6768\u679d\u7518\u9732", "trend": 1.09}, {"avg7": 31.0, "confidence": 0.85, "next_qty": 27.1, "product": "\u56db\u5b63\u6625\u8336", "trend": 0.87}, {"avg7": 27.9, "confidence": 0.8, "next_qty": 22.6, "product": "\u829d\u58eb\u8461\u8404", "trend": 0.81}, {"avg7": 27.4, "confidence": 0.8, "next_qty": 19.2, "product": "\u6930\u679c\u5976\u8336", "trend": 0.7}, {"avg7": 27.1, "confidence": 0.79, "next_qty": 19.0, "product": "\u8309\u8389\u7eff\u8336", "trend": 0.7}, {"avg7": 27.1, "confidence": 0.8, "next_qty": 19.0, "product": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "trend": 0.7}, {"avg7": 24.4, "confidence": 0.82, "next_qty": 17.1, "product": "\u62b9\u8336\u5976\u7eff", "trend": 0.7}, {"avg7": 23.0, "confidence": 0.82, "next_qty": 16.1, "product": "\u828b\u6ce5\u6ce2\u6ce2", "trend": 0.7}], "ok": true}, "replenishment": {"items": [{"basis": "\u65e5\u5747\u9700\u6c42 34.7 + \u5b89\u5168\u5e93\u5b58 19.6 \u2212 \u73b0\u5b58 30.0", "demand": 34.7, "product": "\u751f\u6930\u62ff\u94c1", "remaining": 30.0, "safety_stock": 19.6, "sigma": 11.87, "suggest": 24.3}, {"basis": "\u65e5\u5747\u9700\u6c42 35.1 + \u5b89\u5168\u5e93\u5b58 17.7 \u2212 \u73b0\u5b58 32.0", "demand": 35.1, "product": "\u70e7\u4ed9\u8349", "remaining": 32.0, "safety_stock": 17.7, "sigma": 10.75, "suggest": 20.9}, {"basis": "\u65e5\u5747\u9700\u6c42 27.6 + \u5b89\u5168\u5e93\u5b58 18.8 \u2212 \u73b0\u5b58 33.0", "demand": 27.6, "product": "\u829d\u58eb\u8461\u8404", "remaining": 33.0, "safety_stock": 18.8, "sigma": 11.37, "suggest": 13.3}, {"basis": "\u65e5\u5747\u9700\u6c42 31.4 + \u5b89\u5168\u5e93\u5b58 15.3 \u2212 \u73b0\u5b58 35.0", "demand": 31.4, "product": "\u56db\u5b63\u6625\u8336", "remaining": 35.0, "safety_stock": 15.3, "sigma": 9.27, "suggest": 11.7}, {"basis": "\u65e5\u5747\u9700\u6c42 26.0 + \u5b89\u5168\u5e93\u5b58 17.8 \u2212 \u73b0\u5b58 37.0", "demand": 26.0, "product": "\u6768\u679d\u7518\u9732", "remaining": 37.0, "safety_stock": 17.8, "sigma": 10.78, "suggest": 6.8}, {"basis": "\u65e5\u5747\u9700\u6c42 32.9 + \u5b89\u5168\u5e93\u5b58 17.4 \u2212 \u73b0\u5b58 47.0", "demand": 32.9, "product": "\u53cc\u62fc\u679c\u8336", "remaining": 47.0, "safety_stock": 17.4, "sigma": 10.55, "suggest": 3.3}, {"basis": "\u65e5\u5747\u9700\u6c42 36.0 + \u5b89\u5168\u5e93\u5b58 17.6 \u2212 \u73b0\u5b58 52.0", "demand": 36.0, "product": "\u871c\u6843\u4e4c\u9f99", "remaining": 52.0, "safety_stock": 17.6, "sigma": 10.67, "suggest": 1.6}, {"basis": "\u65e5\u5747\u9700\u6c42 25.6 + \u5b89\u5168\u5e93\u5b58 19.1 \u2212 \u73b0\u5b58 56.0", "demand": 25.6, "product": "\u62b9\u8336\u5976\u7eff", "remaining": 56.0, "safety_stock": 19.1, "sigma": 11.6, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 29.0 + \u5b89\u5168\u5e93\u5b58 16.0 \u2212 \u73b0\u5b58 46.0", "demand": 29.0, "product": "\u67e0\u6aac\u6c34", "remaining": 46.0, "safety_stock": 16.0, "sigma": 9.71, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 27.0 + \u5b89\u5168\u5e93\u5b58 18.5 \u2212 \u73b0\u5b58 63.0", "demand": 27.0, "product": "\u67e0\u6aac\u8702\u871c\u8336", "remaining": 63.0, "safety_stock": 18.5, "sigma": 11.2, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 31.7 + \u5b89\u5168\u5e93\u5b58 18.8 \u2212 \u73b0\u5b58 57.0", "demand": 31.7, "product": "\u6930\u679c\u5976\u8336", "remaining": 57.0, "safety_stock": 18.8, "sigma": 11.41, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 24.9 + \u5b89\u5168\u5e93\u5b58 20.8 \u2212 \u73b0\u5b58 70.0", "demand": 24.9, "product": "\u73cd\u73e0\u5976\u8336", "remaining": 70.0, "safety_stock": 20.8, "sigma": 12.59, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 24.3 + \u5b89\u5168\u5e93\u5b58 17.3 \u2212 \u73b0\u5b58 52.0", "demand": 24.3, "product": "\u828b\u6ce5\u6ce2\u6ce2", "remaining": 52.0, "safety_stock": 17.3, "sigma": 10.48, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 28.9 + \u5b89\u5168\u5e93\u5b58 20.2 \u2212 \u73b0\u5b58 71.0", "demand": 28.9, "product": "\u8309\u8389\u7eff\u8336", "remaining": 71.0, "safety_stock": 20.2, "sigma": 12.24, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 30.0 + \u5b89\u5168\u5e93\u5b58 20.3 \u2212 \u73b0\u5b58 80.0", "demand": 30.0, "product": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "remaining": 80.0, "safety_stock": 20.3, "sigma": 12.3, "suggest": 0.0}], "ok": true}, "top": {"names": ["\u751f\u6930\u62ff\u94c1", "\u829d\u58eb\u8461\u8404", "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "\u53cc\u62fc\u679c\u8336", "\u871c\u6843\u4e4c\u9f99", "\u6768\u679d\u7518\u9732", "\u70e7\u4ed9\u8349", "\u62b9\u8336\u5976\u7eff", "\u828b\u6ce5\u6ce2\u6ce2", "\u6930\u679c\u5976\u8336", "\u73cd\u73e0\u5976\u8336", "\u67e0\u6aac\u8702\u871c\u8336", "\u56db\u5b63\u6625\u8336", "\u67e0\u6aac\u6c34", "\u8309\u8389\u7eff\u8336"], "values": [13100.0, 12650.0, 11780.0, 11600.0, 11424.0, 10656.0, 9435.0, 9405.0, 9184.0, 7592.0, 7080.0, 6838.0, 6120.0, 5536.0, 5157.0]}, "waste_alert_total": 2, "waste_alerts": [{"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-09-13", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u751f\u6930\u62ff\u94c1"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-09-12", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u67e0\u6aac\u8702\u871c\u8336"}], "waste_causes": {"items": [{"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-09-13", "note": "\u635f\u8017\u7387\u5f02\u5e38\uff0c\u6253\u70ca\u590d\u76d8", "product": "\u751f\u6930\u62ff\u94c1", "rate": 21.1}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-09-12", "note": "\u635f\u8017\u7387\u5f02\u5e38\uff0c\u6253\u70ca\u590d\u76d8", "product": "\u67e0\u6aac\u8702\u871c\u8336", "rate": 21.1}], "ok": true, "summary": {"labels": {"\u5f85\u6392\u67e5": 2}, "main": "\u5f85\u6392\u67e5"}, "total": 2}, "weekday": {"ok": true, "weekday_avg": 301.4, "weekend_avg": 307.2}};
+var stats = {"anomalies": {"checked": 60, "ok": true, "points": [{"date": "2026-09-14", "deviation_pct": -29.8, "expected": 296.33, "method": "z-score", "metric": "\u9500\u91cf", "value": 208.0}]}, "basket": {"days": 30, "ok": true, "pairs": [{"a": "\u56db\u5b63\u6625\u8336", "b": "\u62b9\u8336\u5976\u7eff", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u751f\u6930\u62ff\u94c1", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u871c\u6843\u4e4c\u9f99", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u56db\u5b63\u6625\u8336", "b": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}, {"a": "\u62b9\u8336\u5976\u7eff", "b": "\u751f\u6930\u62ff\u94c1", "confidence": 1.0, "days": 20, "lift": 1.5, "support": 0.667}]}, "capabilities": {"custom_metrics": [], "note": true, "waste": true}, "compare": {"ok": true, "qty_pct": -6.3, "revenue_pct": -4.5}, "daily": {"dates": ["08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02", "09-03", "09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14"], "qty": [308, 301, 307, 260, 236, 286, 325, 302, 261, 288, 300, 344, 244, 230, 286, 375, 313, 309, 282, 313, 371, 319, 280, 303, 331, 244, 354, 354, 256, 208], "revenue": [4725.0, 4582.0, 4876.0, 3936.0, 3136.0, 4499.0, 4957.0, 4416.0, 4210.0, 4397.0, 4404.0, 5301.0, 3571.0, 3333.0, 4580.0, 5484.0, 4492.0, 4899.0, 3939.0, 4536.0, 5829.0, 4769.0, 4124.0, 5103.0, 5151.0, 3327.0, 5721.0, 5221.0, 3383.0, 3228.0]}, "daily_iso": ["2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-29", "2026-08-30", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14"], "derived_metrics": [{"alert": false, "desc": "\u635f\u8017\u00f7\uff08\u5269\u4f59+\u635f\u8017\uff09\uff0c\u9884\u8b66\u7ebf 15%", "key": "waste_rate", "label": "\u635f\u8017\u7387", "unit": "%", "value": 2.0}, {"alert": false, "desc": "\u9500\u91cf\u00f7\uff08\u9500\u91cf+\u5269\u4f59\uff09", "key": "sell_through", "label": "\u52a8\u9500\u7387", "unit": "%", "value": 35.0}, {"alert": false, "desc": "\u7a97\u53e3\u7d2f\u8ba1\u9500\u91cf\u00f7\u5269\u4f59\u91cf", "key": "stock_turnover", "label": "\u5e93\u5b58\u5468\u8f6c", "unit": "\u6b21", "value": 0.54}], "forecast": {"method": "\u6307\u6570\u5e73\u6ed1\u52a0\u6743\uff08\u8fd1 14 \u65e5\uff0c\u534a\u8870\u671f 3 \u5929\uff09 \u00d7 \u8d8b\u52bf\u7cfb\u6570 0.87\uff08\u8fd13\u65e5\u5747\u00f7\u524d4\u65e5\u5747\uff0c\u9650\u5e450.7~1.3\uff09 \u00d7 \u661f\u671f\u5468\u671f\u56e0\u5b50 1.02\uff08\u660e\u5929\u5468\u4e8c\uff0c\u6309\u5386\u53f2\u5468\u5185\u8282\u5f8b\u5b63\u8282\u8c03\u6574\uff09", "ok": true, "qty": 251.3, "revenue": 3792.0, "target_date": "2026-09-15"}, "forecast_accuracy": {"accuracy": null, "count": 0, "hit_rate": null, "last": null, "mape": null, "ok": false}, "has_data": true, "kpi": {"avg_daily_revenue": 4470.97, "avg_per_unit": 15.09, "gross_margin": 64.5, "margin_cost_items": 280, "margin_total_items": 300, "report_days": 30, "staff_count": 2, "total_qty": 8890, "total_revenue": 134129.0}, "pie": {"names": ["\u751f\u6930\u62ff\u94c1", "\u67e0\u6aac\u6c34", "\u56db\u5b63\u6625\u8336", "\u6768\u679d\u7518\u9732", "\u73cd\u73e0\u5976\u8336", "\u62b9\u8336\u5976\u7eff", "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "\u871c\u6843\u4e4c\u9f99", "\u67e0\u6aac\u8702\u871c\u8336", "\u828b\u6ce5\u6ce2\u6ce2", "\u829d\u58eb\u8461\u8404", "\u8309\u8389\u7eff\u8336", "\u53cc\u62fc\u679c\u8336", "\u6930\u679c\u5976\u8336", "\u70e7\u4ed9\u8349"], "values": [674, 667, 645, 644, 641, 634, 623, 597, 585, 573, 537, 528, 528, 513, 501]}, "product_forecast": {"items": [{"avg7": 35.6, "confidence": 0.81, "next_qty": 46.3, "product": "\u56db\u5b63\u6625\u8336", "trend": 1.3}, {"avg7": 33.4, "confidence": 0.79, "next_qty": 43.4, "product": "\u828b\u6ce5\u6ce2\u6ce2", "trend": 1.3}, {"avg7": 34.3, "confidence": 0.85, "next_qty": 36.6, "product": "\u67e0\u6aac\u6c34", "trend": 1.07}, {"avg7": 31.8, "confidence": 0.86, "next_qty": 36.4, "product": "\u73cd\u73e0\u5976\u8336", "trend": 1.14}, {"avg7": 26.9, "confidence": 0.84, "next_qty": 34.9, "product": "\u67e0\u6aac\u8702\u871c\u8336", "trend": 1.3}, {"avg7": 32.5, "confidence": 0.77, "next_qty": 33.0, "product": "\u70e7\u4ed9\u8349", "trend": 1.01}, {"avg7": 35.7, "confidence": 0.84, "next_qty": 33.0, "product": "\u751f\u6930\u62ff\u94c1", "trend": 0.92}, {"avg7": 31.8, "confidence": 0.8, "next_qty": 29.1, "product": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "trend": 0.91}, {"avg7": 27.2, "confidence": 0.8, "next_qty": 25.0, "product": "\u871c\u6843\u4e4c\u9f99", "trend": 0.92}, {"avg7": 25.6, "confidence": 0.8, "next_qty": 22.2, "product": "\u829d\u58eb\u8461\u8404", "trend": 0.87}, {"avg7": 28.4, "confidence": 0.8, "next_qty": 20.3, "product": "\u8309\u8389\u7eff\u8336", "trend": 0.71}, {"avg7": 28.2, "confidence": 0.82, "next_qty": 19.7, "product": "\u6768\u679d\u7518\u9732", "trend": 0.7}, {"avg7": 25.5, "confidence": 0.8, "next_qty": 17.8, "product": "\u62b9\u8336\u5976\u7eff", "trend": 0.7}, {"avg7": 22.1, "confidence": 0.76, "next_qty": 17.1, "product": "\u53cc\u62fc\u679c\u8336", "trend": 0.77}, {"avg7": 22.5, "confidence": 0.77, "next_qty": 15.8, "product": "\u6930\u679c\u5976\u8336", "trend": 0.7}], "ok": true}, "replenishment": {"items": [{"basis": "\u65e5\u5747\u9700\u6c42 39.4 + \u5b89\u5168\u5e93\u5b58 18.3 \u2212 \u73b0\u5b58 30.0", "demand": 39.4, "product": "\u751f\u6930\u62ff\u94c1", "remaining": 30.0, "safety_stock": 18.3, "sigma": 11.08, "suggest": 27.7}, {"basis": "\u65e5\u5747\u9700\u6c42 32.3 + \u5b89\u5168\u5e93\u5b58 19.4 \u2212 \u73b0\u5b58 35.0", "demand": 32.3, "product": "\u828b\u6ce5\u6ce2\u6ce2", "remaining": 35.0, "safety_stock": 19.4, "sigma": 11.76, "suggest": 16.7}, {"basis": "\u65e5\u5747\u9700\u6c42 30.3 + \u5b89\u5168\u5e93\u5b58 17.6 \u2212 \u73b0\u5b58 42.0", "demand": 30.3, "product": "\u8309\u8389\u7eff\u8336", "remaining": 42.0, "safety_stock": 17.6, "sigma": 10.67, "suggest": 5.9}, {"basis": "\u65e5\u5747\u9700\u6c42 33.9 + \u5b89\u5168\u5e93\u5b58 19.9 \u2212 \u73b0\u5b58 49.0", "demand": 33.9, "product": "\u56db\u5b63\u6625\u8336", "remaining": 49.0, "safety_stock": 19.9, "sigma": 12.06, "suggest": 4.8}, {"basis": "\u65e5\u5747\u9700\u6c42 31.6 + \u5b89\u5168\u5e93\u5b58 19.2 \u2212 \u73b0\u5b58 47.0", "demand": 31.6, "product": "\u6768\u679d\u7518\u9732", "remaining": 47.0, "safety_stock": 19.2, "sigma": 11.66, "suggest": 3.8}, {"basis": "\u65e5\u5747\u9700\u6c42 23.0 + \u5b89\u5168\u5e93\u5b58 20.5 \u2212 \u73b0\u5b58 78.0", "demand": 23.0, "product": "\u53cc\u62fc\u679c\u8336", "remaining": 78.0, "safety_stock": 20.5, "sigma": 12.44, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 29.1 + \u5b89\u5168\u5e93\u5b58 21.0 \u2212 \u73b0\u5b58 79.0", "demand": 29.1, "product": "\u62b9\u8336\u5976\u7eff", "remaining": 79.0, "safety_stock": 21.0, "sigma": 12.7, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 33.4 + \u5b89\u5168\u5e93\u5b58 16.0 \u2212 \u73b0\u5b58 58.0", "demand": 33.4, "product": "\u67e0\u6aac\u6c34", "remaining": 58.0, "safety_stock": 16.0, "sigma": 9.72, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 25.4 + \u5b89\u5168\u5e93\u5b58 15.9 \u2212 \u73b0\u5b58 47.0", "demand": 25.4, "product": "\u67e0\u6aac\u8702\u871c\u8336", "remaining": 47.0, "safety_stock": 15.9, "sigma": 9.63, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 26.1 + \u5b89\u5168\u5e93\u5b58 19.5 \u2212 \u73b0\u5b58 46.0", "demand": 26.1, "product": "\u6930\u679c\u5976\u8336", "remaining": 46.0, "safety_stock": 19.5, "sigma": 11.82, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 33.7 + \u5b89\u5168\u5e93\u5b58 19.0 \u2212 \u73b0\u5b58 54.0", "demand": 33.7, "product": "\u70e7\u4ed9\u8349", "remaining": 54.0, "safety_stock": 19.0, "sigma": 11.5, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 30.0 + \u5b89\u5168\u5e93\u5b58 14.9 \u2212 \u73b0\u5b58 61.0", "demand": 30.0, "product": "\u73cd\u73e0\u5976\u8336", "remaining": 61.0, "safety_stock": 14.9, "sigma": 9.05, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 28.3 + \u5b89\u5168\u5e93\u5b58 17.7 \u2212 \u73b0\u5b58 64.0", "demand": 28.3, "product": "\u829d\u58eb\u8461\u8404", "remaining": 64.0, "safety_stock": 17.7, "sigma": 10.72, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 26.3 + \u5b89\u5168\u5e93\u5b58 19.8 \u2212 \u73b0\u5b58 56.0", "demand": 26.3, "product": "\u871c\u6843\u4e4c\u9f99", "remaining": 56.0, "safety_stock": 19.8, "sigma": 12.03, "suggest": 0.0}, {"basis": "\u65e5\u5747\u9700\u6c42 33.0 + \u5b89\u5168\u5e93\u5b58 20.7 \u2212 \u73b0\u5b58 77.0", "demand": 33.0, "product": "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "remaining": 77.0, "safety_stock": 20.7, "sigma": 12.54, "suggest": 0.0}], "ok": true}, "top": {"names": ["\u751f\u6930\u62ff\u94c1", "\u9ed1\u7cd6\u73cd\u73e0\u9c9c\u5976", "\u829d\u58eb\u8461\u8404", "\u6768\u679d\u7518\u9732", "\u53cc\u62fc\u679c\u8336", "\u871c\u6843\u4e4c\u9f99", "\u62b9\u8336\u5976\u7eff", "\u828b\u6ce5\u6ce2\u6ce2", "\u73cd\u73e0\u5976\u8336", "\u67e0\u6aac\u8702\u871c\u8336", "\u70e7\u4ed9\u8349", "\u6930\u679c\u5976\u8336", "\u56db\u5b63\u6625\u8336", "\u67e0\u6aac\u6c34", "\u8309\u8389\u7eff\u8336"], "values": [13480.0, 11837.0, 11814.0, 11592.0, 10560.0, 10149.0, 9510.0, 9168.0, 7692.0, 7605.0, 7515.0, 6669.0, 6450.0, 5336.0, 4752.0]}, "waste_alert_total": 2, "waste_alerts": [{"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-09-14", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u751f\u6930\u62ff\u94c1"}, {"cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "date": "2026-09-13", "note": "\u539f\u6599\u635f\u8017\u7387 21.1% \u8d85\u8fc7\u9884\u8b66\u9608\u503c 15%", "product": "\u67e0\u6aac\u8702\u871c\u8336"}], "waste_causes": {"items": [{"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-09-14", "note": "\u635f\u8017\u7387\u5f02\u5e38\uff0c\u6253\u70ca\u590d\u76d8", "product": "\u751f\u6930\u62ff\u94c1", "rate": 21.1}, {"advice": "\u5efa\u8bae\u8fde\u7eed\u89c2\u5bdf 2-3 \u65e5\u635f\u8017\u6784\u6210\uff0c\u5b9a\u4f4d\u5c5e\u4e8e\u5907\u8d27\u3001\u50a8\u5b58\u8fd8\u662f\u64cd\u4f5c\u73af\u8282\u95ee\u9898\u3002", "cause": "unknown", "cause_label": "\u5f85\u6392\u67e5", "confidence": "\u4f4e", "date": "2026-09-13", "note": "\u635f\u8017\u7387\u5f02\u5e38\uff0c\u6253\u70ca\u590d\u76d8", "product": "\u67e0\u6aac\u8702\u871c\u8336", "rate": 21.1}], "ok": true, "summary": {"labels": {"\u5f85\u6392\u67e5": 2}, "main": "\u5f85\u6392\u67e5"}, "total": 2}, "weekday": {"ok": true, "weekday_avg": 292.3, "weekend_avg": 305.7}};
 var rangeDays = 365;
 function fmtMoney(v) {
     return '¥' + Number(v).toLocaleString('zh-CN', { maximumFractionDigits: 2 });

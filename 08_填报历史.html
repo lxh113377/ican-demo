@@ -7,7 +7,7 @@
     <title>填报历史 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_QA.OhREy87FMhjGlSBQg-07_pOCMvE">
+    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -1994,6 +1994,56 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .pack-anchors a { transition: none; }
 }
 
+/* ═══════════ 责任任务闭环（PH4-2） ═══════════ */
+.task-form .form-group { margin-bottom: var(--sp-3); }
+.task-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+}
+.task-filter .btn.active {
+    background: var(--primary-soft-strong);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.task-row { align-items: center; }
+.task-title { display: block; margin-bottom: var(--sp-1); }
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+.task-actions .inline-form { margin-bottom: 0; }
+.task-overdue { border-left: 3px solid var(--danger); }
+.task-create-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+.task-create-form .form-control { max-width: 220px; }
+.task-evidence {
+    margin-top: var(--sp-2);
+    padding: var(--sp-3);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+    .task-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .task-actions { width: 100%; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -2051,9 +2101,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-user">
                 
                 
+                
                 <span>奶茶示范店店员1</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_QA.OhREy87FMhjGlSBQg-07_pOCMvE">
+                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2080,180 +2131,180 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">黑糖珍珠鲜奶</span>
-            <span class="badge badge-secondary">09-13</span>
+            <span class="badge badge-secondary">09-14</span>
         </div>
-        <div class="record-detail">销量 19 杯 · 营收 ¥361.00</div>
+        <div class="record-detail">销量 16 杯 · 营收 ¥304.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">抹茶奶绿</span>
-            <span class="badge badge-secondary">09-13</span>
+            <span class="badge badge-secondary">09-14</span>
         </div>
-        <div class="record-detail">销量 16 杯 · 营收 ¥240.00</div>
+        <div class="record-detail">销量 13 杯 · 营收 ¥195.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">蜜桃乌龙</span>
-            <span class="badge badge-secondary">09-13</span>
+            <span class="badge badge-secondary">09-14</span>
         </div>
-        <div class="record-detail">销量 38 杯 · 营收 ¥646.00</div>
+        <div class="record-detail">销量 21 杯 · 营收 ¥357.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">四季春茶</span>
-            <span class="badge badge-secondary">09-13</span>
+            <span class="badge badge-secondary">09-14</span>
         </div>
-        <div class="record-detail">销量 24 杯 · 营收 ¥240.00</div>
+        <div class="record-detail">销量 26 杯 · 营收 ¥260.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">生椰拿铁</span>
-            <span class="badge badge-secondary">09-13</span>
+            <span class="badge badge-secondary">09-14</span>
         </div>
-        <div class="record-detail">销量 34 杯 · 营收 ¥680.00</div>
+        <div class="record-detail">销量 27 杯 · 营收 ¥540.00</div>
         <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 损耗率异常，打烊复盘</div>
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">茉莉绿茶</span>
-            <span class="badge badge-secondary">09-12</span>
+            <span class="badge badge-secondary">09-13</span>
         </div>
-        <div class="record-detail">销量 20 杯 · 营收 ¥180.00</div>
+        <div class="record-detail">销量 37 杯 · 营收 ¥333.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">双拼果茶</span>
-            <span class="badge badge-secondary">09-12</span>
+            <span class="badge badge-secondary">09-13</span>
         </div>
-        <div class="record-detail">销量 32 杯 · 营收 ¥640.00</div>
+        <div class="record-detail">销量 10 杯 · 营收 ¥200.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">椰果奶茶</span>
-            <span class="badge badge-secondary">09-12</span>
+            <span class="badge badge-secondary">09-13</span>
         </div>
-        <div class="record-detail">销量 32 杯 · 营收 ¥416.00</div>
+        <div class="record-detail">销量 13 杯 · 营收 ¥169.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">芝士葡萄</span>
-            <span class="badge badge-secondary">09-12</span>
+            <span class="badge badge-secondary">09-13</span>
         </div>
-        <div class="record-detail">销量 23 杯 · 营收 ¥506.00</div>
+        <div class="record-detail">销量 11 杯 · 营收 ¥242.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">柠檬蜂蜜茶</span>
-            <span class="badge badge-secondary">09-12</span>
+            <span class="badge badge-secondary">09-13</span>
         </div>
-        <div class="record-detail">销量 43 杯 · 营收 ¥559.00</div>
+        <div class="record-detail">销量 18 杯 · 营收 ¥234.00</div>
         <div class="record-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 损耗率异常，打烊复盘</div>
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">芋泥波波</span>
-            <span class="badge badge-secondary">09-11</span>
+            <span class="badge badge-secondary">09-12</span>
         </div>
-        <div class="record-detail">销量 13 杯 · 营收 ¥208.00</div>
+        <div class="record-detail">销量 46 杯 · 营收 ¥736.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">柠檬水</span>
-            <span class="badge badge-secondary">09-11</span>
+            <span class="badge badge-secondary">09-12</span>
         </div>
-        <div class="record-detail">销量 20 杯 · 营收 ¥160.00</div>
+        <div class="record-detail">销量 40 杯 · 营收 ¥320.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">烧仙草</span>
-            <span class="badge badge-secondary">09-11</span>
+            <span class="badge badge-secondary">09-12</span>
         </div>
-        <div class="record-detail">销量 47 杯 · 营收 ¥705.00</div>
+        <div class="record-detail">销量 42 杯 · 营收 ¥630.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">杨枝甘露</span>
-            <span class="badge badge-secondary">09-11</span>
+            <span class="badge badge-secondary">09-12</span>
         </div>
-        <div class="record-detail">销量 15 杯 · 营收 ¥270.00</div>
+        <div class="record-detail">销量 12 杯 · 营收 ¥216.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">珍珠奶茶</span>
-            <span class="badge badge-secondary">09-11</span>
+            <span class="badge badge-secondary">09-12</span>
         </div>
-        <div class="record-detail">销量 13 杯 · 营收 ¥156.00</div>
+        <div class="record-detail">销量 36 杯 · 营收 ¥432.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">黑糖珍珠鲜奶</span>
-            <span class="badge badge-secondary">09-10</span>
+            <span class="badge badge-secondary">09-11</span>
         </div>
-        <div class="record-detail">销量 23 杯 · 营收 ¥437.00</div>
+        <div class="record-detail">销量 28 杯 · 营收 ¥532.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">抹茶奶绿</span>
-            <span class="badge badge-secondary">09-10</span>
+            <span class="badge badge-secondary">09-11</span>
         </div>
-        <div class="record-detail">销量 19 杯 · 营收 ¥285.00</div>
+        <div class="record-detail">销量 43 杯 · 营收 ¥645.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">蜜桃乌龙</span>
-            <span class="badge badge-secondary">09-10</span>
+            <span class="badge badge-secondary">09-11</span>
         </div>
-        <div class="record-detail">销量 46 杯 · 营收 ¥782.00</div>
+        <div class="record-detail">销量 23 杯 · 营收 ¥391.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">四季春茶</span>
-            <span class="badge badge-secondary">09-10</span>
+            <span class="badge badge-secondary">09-11</span>
         </div>
-        <div class="record-detail">销量 33 杯 · 营收 ¥330.00</div>
+        <div class="record-detail">销量 49 杯 · 营收 ¥490.00</div>
         
     </div>
     
     <div class="record-item">
         <div class="record-header">
             <span class="product-name">生椰拿铁</span>
-            <span class="badge badge-secondary">09-10</span>
+            <span class="badge badge-secondary">09-11</span>
         </div>
-        <div class="record-detail">销量 50 杯 · 营收 ¥1000.00</div>
+        <div class="record-detail">销量 47 杯 · 营收 ¥940.00</div>
         
     </div>
     
@@ -2293,6 +2344,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <a href="09_AI培训主页.html" class="tab-item "
            >
             <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg></span><span class="tab-text">AI</span>
+        </a>
+        <a href="23_我的任务.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tab-text">任务</span>
         </a>
     </nav>
     

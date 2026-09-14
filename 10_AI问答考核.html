@@ -7,7 +7,7 @@
     <title>AI 问答考核 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_QQ.aJ1Ef_fyHTfoMs8x48Ct-p4bMwE">
+    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -1994,6 +1994,56 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .pack-anchors a { transition: none; }
 }
 
+/* ═══════════ 责任任务闭环（PH4-2） ═══════════ */
+.task-form .form-group { margin-bottom: var(--sp-3); }
+.task-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+}
+.task-filter .btn.active {
+    background: var(--primary-soft-strong);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.task-row { align-items: center; }
+.task-title { display: block; margin-bottom: var(--sp-1); }
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+.task-actions .inline-form { margin-bottom: 0; }
+.task-overdue { border-left: 3px solid var(--danger); }
+.task-create-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+.task-create-form .form-control { max-width: 220px; }
+.task-evidence {
+    margin-top: var(--sp-2);
+    padding: var(--sp-3);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+    .task-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .task-actions { width: 100%; }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -2051,9 +2101,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-user">
                 
                 
+                
                 <span>奶茶示范店店员1</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_QQ.aJ1Ef_fyHTfoMs8x48Ct-p4bMwE">
+                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2080,7 +2131,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <div class="q-box">
         <div class="question">本店招牌杨枝甘露的标准配料是什么？（提示：答出关键要点即可）</div>
         <form method="GET" action="12_我的培训进度.html">
-            <input type="hidden" name="csrf_token" value="IjhjNmZjYmRlNzkwN2MzNDFmMzllZjUwZTVmOWJkYmRlMTQ4YWRiNTYi.aqb_QQ.aJ1Ef_fyHTfoMs8x48Ct-p4bMwE">
+            <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghWA.IqEmMkg2_vlRn1rYNt5pDncRxYI">
             <div class="form-group">
                 <textarea name="answer" class="form-control" rows="4" placeholder="在此输入你的作答…" required></textarea>
             </div>
@@ -2111,6 +2162,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <a href="09_AI培训主页.html" class="tab-item active"
            aria-current="page">
             <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg></span><span class="tab-text">AI</span>
+        </a>
+        <a href="23_我的任务.html" class="tab-item "
+           >
+            <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tab-text">任务</span>
         </a>
     </nav>
     
