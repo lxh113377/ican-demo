@@ -7,7 +7,7 @@
     <title>AI 经营分析 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
+    <meta name="csrf-token" content="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2044,6 +2044,222 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .task-actions { width: 100%; }
 }
 
+/* ═══════════ AI 决策驾驶舱（PH5） ═══════════ */
+.decision-cockpit {
+    margin: var(--sp-4) 0 var(--sp-6);
+    padding: var(--sp-5) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.decision-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+.decision-head h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin: 0;
+}
+.decision-note,
+.decision-role-summary,
+.decision-item p,
+.decision-confirm p {
+    color: var(--text-light);
+    line-height: var(--lh-snug);
+}
+.decision-note { margin: var(--sp-1) 0 0; font-size: var(--fs-sm); }
+.decision-status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    align-items: center;
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+}
+.decision-summary {
+    margin: var(--sp-3) 0 var(--sp-4);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.decision-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-3);
+}
+.decision-role {
+    min-width: 0;
+    padding: var(--sp-4);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+.decision-role--advisor { border-left: 3px solid var(--primary); }
+.decision-role--auditor { border-left: 3px solid var(--warning); }
+.decision-role--moderator { border-left: 3px solid var(--success); }
+.decision-role-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-2);
+}
+.decision-role-summary {
+    margin: 0 0 var(--sp-3);
+    font-size: var(--fs-sm);
+}
+.decision-source {
+    flex: none;
+    padding: 2px var(--sp-2);
+    border-radius: var(--radius-full);
+    background: var(--neutral-bg);
+    color: var(--text-light);
+    font-size: var(--fs-2xs);
+}
+.decision-source--deepseek,
+.decision-source--dify,
+.decision-source--ai {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+.decision-source--error {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+.decision-item {
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+.decision-item:first-of-type { border-top: none; }
+.decision-item strong { display: block; margin-bottom: var(--sp-1); }
+.decision-item p { margin: 0; font-size: var(--fs-sm); }
+.decision-item--danger {
+    padding-left: var(--sp-3);
+    border-left: 3px solid var(--danger);
+}
+.decision-evidence-id {
+    display: inline-block;
+    margin-top: var(--sp-2);
+    color: var(--text-light);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--fs-2xs);
+    overflow-wrap: anywhere;
+}
+.decision-disagreement {
+    margin-top: var(--sp-4);
+    padding: var(--sp-4);
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius-sm);
+}
+.decision-disagreement h4,
+.decision-confirm h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: 0;
+}
+.decision-evidence {
+    margin-top: var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--border);
+}
+.decision-evidence summary { cursor: pointer; font-weight: 600; }
+.decision-evidence-list {
+    display: grid;
+    gap: var(--sp-2);
+    margin-top: var(--sp-3);
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+    overflow-wrap: anywhere;
+}
+.decision-confirm {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 1.4fr);
+    gap: var(--sp-5);
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+}
+.decision-confirm h4 { margin-bottom: var(--sp-2); }
+.decision-confirm p { margin: 0; font-size: var(--fs-sm); }
+.decision-task-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-3);
+}
+.decision-task-form label {
+    display: grid;
+    gap: var(--sp-1);
+    min-width: 0;
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+}
+.decision-task-wide { grid-column: 1 / -1; }
+.decision-task-form input,
+.decision-task-form select,
+.decision-task-form textarea {
+    width: 100%;
+    min-width: 0;
+}
+.decision-task-form button { justify-self: start; }
+.decision-error {
+    margin-bottom: var(--sp-3);
+    padding: var(--sp-3);
+    background: var(--danger-bg);
+    color: var(--danger-text);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 767px) {
+    .decision-role-grid,
+    .decision-confirm,
+    .decision-task-form {
+        grid-template-columns: 1fr;
+    }
+    .decision-head { align-items: center; }
+}
+
+@media (max-width: 375px) {
+    .decision-cockpit { padding: var(--sp-4) 0; }
+    .decision-head { align-items: flex-start; flex-direction: column; }
+    .decision-role { padding: var(--sp-3); }
+    .decision-status-bar { display: grid; }
+    .decision-task-form button { width: 100%; }
+}
+
+@media (max-width: 820px) {
+    .top-nav {
+        flex-wrap: wrap;
+        gap: var(--sp-2);
+        padding: var(--sp-3);
+        padding-top: calc(var(--sp-3) + env(safe-area-inset-top));
+    }
+    .nav-user {
+        order: 2;
+        margin-left: auto;
+        gap: var(--sp-2);
+    }
+    .nav-user > span { display: none; }
+    .pack-switcher {
+        order: 3;
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+    .pack-switcher label { flex: none; }
+    .pack-switcher select {
+        flex: 1 1 120px;
+        min-width: 0;
+        max-width: none;
+    }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -2098,7 +2314,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
+                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2122,7 +2338,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
+                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
@@ -2153,7 +2369,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
                 <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVw.9ysSRjyBn8siX79FCVW8Sn6mx-Q">
+                    <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2186,10 +2402,10 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 
 <div class="stat-cards">
-    <div class="stat-card"><div class="stat-num">¥134129.0</div><div class="stat-label">总营收</div></div>
-    <div class="stat-card"><div class="stat-num">8890</div><div class="stat-label">总销量(杯)</div></div>
-    <div class="stat-card"><div class="stat-num">¥4470.97</div><div class="stat-label">日均营收</div></div>
-    <div class="stat-card"><div class="stat-num">¥15.09</div><div class="stat-label">单均营收</div></div>
+    <div class="stat-card"><div class="stat-num">¥139076.0</div><div class="stat-label">总营收</div></div>
+    <div class="stat-card"><div class="stat-num">9160</div><div class="stat-label">总销量(杯)</div></div>
+    <div class="stat-card"><div class="stat-num">¥4635.87</div><div class="stat-label">日均营收</div></div>
+    <div class="stat-card"><div class="stat-num">¥15.18</div><div class="stat-label">单均营收</div></div>
 </div>
 
 
@@ -2201,12 +2417,12 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <h4>周期对比（近 7 日 vs 前 7 日）</h4>
         
         <span class="trend-badge down">
-            ↓ 销量 6.3%
+            ↓ 销量 3.6%
         </span>
         
         
         <span class="trend-badge down">
-            ↓ 营收 4.5%
+            ↓ 营收 3.7%
         </span>
         
     </div>
@@ -2214,15 +2430,15 @@ body.h5-page .main-content { padding-bottom: 84px; }
     
     <div class="insight-card">
         <h4>销量预测</h4>
-        <div class="prediction">明日约 <strong>251.3</strong> 杯
-             · 营收 ≈ ¥3792
+        <div class="prediction">明日约 <strong>304.2</strong> 杯
+             · 营收 ≈ ¥4619
         </div>
     </div>
     
     
     <div class="insight-card">
         <h4>工作日 / 周末规律</h4>
-        <div class="prediction">工作日日均 292.3 杯 · 周末日均 305.7 杯</div>
+        <div class="prediction">工作日日均 311.3 杯 · 周末日均 289.0 杯</div>
     </div>
     
     
@@ -2230,8 +2446,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <h4>AI 异常识别</h4>
         
         <div class="prediction">
-            检出 <strong>1</strong> 个异常日，
-            最新 2026-09-14（销量偏离 -29.8%）
+            检出 <strong>7</strong> 个异常日，
+            最新 2026-09-12（销量偏离 -24.0%）
         </div>
         <div class="record-note neutral">判据：z-score（|z|≥2）+ IQR 双检测</div>
     </div>
@@ -2240,11 +2456,11 @@ body.h5-page .main-content { padding-bottom: 84px; }
     <div class="insight-card">
         <h4>AI 备货建议（安全库存）</h4>
         
-        <div class="prediction">生椰拿铁：补 <strong>27.7</strong> 杯</div>
+        <div class="prediction">四季春茶：补 <strong>22.2</strong> 杯</div>
         
-        <div class="prediction">芋泥波波：补 <strong>16.7</strong> 杯</div>
+        <div class="prediction">生椰拿铁：补 <strong>20.0</strong> 杯</div>
         
-        <div class="prediction">茉莉绿茶：补 <strong>5.9</strong> 杯</div>
+        <div class="prediction">芝士葡萄：补 <strong>5.6</strong> 杯</div>
         
     </div>
     
@@ -2279,9 +2495,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>近 7 日销量较前 7 日下滑 6.3%，营收下滑 4.5%。</p>
+        <p>近 7 日销量较前 7 日下滑 3.6%，营收下滑 3.7%。</p>
         <ul class="evidence-list">
-            <li>对比窗口：近 7 日 vs 前 7 日（共 14 个统计日）</li><li>销量变动 -6.3%，营收变动 -4.5%</li>
+            <li>对比窗口：近 7 日 vs 前 7 日（共 14 个统计日）</li><li>销量变动 -3.6%，营收变动 -3.7%</li>
         </ul>
         <div class="record-note neutral">局限：未剔除节假日与促销活动的结构性影响</div>
     </div>
@@ -2294,9 +2510,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>预计明日销量约 251.3 杯，营收约 ¥3792。</p>
+        <p>预计明日销量约 304.2 杯，营收约 ¥4619。</p>
         <ul class="evidence-list">
-            <li>方法：指数平滑加权（近 14 日，半衰期 3 天） × 趋势系数 0.87（近3日均÷前4日均，限幅0.7~1.3） × 星期周期因子 1.02（明天周二，按历史周内节律季节调整）</li>
+            <li>方法：指数平滑加权（近 14 日，半衰期 3 天） × 趋势系数 1.07（近3日均÷前4日均，限幅0.7~1.3） × 星期周期因子 0.96（明天周三，按历史周内节律季节调整）</li>
         </ul>
         <div class="record-note neutral">局限：趋势外推不适用于突变场景（天气骤变、临时活动、停业）</div>
     </div>
@@ -2309,9 +2525,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 81%"></span></div>
-        <p>「四季春茶」明日需求约 46.3 份，为当前需求最高的单品。</p>
+        <p>「芝士葡萄」明日需求约 47.9 份，为当前需求最高的单品。</p>
         <ul class="evidence-list">
-            <li>近 14 日指数平滑加权均值 35.6 份（半衰期 3 天） × 趋势系数 1.3</li><li>模型自评稳定度 0.81（含波动率惩罚）</li>
+            <li>近 14 日指数平滑加权均值 42.1 份（半衰期 3 天） × 趋势系数 1.14</li><li>模型自评稳定度 0.88（含波动率惩罚）</li>
         </ul>
         <div class="record-note neutral">局限：单品样本天数少于 3 天时不输出预测</div>
     </div>
@@ -2324,9 +2540,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>建议为「生椰拿铁」补 27.7 份原料/成品。</p>
+        <p>建议为「四季春茶」补 22.2 份原料/成品。</p>
         <ul class="evidence-list">
-            <li>计算口径：日均需求 39.4 + 安全库存 18.3 − 现存 30.0</li><li>服务水平 95%（安全库存 = 1.65 × 波动 σ=11.08）</li>
+            <li>计算口径：日均需求 34.9 + 安全库存 22.3 − 现存 35.0</li><li>服务水平 95%（安全库存 = 1.65 × 波动 σ=13.54）</li>
         </ul>
         <div class="record-note neutral">局限：未考虑在途订货与临期原料，实际下单请结合盘点结果</div>
     </div>
@@ -2354,9 +2570,9 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </span>
         </div>
         <div class="confidence-bar"><span class="confidence-fill" style="width: 95%"></span></div>
-        <p>检测到 1 个异常经营日，最新为 2026-09-14 （销量偏离 -29.8%）。</p>
+        <p>检测到 7 个异常经营日，最新为 2026-09-12 （销量偏离 -24.0%）。</p>
         <ul class="evidence-list">
-            <li>判据：z-score（|z|≥2）与 IQR（1.5×四分位距）双检测</li><li>该日实际 208.0 vs 期望 296.33（z-score）</li>
+            <li>判据：z-score（|z|≥2）与 IQR（1.5×四分位距）双检测</li><li>该日实际 232.0 vs 期望 305.33（z-score+IQR）</li>
         </ul>
         <div class="record-note neutral">局限：异常不等于事故，需结合异常备注与当日实际情况复核</div>
     </div>
@@ -2371,7 +2587,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="confidence-bar"><span class="confidence-fill" style="width: 38%"></span></div>
         <p>存在 2 条原料损耗/异常记录，建议优先排查。</p>
         <ul class="evidence-list">
-            <li>最新：2026-09-14 · 生椰拿铁 · 原料损耗率 21.1% 超过预警阈值 15%</li><li>判定规则：损耗率 &gt; 15% 或存在异常备注</li>
+            <li>最新：2026-09-15 · 生椰拿铁 · 原料损耗率 21.1% 超过预警阈值 15%</li><li>判定规则：损耗率 &gt; 15% 或存在异常备注</li>
         </ul>
         <div class="record-note neutral">局限：损耗率为按行填报口径估算，未区分原料品类</div>
     </div>
@@ -2391,7 +2607,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>统计期总营收 ¥134,129，总销量 8890 杯，日均营收 ¥4,471，客单价 ¥15。</p>
+                    <p>统计期总营收 ¥139,076，总销量 9160 杯，日均营收 ¥4,636，客单价 ¥15。</p>
                 
             
                 
@@ -2399,19 +2615,19 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>销量近 7 日日均 293 杯，较前 7 日回落 6%。热销 TOP：生椰拿铁、黑糖珍珠鲜奶、芝士葡萄；销售结构：生椰拿铁(674杯)、柠檬水(667杯)、四季春茶(645杯)、杨枝甘露(644杯)。</p>
+                    <p>销量近 7 日日均 294 杯，与前 7 日基本持平。热销 TOP：芝士葡萄、杨枝甘露、黑糖珍珠鲜奶；销售结构：芝士葡萄(795杯)、芋泥波波(673杯)、珍珠奶茶(667杯)、烧仙草(649杯)。</p>
                 
             
                 
-                    <p>近 7 日较前 7 日：销量回落6.3%、营收回落4.5%。</p>
+                    <p>近 7 日较前 7 日：销量回落3.6%、营收回落3.7%。</p>
                 
             
                 
-                    <p>工作日与周末日均销量接近（292.3/305.7 杯），备货节奏可保持平稳。</p>
+                    <p>工作日日均销量 311.3 杯高于周末 289.0 杯，工作日下午高峰期需备足。</p>
                 
             
                 
-                    <p>综合毛利率 64.5%（按已录成本口径，280/300 条填报核入）。</p>
+                    <p>综合毛利率 64.4%（按已录成本口径，280/300 条填报核入）。</p>
                 
             
                 
@@ -2423,7 +2639,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>AI 离群检测发现 1 个异常经营日，最新为 2026-09-14 （销量 208.0，偏离常态 -29.8%）。建议核对当日异常备注与天气/活动因素。</p>
+                    <p>AI 离群检测发现 7 个异常经营日，最新为 2026-09-12 （销量 232.0，偏离常态 -24.0%）。建议核对当日异常备注与天气/活动因素。</p>
                 
             
                 
@@ -2431,11 +2647,11 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
             
                 
-                    <p>预计明日销量约 251.3 杯、营收约 ¥3,792（基于近 7 日趋势外推，仅供参考），建议按此量级预备原料与人力。</p>
+                    <p>预计明日销量约 304.2 杯、营收约 ¥4,619（基于近 7 日趋势外推，仅供参考），建议按此量级预备原料与人力。</p>
                 
             
                 
-                    <p>安全库存模型测算需补货：生椰拿铁 约 27.7 份、芋泥波波 约 16.7 份（按 95% 服务水平）。</p>
+                    <p>安全库存模型测算需补货：四季春茶 约 22.2 份、生椰拿铁 约 20.0 份（按 95% 服务水平）。</p>
                 
             
                 
@@ -2448,7 +2664,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
         
     
-    <p class="note">生成时间：2026-09-14 16:31（规则版·演示）</p>
+    <p class="note">生成时间：2026-09-15 13:43（规则版·演示）</p>
 </div>
 
 
@@ -2470,7 +2686,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="trace-io"><span class="trace-io-k">输入</span><span class="trace-io-v">读取门店真实经营数据</span></div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">总营收 ¥134129.0、总销量 8890、日均 ¥4470.97</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">总营收 ¥139076.0、总销量 9160、日均 ¥4635.87</span></div>
         </li>
     
         <li class="trace-step">
@@ -2480,7 +2696,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 <span class="trace-ms">0 ms</span>
             </div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">明日约 251.3 杯，营收约 ¥3792.0</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">明日约 304.2 杯，营收约 ¥4619.0</span></div>
         </li>
     
         <li class="trace-step">
@@ -2490,7 +2706,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 <span class="trace-ms">0 ms</span>
             </div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">销量 -6.3% / 营收 -4.5%</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">销量 -3.6% / 营收 -3.7%</span></div>
         </li>
     
         <li class="trace-step">
@@ -2500,7 +2716,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 <span class="trace-ms">0 ms</span>
             </div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">检出 1 个异常日</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">检出 7 个异常日</span></div>
         </li>
     
         <li class="trace-step">
@@ -2522,7 +2738,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             <div class="trace-io"><span class="trace-io-k">输入</span><span class="trace-io-v">汇总数据 → 生成分析报告</span></div>
             
-            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">【① 经营概况】 统计期总营收 ¥134,129，总销量 8890 杯，日均营收 ¥4,471，客单价 ¥15。 【② 趋势与结构】 销量近 7 日日均 293 杯，较前 7 日回落 6%。热销 TOP：生椰拿铁、黑糖珍珠鲜奶、芝士葡萄；销售结构：生椰拿铁(674杯)、柠檬水(667杯)、四季春茶(645杯)、杨枝甘…</span></div>
+            <div class="trace-io"><span class="trace-io-k">输出</span><span class="trace-io-v">【① 经营概况】 统计期总营收 ¥139,076，总销量 9160 杯，日均营收 ¥4,636，客单价 ¥15。 【② 趋势与结构】 销量近 7 日日均 294 杯，与前 7 日基本持平。热销 TOP：芝士葡萄、杨枝甘露、黑糖珍珠鲜奶；销售结构：芝士葡萄(795杯)、芋泥波波(673杯)、珍珠奶茶(667杯)、烧仙草…</span></div>
         </li>
     
         <li class="trace-step">
@@ -2551,7 +2767,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="record-item">
             <div class="record-header">
                 <span class="product-name">生椰拿铁</span>
-                <span class="badge badge-danger">2026-09-14</span>
+                <span class="badge badge-danger">2026-09-15</span>
             </div>
             <div class="record-note">原料损耗率 21.1% 超过预警阈值 15%</div>
             
@@ -2562,7 +2778,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <div class="record-item">
             <div class="record-header">
                 <span class="product-name">柠檬蜂蜜茶</span>
-                <span class="badge badge-danger">2026-09-13</span>
+                <span class="badge badge-danger">2026-09-14</span>
             </div>
             <div class="record-note">原料损耗率 21.1% 超过预警阈值 15%</div>
             

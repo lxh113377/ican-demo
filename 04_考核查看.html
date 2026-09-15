@@ -7,7 +7,7 @@
     <title>员工考核记录 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVg.nRyhxHQ2Q4huXdULa8ySKXiDahE">
+    <meta name="csrf-token" content="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2044,6 +2044,222 @@ body.h5-page .main-content { padding-bottom: 84px; }
     .task-actions { width: 100%; }
 }
 
+/* ═══════════ AI 决策驾驶舱（PH5） ═══════════ */
+.decision-cockpit {
+    margin: var(--sp-4) 0 var(--sp-6);
+    padding: var(--sp-5) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.decision-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+.decision-head h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin: 0;
+}
+.decision-note,
+.decision-role-summary,
+.decision-item p,
+.decision-confirm p {
+    color: var(--text-light);
+    line-height: var(--lh-snug);
+}
+.decision-note { margin: var(--sp-1) 0 0; font-size: var(--fs-sm); }
+.decision-status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    align-items: center;
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+}
+.decision-summary {
+    margin: var(--sp-3) 0 var(--sp-4);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.decision-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-3);
+}
+.decision-role {
+    min-width: 0;
+    padding: var(--sp-4);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+.decision-role--advisor { border-left: 3px solid var(--primary); }
+.decision-role--auditor { border-left: 3px solid var(--warning); }
+.decision-role--moderator { border-left: 3px solid var(--success); }
+.decision-role-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-2);
+}
+.decision-role-summary {
+    margin: 0 0 var(--sp-3);
+    font-size: var(--fs-sm);
+}
+.decision-source {
+    flex: none;
+    padding: 2px var(--sp-2);
+    border-radius: var(--radius-full);
+    background: var(--neutral-bg);
+    color: var(--text-light);
+    font-size: var(--fs-2xs);
+}
+.decision-source--deepseek,
+.decision-source--dify,
+.decision-source--ai {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+.decision-source--error {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+.decision-item {
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+.decision-item:first-of-type { border-top: none; }
+.decision-item strong { display: block; margin-bottom: var(--sp-1); }
+.decision-item p { margin: 0; font-size: var(--fs-sm); }
+.decision-item--danger {
+    padding-left: var(--sp-3);
+    border-left: 3px solid var(--danger);
+}
+.decision-evidence-id {
+    display: inline-block;
+    margin-top: var(--sp-2);
+    color: var(--text-light);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--fs-2xs);
+    overflow-wrap: anywhere;
+}
+.decision-disagreement {
+    margin-top: var(--sp-4);
+    padding: var(--sp-4);
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius-sm);
+}
+.decision-disagreement h4,
+.decision-confirm h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: 0;
+}
+.decision-evidence {
+    margin-top: var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--border);
+}
+.decision-evidence summary { cursor: pointer; font-weight: 600; }
+.decision-evidence-list {
+    display: grid;
+    gap: var(--sp-2);
+    margin-top: var(--sp-3);
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+    overflow-wrap: anywhere;
+}
+.decision-confirm {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 1.4fr);
+    gap: var(--sp-5);
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+}
+.decision-confirm h4 { margin-bottom: var(--sp-2); }
+.decision-confirm p { margin: 0; font-size: var(--fs-sm); }
+.decision-task-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-3);
+}
+.decision-task-form label {
+    display: grid;
+    gap: var(--sp-1);
+    min-width: 0;
+    color: var(--text-light);
+    font-size: var(--fs-xs);
+}
+.decision-task-wide { grid-column: 1 / -1; }
+.decision-task-form input,
+.decision-task-form select,
+.decision-task-form textarea {
+    width: 100%;
+    min-width: 0;
+}
+.decision-task-form button { justify-self: start; }
+.decision-error {
+    margin-bottom: var(--sp-3);
+    padding: var(--sp-3);
+    background: var(--danger-bg);
+    color: var(--danger-text);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 767px) {
+    .decision-role-grid,
+    .decision-confirm,
+    .decision-task-form {
+        grid-template-columns: 1fr;
+    }
+    .decision-head { align-items: center; }
+}
+
+@media (max-width: 375px) {
+    .decision-cockpit { padding: var(--sp-4) 0; }
+    .decision-head { align-items: flex-start; flex-direction: column; }
+    .decision-role { padding: var(--sp-3); }
+    .decision-status-bar { display: grid; }
+    .decision-task-form button { width: 100%; }
+}
+
+@media (max-width: 820px) {
+    .top-nav {
+        flex-wrap: wrap;
+        gap: var(--sp-2);
+        padding: var(--sp-3);
+        padding-top: calc(var(--sp-3) + env(safe-area-inset-top));
+    }
+    .nav-user {
+        order: 2;
+        margin-left: auto;
+        gap: var(--sp-2);
+    }
+    .nav-user > span { display: none; }
+    .pack-switcher {
+        order: 3;
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+    .pack-switcher label { flex: none; }
+    .pack-switcher select {
+        flex: 1 1 120px;
+        min-width: 0;
+        max-width: none;
+    }
+}
+
 
 /* 快照翻页导航（仅演示快照集页面） */
 .snap-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;
@@ -2098,7 +2314,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
             <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVg.nRyhxHQ2Q4huXdULa8ySKXiDahE">
+                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2122,7 +2338,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             
             
             <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVg.nRyhxHQ2Q4huXdULa8ySKXiDahE">
+                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
@@ -2153,7 +2369,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 
                 <span>owner_demo</span>
                 <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjdiZmRjNDRiZTU3YjdmNTc2OGVkNTVmZmE0ZjhjZDczYzY1YWEyMDQi.aqghVg.nRyhxHQ2Q4huXdULa8ySKXiDahE">
+                    <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLkw.C8rQSgV8XcjO4lW4Z2XlWbedl9U">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2185,7 +2401,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【套餐价格】顾客问饮品价时，报价话术要点是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2194,7 +2410,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【称重计价】顾客质疑缺斤短两怎么办？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2203,7 +2419,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【收银规范】扫码支付失败怎么处理？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2212,7 +2428,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【烘烤与出品】吐司的烘烤温度和时长标准是多少？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2221,7 +2437,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【卫生与消毒】剪刀、梳子怎么消毒？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2230,7 +2446,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【健康与安全】没有疫苗本能不能接洗护？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2239,7 +2455,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【销售与搭配】导购接待的标准流程是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-14 09:00</td>
+            <td>09-15 09:00</td>
         </tr>
         
         <tr>
@@ -2248,7 +2464,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【套餐价格】套餐「双人欢享」的具体内容是什么？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2257,7 +2473,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【称重计价】称重计价的标准流程是什么？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2266,7 +2482,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【收银规范】标准收银流程是哪几步？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2275,7 +2491,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】烘焙原料到货验收要查哪几项？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2284,7 +2500,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】服务完成后要做哪些收尾动作？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2293,7 +2509,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】洗护完成后怎么交付？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2302,7 +2518,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】商品吊牌与价签怎么管理？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-13 09:00</td>
+            <td>09-14 09:00</td>
         </tr>
         
         <tr>
@@ -2311,7 +2527,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【异议处理】顾客说「上一杯太甜了」，本杯怎么处理？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2320,7 +2536,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【损耗控制】报损登记有什么要求？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2329,7 +2545,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【保质期管理】鲜食的废弃时点是怎么规定的？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2338,7 +2554,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】中种或老面的作用是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2347,7 +2563,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】顾客对发型效果不满意怎么处理？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2356,7 +2572,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】造型剪毛前怎么和主人确认？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2365,7 +2581,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】深色浅色衣物怎么陈列防染色？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-12 09:00</td>
+            <td>09-13 09:00</td>
         </tr>
         
         <tr>
@@ -2374,7 +2590,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【异议处理】顾客质疑卫生（「干净吗」），你怎么回答？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2383,7 +2599,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【损耗控制】怎么从源头降低损耗？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2392,7 +2608,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【保质期管理】顾客买到过期商品怎么办？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2401,7 +2617,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】隔夜面团还能用吗？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2410,7 +2626,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】美甲的标准操作流程是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2419,7 +2635,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】洗护工具怎么清洁与消毒？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2428,7 +2644,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】衣物挂放与折叠的标准是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-11 09:00</td>
+            <td>09-12 09:00</td>
         </tr>
         
         <tr>
@@ -2437,7 +2653,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【异议处理】顾客催单说「怎么这么慢」，你该怎么回应？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2446,7 +2662,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【损耗控制】发现有烂果怎么处理？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2455,7 +2671,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【保质期管理】早班效期翻检怎么做？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2464,7 +2680,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】淡奶油打发失败怎么补救？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2473,7 +2689,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】烫发后第一次洗头有什么提醒？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2482,7 +2698,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】吹干不到位会有什么后果？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2491,7 +2707,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】换季陈列怎么调整？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-10 09:00</td>
+            <td>09-11 09:00</td>
         </tr>
         
         <tr>
@@ -2500,7 +2716,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【异议处理】顾客嫌价格贵要砍价，正确话术是？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2509,7 +2725,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【损耗控制】每日损耗率怎么算？超过多少算异常？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2518,7 +2734,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【保质期管理】临期商品怎么界定和处理？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2527,7 +2743,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】黄油分哪几类，各用在什么地方？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2536,7 +2752,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】染发上色过程要检查哪几个节点？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2545,7 +2761,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】打结毛发怎么处理？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2554,7 +2770,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】橱窗与模特怎么搭配？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-09 09:00</td>
+            <td>09-10 09:00</td>
         </tr>
         
         <tr>
@@ -2563,7 +2779,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料规范】每日盘点的损耗率超过多少视为异常，需查明原因？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2572,7 +2788,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【鲜度管理】顾客问「今天的水果新不新鲜」怎么回答？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2581,7 +2797,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品陈列】冷柜陈列有什么要求？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2590,7 +2806,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料与发酵】怎么判断面团发酵到位？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2599,7 +2815,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【服务流程】剪发前沟通要确认哪几项？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2608,7 +2824,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【洗护流程】洗护前要做哪些检查？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2617,7 +2833,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【商品与陈列】商品陈列的基本原则是什么？</td>
             <td>100.00</td>
             <td><span class="badge badge-success">通过</span></td>
-            <td>09-08 09:00</td>
+            <td>09-09 09:00</td>
         </tr>
         
         <tr>
@@ -2626,7 +2842,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <td>【原料规范】鲜奶开封后在冷藏 2-6℃ 条件下的最长使用时间是？</td>
             <td>0.00</td>
             <td><span class="badge badge-danger">未通过</span></td>
-            <td>09-07 09:00</td>
+            <td>09-08 09:00</td>
         </tr>
         
         </tbody>
