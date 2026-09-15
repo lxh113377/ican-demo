@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>店员账号管理 · 门店管理助手</title>
+    <title>只读演示 · AI 决策驾驶舱</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
+    <meta name="csrf-token" content="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloew.FdocauQGxMeJae47orJj5qZFfb0">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2306,76 +2306,18 @@ body.h5-page .main-content { padding-bottom: 84px; }
 })();
 </script>
 </head>
-<body class="is-admin">
+<body class="">
     <a class="skip-link" href="#main">跳到主要内容</a>
     <div class="container">
         
-        <nav class="top-nav">
-            <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
-            
-            <form method="GET" action="17_建包工作台.html" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-                <label for="adminPackSelect">行业包</label>
-                <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
-                    
-                    <option value="apparel">服装零售店</option>
-                    
-                    <option value="bakery">烘焙轻食店</option>
-                    
-                    <option value="beauty">美容美发/美甲店</option>
-                    
-                    <option value="convenience">便利店</option>
-                    
-                    <option value="fruit">水果生鲜店</option>
-                    
-                    <option value="milk_tea" selected>奶茶店（当前）</option>
-                    
-                    <option value="pet">宠物服务店</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-            </form>
-            
-            
-            <form method="GET" action="19_门店与成员.html" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-                <label for="adminStoreSelect">门店</label>
-                <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
-                    
-                    <option value="1" selected>奶茶示范店（当前）</option>
-                    
-                    <option value="2">水果生鲜示范店</option>
-                    
-                    <option value="3">便利店示范店</option>
-                    
-                    <option value="4">烘焙轻食示范店</option>
-                    
-                    <option value="5">美业示范店</option>
-                    
-                    <option value="6">宠物服务示范店</option>
-                    
-                    <option value="7">服装零售示范店</option>
-                    
-                </select>
-                <button type="submit" class="btn-pack-switch">切换</button>
-                <a class="btn-pack-switch" href="19_门店与成员.html">管理</a>
-            </form>
-            
-            <div class="nav-user">
-                
-                
-                
-                <a class="btn-pack-switch" href="22_责任任务.html">任务</a>
-                
-                <span>owner_demo</span>
-                <form method="GET" action="index.html" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-                    <button type="submit" class="btn-logout">退出</button>
-                </form>
-                
-            </div>
-        </nav>
-        
+<nav class="top-nav">
+    <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
+    <div class="nav-user">
+        <span class="badge badge-secondary">只读演示</span>
+        <a class="btn-pack-switch" href="index.html">登录体验完整闭环</a>
+    </div>
+</nav>
+
 
         <div class="flash-messages" role="status" aria-live="polite">
             
@@ -2386,293 +2328,204 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <main class="main-content" id="main" tabindex="-1">
             
 <div class="page-header">
-    <h2>店员账号管理</h2>
-    <a href="13_新增店员.html" class="btn btn-primary btn-sm">+ 新增店员</a>
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/></svg> AI 决策驾驶舱 · 只读演示</h2>
 </div>
 
-<div class="staff-grid">
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>服装零售示范店店员2</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：apparel_staff2</small>
-        <small>电话：—</small>
-        <small>门店：服装零售示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
+<section class="decision-cockpit" id="demoCockpit">
+    <div class="decision-status-bar">
+        <span class="badge badge-secondary">免登录</span>
+        <span class="badge badge-secondary">只读</span>
+        <span class="badge badge-secondary">规则版（不调用大模型）</span>
+        <span>演示商家：智电轻擎演示商家</span>
+        <span>覆盖门店：7 家</span>
     </div>
+    <p class="decision-note">
+        本页固定绑定一个合成演示商家，门店范围由服务端解析，不接受任何请求参数；
+        页面不写数据库、不写决策轨迹、不创建任务。需要查看真实模型调用与人工确认闭环，
+        请登录后在管理员驾驶舱内操作。
+    </p>
+
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>服装零售示范店店员1</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：apparel_staff1</small>
-        <small>电话：—</small>
-        <small>门店：服装零售示范店</small>
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
+
+<div class="decision-status-bar">
+    <span class="badge badge-success">
+        四角色共识
+        
+    </span>
+    <span>生成时间：2026-09-15 15:47:02</span>
+    <span>缓存：命中</span>
+    <span>用量：0/10</span>
+</div>
+<p class="decision-summary">风险审计未阻断 1 条建议，可进入人工确认。</p>
+
+<div class="decision-role-grid">
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>宠物服务示范店店员2</strong>
-            <span class="status active">启用</span>
+    <article class="decision-role decision-role--data_analyst">
+        <div class="decision-role-head">
+            <strong>数据分析师</strong>
+            <span class="decision-source decision-source--rule">
+                规则版
+            </span>
         </div>
-        <small>账号：pet_staff2</small>
-        <small>电话：—</small>
-        <small>门店：宠物服务示范店</small>
+        <p class="decision-role-summary">覆盖 7 家有效门店，识别 5 条分析结论。</p>
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
+            
+            <div class="decision-item">
+                <p>营收最高门店为「服装零售示范店」，本期营收 2826921.00 元。</p>
+                <span class="decision-evidence-id">ev-1</span>
+            </div>
+            
+            <div class="decision-item">
+                <p>「美业示范店」营收仅为最高门店的 49%。</p>
+                <span class="decision-evidence-id">ev-5</span>
+            </div>
+            
+            <div class="decision-item">
+                <p>「宠物服务示范店」营收仅为最高门店的 32%。</p>
+                <span class="decision-evidence-id">ev-9</span>
+            </div>
+            
+            <div class="decision-item">
+                <p>「服装零售示范店」培训均分 70.0，建议安排薄弱知识域复训。</p>
+                <span class="decision-evidence-id">ev-4</span>
+            </div>
+            
+            <div class="decision-item">
+                <p>「美业示范店」培训均分 70.0，建议安排薄弱知识域复训。</p>
+                <span class="decision-evidence-id">ev-8</span>
+            </div>
+            
+        
+    </article>
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>宠物服务示范店店员1</strong>
-            <span class="status active">启用</span>
+    <article class="decision-role decision-role--advisor">
+        <div class="decision-role-head">
+            <strong>经营参谋</strong>
+            <span class="decision-source decision-source--fallback">
+                降级规则版
+            </span>
         </div>
-        <small>账号：pet_staff1</small>
-        <small>电话：—</small>
-        <small>门店：宠物服务示范店</small>
+        <p class="decision-role-summary">规则版形成 1 条建议。</p>
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
+            
+            <div class="decision-item">
+                <strong>保持当前经营监控节奏</strong>
+                <p>当前未识别到超过规则阈值的经营异常。</p>
+                <span class="decision-evidence-id">ev-1</span>
+            </div>
+            
+        
+    </article>
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>美业示范店店员2</strong>
-            <span class="status active">启用</span>
+    <article class="decision-role decision-role--auditor">
+        <div class="decision-role-head">
+            <strong>风险审计员</strong>
+            <span class="decision-source decision-source--fallback">
+                降级规则版
+            </span>
         </div>
-        <small>账号：beauty_staff2</small>
-        <small>电话：—</small>
-        <small>门店：美业示范店</small>
+        <p class="decision-role-summary">规则版识别 1 项风险。</p>
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
+            
+            <div class="decision-item ">
+                <strong>数据覆盖范围有限，结论可能遗漏未观测因素</strong>
+                <p>按周复核数据完整性，不把单次结论当因果证明。</p>
+                <span class="decision-evidence-id"></span>
+            </div>
+            
+        
+    </article>
     
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>美业示范店店员1</strong>
-            <span class="status active">启用</span>
+    <article class="decision-role decision-role--moderator">
+        <div class="decision-role-head">
+            <strong>规则主持人</strong>
+            <span class="decision-source decision-source--rule">
+                规则版
+            </span>
         </div>
-        <small>账号：beauty_staff1</small>
-        <small>电话：—</small>
-        <small>门店：美业示范店</small>
+        <p class="decision-role-summary">风险审计未阻断 1 条建议，可进入人工确认。</p>
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>烘焙轻食示范店店员2</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：bakery_staff2</small>
-        <small>电话：—</small>
-        <small>门店：烘焙轻食示范店</small>
+            
+            <div class="decision-item">
+                <p>经营建议与风险审计在当前证据下没有高风险冲突。</p>
+                <span class="decision-evidence-id">ev-1</span>
+            </div>
+            
         
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>烘焙轻食示范店店员1</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：bakery_staff1</small>
-        <small>电话：—</small>
-        <small>门店：烘焙轻食示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>便利店示范店店员2</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：convenience_staff2</small>
-        <small>电话：—</small>
-        <small>门店：便利店示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>便利店示范店店员1</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：convenience_staff1</small>
-        <small>电话：—</small>
-        <small>门店：便利店示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>水果生鲜示范店店员2</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：fruit_staff2</small>
-        <small>电话：—</small>
-        <small>门店：水果生鲜示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>水果生鲜示范店店员1</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：fruit_staff1</small>
-        <small>电话：—</small>
-        <small>门店：水果生鲜示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>奶茶示范店店员2</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：milk_tea_staff2</small>
-        <small>电话：—</small>
-        <small>门店：奶茶示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
-    
-    <div class="staff-card ">
-        <div class="record-header">
-            <strong>奶茶示范店店员1</strong>
-            <span class="status active">启用</span>
-        </div>
-        <small>账号：milk_tea_staff1</small>
-        <small>电话：—</small>
-        <small>门店：奶茶示范店</small>
-        
-        <form method="GET" action="02_店员管理.html" class="mt-8">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <button type="submit" class="btn btn-outline btn-sm">停用</button>
-        </form>
-        <form method="GET" action="02_店员管理.html" class="mt-8 inline-form">
-            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqlodw.OL9rzYmUfsMt0xkJKK6c9i0XdZw">
-            <input type="password" name="password" class="form-control" placeholder="重置密码（≥8位，含字母和数字）" required>
-            <button type="submit" class="btn btn-outline btn-sm">重置密码</button>
-        </form>
-    </div>
+    </article>
     
 </div>
+
+
+
+<details class="decision-evidence">
+    <summary>证据目录（28）</summary>
+    <div class="decision-evidence-list">
+        
+        <div><code>ev-1</code> 门店 7 · revenue = 2826921.0 · 近30天</div>
+        
+        <div><code>ev-2</code> 门店 7 · records = 300 · 近30天</div>
+        
+        <div><code>ev-3</code> 门店 7 · waste_rate = 0.01808785529715762 · 近30天</div>
+        
+        <div><code>ev-4</code> 门店 7 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-5</code> 门店 5 · revenue = 1377418.0 · 近30天</div>
+        
+        <div><code>ev-6</code> 门店 5 · records = 300 · 近30天</div>
+        
+        <div><code>ev-7</code> 门店 5 · waste_rate = 0.018633905478485775 · 近30天</div>
+        
+        <div><code>ev-8</code> 门店 5 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-9</code> 门店 6 · revenue = 901582.0 · 近30天</div>
+        
+        <div><code>ev-10</code> 门店 6 · records = 300 · 近30天</div>
+        
+        <div><code>ev-11</code> 门店 6 · waste_rate = 0.020004894163709777 · 近30天</div>
+        
+        <div><code>ev-12</code> 门店 6 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-13</code> 门店 1 · revenue = 139076.0 · 近30天</div>
+        
+        <div><code>ev-14</code> 门店 1 · records = 300 · 近30天</div>
+        
+        <div><code>ev-15</code> 门店 1 · waste_rate = 0.01886466900557888 · 近30天</div>
+        
+        <div><code>ev-16</code> 门店 1 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-17</code> 门店 4 · revenue = 117212.5 · 近30天</div>
+        
+        <div><code>ev-18</code> 门店 4 · records = 300 · 近30天</div>
+        
+        <div><code>ev-19</code> 门店 4 · waste_rate = 0.019043639185720256 · 近30天</div>
+        
+        <div><code>ev-20</code> 门店 4 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-21</code> 门店 2 · revenue = 94550.84 · 近30天</div>
+        
+        <div><code>ev-22</code> 门店 2 · records = 300 · 近30天</div>
+        
+        <div><code>ev-23</code> 门店 2 · waste_rate = 0.018264295093708964 · 近30天</div>
+        
+        <div><code>ev-24</code> 门店 2 · quiz_avg = 70.0 · 近30天</div>
+        
+        <div><code>ev-25</code> 门店 3 · revenue = 43417.4 · 近30天</div>
+        
+        <div><code>ev-26</code> 门店 3 · records = 300 · 近30天</div>
+        
+        <div><code>ev-27</code> 门店 3 · waste_rate = 0.016425177450577814 · 近30天</div>
+        
+        <div><code>ev-28</code> 门店 3 · quiz_avg = 70.0 · 近30天</div>
+        
+    </div>
+</details>
+
+
+
+    
+</section>
 
         </main>
     </div>
@@ -2760,5 +2613,5 @@ body.h5-page .main-content { padding-bottom: 84px; }
     </script>
     <!-- main.js 为服务端路由资源，静态快照已移除 -->
     
-<nav class="snap-nav" aria-label="页面导航"><a href="01_管理员看板.html">← 上一页</a><a href="index.html">返回总览</a><a href="13_新增店员.html">下一页 →</a></nav></body>
+<nav class="snap-nav" aria-label="页面导航"><a href="23_我的任务.html">← 上一页</a><a href="index.html">返回总览</a><a class="disabled" aria-disabled="true">下一页 →</a></nav></body>
 </html>

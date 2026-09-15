@@ -7,7 +7,7 @@
     <title>门店与成员 · 门店管理助手</title>
     
     <meta name="theme-color" content="#0B1B19">
-    <meta name="csrf-token" content="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+    <meta name="csrf-token" content="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
     <script>
     // https 自愈（G2）：托管平台下发的预览链接是 http://，而生产环境的会话 Cookie
     // 带 Secure 标记，浏览器在 http 页面会直接丢弃它 → 一登录就 400（CSRF 会话丢失）。
@@ -2313,8 +2313,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <nav class="top-nav">
             <div class="nav-brand"><span class="brand-logo brand-nav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 10h9v6a3.5 3.5 0 0 1-3.5 3.5H9.5A3.5 3.5 0 0 1 6 16v-6z"/><path d="M15 11h1.5a2 2 0 0 1 0 4H15"/><path d="M8.5 4.5c-.9.8-1.4 1.6-1.4 2.6M12 3.5c-.9.8-1.4 1.6-1.4 2.6M15.5 4.5c-.9.8-1.4 1.6-1.4 2.6" fill="none"/></svg></span>门店管理</div>
             
-            <form method="post" action="/admin/industry/activate" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+            <form method="GET" action="17_建包工作台.html" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
                 <label for="adminPackSelect">行业包</label>
                 <select id="adminPackSelect" name="pack_id" aria-label="切换行业包">
                     
@@ -2337,8 +2337,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             </form>
             
             
-            <form method="post" action="/admin/stores/switch" class="pack-switcher">
-                <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+            <form method="GET" action="19_门店与成员.html" class="pack-switcher">
+                <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
                 <label for="adminStoreSelect">门店</label>
                 <select id="adminStoreSelect" name="store_id" aria-label="切换当前门店">
                     
@@ -2358,7 +2358,7 @@ body.h5-page .main-content { padding-bottom: 84px; }
                     
                 </select>
                 <button type="submit" class="btn-pack-switch">切换</button>
-                <a class="btn-pack-switch" href="/admin/stores/">管理</a>
+                <a class="btn-pack-switch" href="19_门店与成员.html">管理</a>
             </form>
             
             <div class="nav-user">
@@ -2368,8 +2368,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
                 <a class="btn-pack-switch" href="22_责任任务.html">任务</a>
                 
                 <span>owner_demo</span>
-                <form method="post" action="/logout" class="logout-form">
-                    <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+                <form method="GET" action="index.html" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
                     <button type="submit" class="btn-logout">退出</button>
                 </form>
                 
@@ -2392,8 +2392,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
 
 <section class="panel">
     <h3>新增门店</h3>
-    <form method="POST" action="/admin/stores/add" class="inline-form">
-        <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+    <form method="GET" action="19_门店与成员.html" class="inline-form">
+        <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
         <input type="text" name="name" class="form-control" required maxlength="100"
                placeholder="门店名称，如：红谷滩店">
         <input type="text" name="code" class="form-control" required maxlength="50"
@@ -2418,8 +2418,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：奶茶示范店店员1 奶茶示范店店员2 </small>
         <small>当前行业包：奶茶店</small>
 
-        <form method="POST" action="/admin/stores/1/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2444,8 +2444,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/1/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2462,8 +2462,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/1/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
@@ -2481,8 +2481,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：水果生鲜示范店店员1 水果生鲜示范店店员2 </small>
         <small>当前行业包：水果生鲜店</small>
 
-        <form method="POST" action="/admin/stores/2/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2507,8 +2507,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/2/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2525,13 +2525,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/2/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="2">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
@@ -2550,8 +2550,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：便利店示范店店员1 便利店示范店店员2 </small>
         <small>当前行业包：便利店</small>
 
-        <form method="POST" action="/admin/stores/3/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2576,8 +2576,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/3/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2594,13 +2594,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/3/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="3">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
@@ -2619,8 +2619,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：烘焙轻食示范店店员1 烘焙轻食示范店店员2 </small>
         <small>当前行业包：烘焙轻食店</small>
 
-        <form method="POST" action="/admin/stores/4/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2645,8 +2645,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/4/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2663,13 +2663,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/4/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="4">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
@@ -2688,8 +2688,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：美业示范店店员1 美业示范店店员2 </small>
         <small>当前行业包：美容美发/美甲店</small>
 
-        <form method="POST" action="/admin/stores/5/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2714,8 +2714,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/5/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2732,13 +2732,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/5/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="5">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
@@ -2757,8 +2757,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：宠物服务示范店店员1 宠物服务示范店店员2 </small>
         <small>当前行业包：宠物服务店</small>
 
-        <form method="POST" action="/admin/stores/6/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2783,8 +2783,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/6/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2801,13 +2801,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/6/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="6">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
@@ -2826,8 +2826,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
         <small>店员：服装零售示范店店员1 服装零售示范店店员2 </small>
         <small>当前行业包：服装零售店</small>
 
-        <form method="POST" action="/admin/stores/7/pack" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>设置本店行业包</label>
                 <select name="pack_id" class="form-control">
@@ -2852,8 +2852,8 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">保存行业包</button>
         </form>
 
-        <form method="POST" action="/admin/stores/7/members/add" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <div class="form-group">
                 <label>邀请成员</label>
                 <select name="role" class="form-control">
@@ -2870,13 +2870,13 @@ body.h5-page .main-content { padding-bottom: 84px; }
             <button type="submit" class="btn btn-outline btn-sm">添加成员</button>
         </form>
 
-        <form method="POST" action="/admin/stores/7/toggle" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <button type="submit" class="btn btn-outline btn-sm">停用门店</button>
         </form>
         
-        <form method="POST" action="/admin/stores/switch" class="mt-8">
-            <input type="hidden" name="csrf_token" value="Ijc0MGYxMmU0YWM0NDY0YWE0ZmJmZDIyMDA4MDc4NTEyOTJhMTYxMzEi.aqlLlQ.OhRrFNAfsKxaehIsooMVYoRDbX8">
+        <form method="GET" action="19_门店与成员.html" class="mt-8">
+            <input type="hidden" name="csrf_token" value="IjYzOGE2OGE1NzU0MDg2ODM5NzUxMDRlYjAzZDJiMzBlNGUyMmIwNjIi.aqloeg.EZ5hPotsC37n5Wx9INnEbpod5qg">
             <input type="hidden" name="store_id" value="7">
             <button type="submit" class="btn btn-primary btn-sm">切换为当前门店</button>
         </form>
